@@ -1,0 +1,5 @@
+# Mengabaikan file sistem dan kredensial lokal
+node_modules/
+.env
+.DS_Store
+Thumbs.db

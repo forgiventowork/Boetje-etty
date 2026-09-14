@@ -11,7 +11,6 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
@@ -71,35 +70,35 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-amber-100 selection:text-amber-900 pb-16 md:pb-8">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-100 selection:text-blue-900 pb-16 md:pb-8">
 
     <!-- Top App Bar -->
-    <header class="bg-slate-900/95 backdrop-blur-md text-white sticky top-0 z-30 border-b border-white/10 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white shadow-md sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-inner shadow-white/20">
-                    <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center shadow-inner">
+                    <svg class="w-6 h-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-base sm:text-lg font-extrabold leading-tight tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">BOETJE-ETTY 2026</h1>
-                    <p class="text-[11px] font-medium text-slate-400 tracking-wide uppercase">Keluarga Boetje Etty Salhuteru</p>
+                    <h1 class="text-base sm:text-lg font-bold leading-tight tracking-wide">IURAN KELUARGA 2026</h1>
+                    <p class="text-xs text-blue-200">Keluarga Boetje Etty Salhuteru</p>
                 </div>
             </div>
 
             <!-- Header Quick Actions -->
             <div class="flex items-center space-x-2">
                 <!-- PWA Install button -->
-                <button id="pwaInstallBtn" onclick="handlePwaInstallPrompt()" class="hidden sm:flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg text-xs font-bold transition border border-slate-700">
+                <button id="pwaInstallBtn" onclick="handlePwaInstallPrompt()" class="hidden sm:flex items-center space-x-1.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9992.4482.9992.9993s-.4482.9997-.9992.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993s-.4482.9997-.9993.9997m11.4045-6.02l1.996-3.4568a.4166.4166 0 00-.1523-.5676.416.416 0 00-.568.1523l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3115-5.1369.8523L4.8408 5.4493a.4166.4166 0 00-.568-.1523.416.416 0 00-.1523.5676l1.996 3.4568C2.688 11.2863.344 15.228 0 19.95h24c-.344-4.722-2.688-8.6637-6.1185-10.6286"/>
                     </svg>
                     <span>Install Aplikasi</span>
                 </button>
-                <button onclick="openAddFamilyModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 transition shadow-lg shadow-amber-500/20">
+                <button onclick="openAddFamilyModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition shadow border border-blue-400/40">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     <span class="hidden sm:inline">Tambah Anggota</span>
                     <span class="sm:hidden">Tambah</span>
@@ -109,17 +108,17 @@
     </header>
 
     <!-- Bank Info & Notice Banner -->
-    <div class="bg-white border-b border-slate-200 px-4 py-3 shadow-sm">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
-            <div class="flex items-center space-x-3 text-slate-600">
-                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold border border-slate-200">ℹ</span>
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200/80 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs sm:text-sm">
+            <div class="flex items-center space-x-2 text-amber-900">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-200/70 text-amber-800 flex items-center justify-center font-bold">ℹ</span>
                 <p>
-                    <span class="font-bold text-slate-900">Info Transfer:</span> Iuran bulanan <b>Rp 20.000 / bln</b> dapat ditransfer ke 
-                    <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200 mx-1">BCA 0440876757</span> 
+                    <span class="font-bold">Info Transfer:</span> Iuran bulanan <b>Rp 20.000 / bln</b> dapat ditransfer ke 
+                    <span class="font-bold text-blue-900 bg-white px-1.5 py-0.5 rounded border border-amber-300">BCA 0440876757</span> 
                     a.n. <b>Pricilia Linda Salhuteru</b>
                 </p>
             </div>
-            <button onclick="copyBcaNumber()" class="self-end sm:self-center inline-flex items-center space-x-1.5 text-xs font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 px-3 py-1.5 rounded-lg shadow-sm transition">
+            <button onclick="copyBcaNumber()" class="self-end sm:self-center inline-flex items-center space-x-1 text-xs font-bold text-blue-700 bg-white hover:bg-blue-50 border border-blue-300 px-2.5 py-1 rounded shadow-sm transition">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                 </svg>
@@ -132,44 +131,44 @@
     <main class="max-w-7xl mx-auto px-3 sm:px-6 py-5 flex-1 w-full space-y-5">
 
         <!-- Top Statistics Cards -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <!-- Saldo Awal -->
-            <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden group">
-                <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider">
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
+                <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
                     <span>Sisa Saldo 2025</span>
-                    <button onclick="openEditSaldoAwalModal()" class="text-amber-500 hover:text-amber-600 font-bold text-[10px] bg-amber-50 px-2 py-1 rounded-md transition opacity-0 group-hover:opacity-100">Ubah</button>
+                    <button onclick="openEditSaldoAwalModal()" class="text-blue-600 hover:text-blue-800 font-bold text-[11px] underline">Ubah</button>
                 </div>
-                <div class="text-xl sm:text-3xl font-black text-slate-800 mt-2" id="statSaldoAwal">Rp 0</div>
-                <div class="text-[11px] text-slate-400 mt-1 font-medium">Saldo per 31 Des 2025</div>
-                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-slate-50 rounded-full pointer-events-none"></div>
+                <div class="text-lg sm:text-2xl font-black text-slate-800 mt-1" id="statSaldoAwal">Rp 0</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Saldo per 31 Des 2025</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-blue-50 rounded-full opacity-60 pointer-events-none"></div>
             </div>
 
             <!-- Iuran Masuk 2026 -->
-            <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
-                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Iuran Terkumpul 2026</div>
-                <div class="text-xl sm:text-3xl font-black text-emerald-600 mt-2" id="statIuranMasuk">Rp 0</div>
-                <div class="text-[11px] text-emerald-600 font-medium mt-1" id="statTotalBulanLunas">0 bulan terbayar</div>
-                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-50 rounded-full pointer-events-none"></div>
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
+                <div class="text-slate-500 text-xs font-medium">Iuran Terkumpul 2026</div>
+                <div class="text-lg sm:text-2xl font-black text-emerald-600 mt-1" id="statIuranMasuk">Rp 0</div>
+                <div class="text-[10px] text-emerald-600 font-medium mt-0.5" id="statTotalBulanLunas">0 bulan terbayar</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-50 rounded-full opacity-60 pointer-events-none"></div>
             </div>
 
             <!-- Total Kas Sekarang -->
-            <div class="bg-gradient-to-br from-slate-900 to-black text-white rounded-3xl p-4 sm:p-5 shadow-xl shadow-slate-900/20 relative overflow-hidden col-span-2 sm:col-span-1 border border-slate-800">
-                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Kas Keseluruhan</div>
-                <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500 mt-2" id="statSubTotal">Rp 0</div>
-                <div class="text-[11px] text-slate-400 mt-1 font-medium">Saldo Awal + Iuran Masuk</div>
-                <div class="absolute right-0 top-0 opacity-10 transform translate-x-4 -translate-y-4">
-                    <svg class="w-24 h-24 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91 2.84.73 4.18 1.91 4.18 3.89 0 1.93-1.49 3.03-3.12 3.18z"/>
+            <div class="bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-2xl p-3.5 sm:p-4 shadow-md relative overflow-hidden col-span-2 sm:col-span-1">
+                <div class="text-blue-200 text-xs font-medium">Total Kas Keseluruhan</div>
+                <div class="text-xl sm:text-2xl font-black text-white mt-1" id="statSubTotal">Rp 0</div>
+                <div class="text-[10px] text-blue-200 mt-0.5">Saldo Awal + Iuran Masuk</div>
+                <div class="absolute right-2 top-2 opacity-20">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
             </div>
 
             <!-- Jumlah Anggota Aktif -->
-            <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden col-span-2 sm:col-span-1">
-                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Data Anggota</div>
-                <div class="text-xl sm:text-3xl font-black text-slate-800 mt-2" id="statTotalAnggota">0 KK</div>
-                <div class="text-[11px] text-slate-500 mt-1 font-medium" id="statPartisipasi">Partisipasi iuran</div>
-                <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-slate-50 rounded-full pointer-events-none"></div>
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden col-span-2 sm:col-span-1">
+                <div class="text-slate-500 text-xs font-medium">Data Anggota Keluarga</div>
+                <div class="text-lg sm:text-2xl font-black text-slate-800 mt-1" id="statTotalAnggota">0 Kepala Keluarga</div>
+                <div class="text-[10px] text-slate-500 mt-0.5" id="statPartisipasi">Partisipasi iuran</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-indigo-50 rounded-full opacity-60 pointer-events-none"></div>
             </div>
         </div>
 
@@ -642,55 +641,25 @@
         let currentModalMonthIndex = null;
         let deferredPrompt = null;
 
-        // Supabase Configuration
-        // GANTI URL DAN KEY DI BAWAH INI DENGAN PROJECT SUPABASE ANDA
-        const SUPABASE_URL = 'https://jsasdhrsupqvowebnjlz.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzYXNkaHJzdXBxdm93ZWJuamx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTc4MDEsImV4cCI6MjEwNDk3MzgwMX0.AYpq2kPOtPgCuNWh6CcSHt6PtnEmdbI6KLBon-H-sQQ';
-        
-        let supabaseClient = null;
-        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
-            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        }
-
-        // Load data from Supabase (or localStorage fallback)
-        async function loadStorage() {
+        // Load data from localStorage if exists
+        function loadStorage() {
             try {
-                if (supabaseClient) {
-                    const { data, error } = await supabaseClient.from('app_state').select('data').eq('id', 1).single();
-                    if (error && error.code !== 'PGRST116') throw error; // ignore row not found error
-                    
-                    if (data && data.data) {
-                        appData = data.data;
-                    } else {
-                        await saveStorage(); // initialize cloud data
-                    }
+                const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
+                if (saved) {
+                    appData = JSON.parse(saved);
                 } else {
-                    const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
-                    if (saved) {
-                        appData = JSON.parse(saved);
-                    } else {
-                        saveStorage();
-                    }
+                    saveStorage();
                 }
-                renderApp();
             } catch (e) {
                 console.error("Storage error:", e);
-                showToast("Error memuat data: " + e.message);
-                renderApp();
             }
         }
 
-        async function saveStorage() {
+        function saveStorage() {
             try {
-                if (supabaseClient) {
-                    const { error } = await supabaseClient.from('app_state').upsert({ id: 1, data: appData });
-                    if (error) throw error;
-                } else {
-                    localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
-                }
+                localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
             } catch (e) {
                 console.error("Save error:", e);
-                showToast("Error menyimpan data: " + e.message);
             }
         }
 
@@ -1257,7 +1226,7 @@
             let csvContent = "data:text/csv;charset=utf-8,";
             
             // Header
-            csvContent += "BOETJE-ETTY 2026\r\n";
+            csvContent += "IURAN KELUARGA BOETJE ETTY SALHUTERU 2026\r\n";
             csvContent += "KELUARGA,JAN,FEB,MARET,APRIL,MEI,JUNI,JULI,AUG,SEPT,OKT,NOV,TOTAL\r\n";
             csvContent += `Sisa Saldo per 31 Des 25,,,,,,,,,,,,"${stats.saldoAwal}"\r\n`;
 
@@ -1362,10 +1331,11 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', async () => {
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStorage();
             setupPwaManifest();
             checkScreenSize();
-            await loadStorage();
+            renderApp();
         });
     </script>
 </body>
