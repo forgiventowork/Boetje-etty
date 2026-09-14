@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Iuran Kas Keluarga Boetje Etty Salhuteru 2026</title>
     
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -280,7 +282,7 @@
                                 Saldo Kas Periode Sebelumnya
                             </td>
                             <td class="py-2.5 px-3 text-right font-black text-blue-900 text-sm" id="tableSaldoAwal">
-                                625,000
+                                0
                             </td>
                         </tr>
                         <!-- Sub Total / Grand Total Row -->
@@ -292,7 +294,7 @@
                                 Total Kas Terkumpul (Saldo Awal + Iuran Berjalan)
                             </td>
                             <td class="py-3.5 px-3 text-right font-black text-blue-900 text-base" id="tableGrandTotal">
-                                1,930,000
+                                0
                             </td>
                         </tr>
                     </tfoot>
@@ -463,203 +465,72 @@
     </div>
 
     <script>
+        // Supabase credentials placeholder
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         // Default standard fee per month
         const STANDARD_MONTHLY_FEE = 20000;
         const MONTH_NAMES = ['JAN', 'FEB', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AUG', 'SEPT', 'OKT', 'NOV'];
 
-        // Initial Data directly extracted from the user's provided document image
-        const INITIAL_DATA = {
-            saldoAwal: 625000,
+        // App state
+        let appData = {
+            saldoAwal: 0,
             year: 2026,
             bankInfo: {
                 bank: 'BCA',
                 accountNumber: '0440876757',
                 accountHolder: 'Pricilia Linda Salhuteru'
             },
-            members: [
-                {
-                    id: '1',
-                    name: 'Kel. R. Salaka',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '14/4/26', amount: 20000 },
-                        2: { paid: true, date: '14/4/26', amount: 20000 },
-                        3: { paid: true, date: '14/4/26', amount: 20000 },
-                        4: { paid: true, date: '14/4/26', amount: 20000 },
-                        5: { paid: true, date: '14/4/26', amount: 20000 }
-                    }
-                },
-                {
-                    id: '2',
-                    name: 'Kel. T. Latuheru',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '10/4/2026', amount: 20000 },
-                        2: { paid: true, date: '10/4/2026', amount: 20000 },
-                        3: { paid: true, date: '10rb', amount: 10000 } // partial 10rb
-                    }
-                },
-                {
-                    id: '3',
-                    name: 'Kel. D. Salhuteru',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '15/4/26', amount: 20000 },
-                        2: { paid: true, date: '15/4/26', amount: 20000 },
-                        3: { paid: true, date: '15/4/26', amount: 20000 },
-                        4: { paid: true, date: '15/4/26', amount: 20000 },
-                        5: { paid: true, date: '15/4/26', amount: 20000 },
-                        6: { paid: true, date: '15/4/26', amount: 20000 },
-                        7: { paid: true, date: '15/4/26', amount: 20000 },
-                        8: { paid: true, date: '15/4/26', amount: 20000 },
-                        9: { paid: true, date: '15/4/26', amount: 20000 },
-                        10: { paid: true, date: '15/4/26', amount: 20000 },
-                        11: { paid: true, date: '15/4/26', amount: 20000 }
-                    }
-                },
-                {
-                    id: '4',
-                    name: 'Kel. V. Salhuteru',
-                    phone: '',
-                    payments: {}
-                },
-                {
-                    id: '5',
-                    name: 'Kel. Nan Salhuteru',
-                    phone: '',
-                    payments: {}
-                },
-                {
-                    id: '6',
-                    name: 'Kel. Rlx. deFretes',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '12/4/2026', amount: 20000 },
-                        2: { paid: true, date: '12/4/2026', amount: 20000 },
-                        3: { paid: true, date: '12/4/2026', amount: 20000 },
-                        4: { paid: true, date: '12/4/2026', amount: 20000 },
-                        5: { paid: true, date: '12/4/2026', amount: 20000 },
-                        6: { paid: true, date: '12/4/2026', amount: 20000 },
-                        7: { paid: true, date: '12/4/2026', amount: 20000 },
-                        8: { paid: true, date: '12/4/2026', amount: 20000 },
-                        9: { paid: true, date: '12/4/2026', amount: 20000 },
-                        10: { paid: true, date: '12/4/2026', amount: 20000 },
-                        11: { paid: true, date: '12/4/2026', amount: 20000 }
-                    }
-                },
-                {
-                    id: '7',
-                    name: 'Kel. U. Ririassa',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '15/4/26', amount: 20000 },
-                        2: { paid: true, date: '15/4/26', amount: 20000 },
-                        3: { paid: true, date: '15/4/26', amount: 20000 },
-                        4: { paid: true, date: '15/4/26', amount: 20000 },
-                        5: { paid: true, date: '15/4/26', amount: 20000 },
-                        6: { paid: true, date: '15/4/26', amount: 20000 },
-                        7: { paid: true, date: '15/4/26', amount: 20000 },
-                        8: { paid: true, date: '15/4/26', amount: 20000 },
-                        9: { paid: true, date: '15/4/26', amount: 20000 },
-                        10: { paid: true, date: '15/4/26', amount: 20000 },
-                        11: { paid: true, date: '15/4/26', amount: 20000 }
-                    }
-                },
-                {
-                    id: '8',
-                    name: 'Kel. M. Salhuteru',
-                    phone: '',
-                    payments: {}
-                },
-                {
-                    id: '9',
-                    name: 'Kel. Rlv. Defretes',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '12/7/2026', amount: 20000 },
-                        2: { paid: true, date: '12/7/2026', amount: 20000 },
-                        3: { paid: true, date: '12/7/2026', amount: 20000 },
-                        4: { paid: true, date: '12/7/2026', amount: 20000 },
-                        5: { paid: true, date: '12/7/2026', amount: 20000 },
-                        6: { paid: true, date: '12/7/2026', amount: 20000 },
-                        7: { paid: true, date: '12/7/2026', amount: 20000 }
-                    }
-                },
-                {
-                    id: '10',
-                    name: 'Kel. A. Nussy',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '12/4/2026', amount: 20000 },
-                        2: { paid: true, date: '12/4/2026', amount: 20000 },
-                        3: { paid: true, date: '12/4/2026', amount: 20000 },
-                        4: { paid: true, date: '12/4/2026', amount: 20000 }
-                    }
-                },
-                {
-                    id: '11',
-                    name: 'Kel. Venter Salhuteru',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '12/7/2026', amount: 20000 },
-                        2: { paid: true, date: '12/7/2026', amount: 20000 },
-                        3: { paid: true, date: '12/7/2026', amount: 20000 },
-                        4: { paid: true, date: '12/7/2026', amount: 20000 },
-                        5: { paid: true, date: '12/7/2026', amount: 20000 }
-                    }
-                },
-                {
-                    id: '12',
-                    name: 'Kel. I. Luturmas',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '10/4/2026', amount: 20000 },
-                        2: { paid: true, date: '10/4/2026', amount: 20000 },
-                        3: { paid: true, date: '10/4/2026', amount: 20000 },
-                        4: { paid: true, date: '15rb', amount: 15000 } // partial 15rb
-                    }
-                },
-                {
-                    id: '13',
-                    name: 'Kel. R. Lokolo',
-                    phone: '',
-                    payments: {
-                        1: { paid: true, date: '14/4/26', amount: 20000 },
-                        2: { paid: true, date: '14/4/26', amount: 20000 },
-                        3: { paid: true, date: '14/4/26', amount: 20000 },
-                        4: { paid: true, date: '14/4/26', amount: 20000 },
-                        5: { paid: true, date: '14/4/26', amount: 20000 }
-                    }
-                }
-            ]
+            members: []
         };
-
-        // App state
-        let appData = { ...INITIAL_DATA };
         let activeView = 'table'; // 'table' or 'cards'
         let currentModalMemberId = null;
         let currentModalMonthIndex = null;
         let deferredPrompt = null;
 
-        // Load data from localStorage if exists
-        function loadStorage() {
+        // Load data from Supabase
+        async function loadStorage() {
             try {
-                const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
-                if (saved) {
-                    appData = JSON.parse(saved);
-                } else {
-                    saveStorage();
+                if(SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') {
+                    console.warn("Please update your Supabase URL and Key in the source code.");
+                    return;
                 }
+
+                const { data: settings, error: errS } = await supabase.from('settings').select('*').eq('id', 1).single();
+                if (settings) {
+                    appData.saldoAwal = settings.saldo_awal;
+                }
+
+                const { data: members, error: errM } = await supabase.from('members').select('*').order('created_at', { ascending: true });
+                if (errM) throw errM;
+
+                const { data: payments, error: errP } = await supabase.from('payments').select('*');
+                if (errP) throw errP;
+
+                appData.members = members.map(m => {
+                    const mPayments = payments.filter(p => p.member_id === m.id);
+                    const paymentsMap = {};
+                    mPayments.forEach(p => {
+                        paymentsMap[p.month] = {
+                            paid: true,
+                            date: p.date_text,
+                            amount: p.amount
+                        };
+                    });
+                    return {
+                        id: m.id,
+                        name: m.name,
+                        phone: m.phone,
+                        payments: paymentsMap
+                    };
+                });
+                
+                renderApp();
             } catch (e) {
                 console.error("Storage error:", e);
-            }
-        }
-
-        function saveStorage() {
-            try {
-                localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
-            } catch (e) {
-                console.error("Save error:", e);
+                showToast("Gagal memuat data dari database");
             }
         }
 
@@ -782,10 +653,8 @@
                         if (isPartial) {
                             cellColor = 'bg-amber-100/90 text-amber-900 font-semibold border-amber-300 hover:bg-amber-200 cursor-pointer';
                         } else if (member.id === '9' || member.id === '11') {
-                            // Orange highlight from image for Rlv. Defretes & Venter
                             cellColor = 'bg-orange-100/90 text-orange-900 font-medium hover:bg-orange-200 cursor-pointer';
                         } else if (member.id === '6') {
-                            // Subtle gray/tan tone from image for Rlx. defretes
                             cellColor = 'bg-stone-100 text-stone-900 font-medium hover:bg-stone-200 cursor-pointer';
                         } else {
                             cellColor = 'bg-emerald-50/60 text-slate-800 font-medium hover:bg-emerald-100 cursor-pointer';
@@ -959,9 +828,8 @@
                 dateInput.value = current.date || '';
                 amountInput.value = current.amount || STANDARD_MONTHLY_FEE;
             } else {
-                // Pre-fill with today formatted (e.g., 14/4/26) or default
                 const now = new Date();
-                dateInput.value = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+                dateInput.value = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
                 amountInput.value = STANDARD_MONTHLY_FEE;
             }
 
@@ -999,50 +867,83 @@
             }
         }
 
-        function savePaymentModal() {
+        async function savePaymentModal() {
             const member = appData.members.find(m => m.id === currentModalMemberId);
             if (!member) return;
 
             if (!member.payments) member.payments = {};
+            
+            try {
+                if (modalIsPaid) {
+                    const dateVal = document.getElementById('modalDateInput').value.trim() || 'Lunas';
+                    const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
+                    
+                    const { error } = await supabase.from('payments').upsert({
+                        member_id: member.id,
+                        month: currentModalMonthIndex,
+                        amount: amtVal,
+                        date_text: dateVal
+                    }, { onConflict: 'member_id, month' });
 
-            if (modalIsPaid) {
-                const dateVal = document.getElementById('modalDateInput').value.trim() || 'Lunas';
-                const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
-                member.payments[currentModalMonthIndex] = {
-                    paid: true,
-                    date: dateVal,
-                    amount: amtVal
-                };
-            } else {
-                delete member.payments[currentModalMonthIndex];
+                    if(error) throw error;
+                    
+                    member.payments[currentModalMonthIndex] = {
+                        paid: true,
+                        date: dateVal,
+                        amount: amtVal
+                    };
+                } else {
+                    const { error } = await supabase.from('payments')
+                        .delete()
+                        .match({ member_id: member.id, month: currentModalMonthIndex });
+                    if(error) throw error;
+                    
+                    delete member.payments[currentModalMonthIndex];
+                }
+
+                renderApp();
+                closeModal('paymentModal');
+                showToast('Data pembayaran berhasil diperbarui');
+            } catch (e) {
+                console.error(e);
+                showToast('Gagal menyimpan ke database!');
             }
-
-            saveStorage();
-            renderApp();
-            closeModal('paymentModal');
-            showToast('Data pembayaran berhasil diperbarui');
         }
 
         // Quick batch pay all 11 months
-        function quickMarkAllMonths(memberId) {
+        async function quickMarkAllMonths(memberId) {
             const member = appData.members.find(m => m.id === memberId);
             if (!member) return;
 
             const now = new Date();
-            const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+            const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
 
             if (!member.payments) member.payments = {};
+            
+            const records = [];
             for (let m = 1; m <= 11; m++) {
-                member.payments[m] = {
-                    paid: true,
-                    date: dateStr,
-                    amount: STANDARD_MONTHLY_FEE
-                };
+                records.push({
+                    member_id: member.id,
+                    month: m,
+                    amount: STANDARD_MONTHLY_FEE,
+                    date_text: dateStr
+                });
             }
 
-            saveStorage();
-            renderApp();
-            showToast(`11 Bulan berhasil dicatat untuk ${member.name}`);
+            try {
+                const { error } = await supabase.from('payments').upsert(records, { onConflict: 'member_id, month' });
+                if (error) throw error;
+
+                for (let m = 1; m <= 11; m++) {
+                    member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
+                }
+
+                renderApp();
+                showToast(`11 Bulan berhasil dicatat untuk ${member.name}`);
+            } catch (e) {
+                console.error(e);
+                showToast('Gagal memproses batch!');
+            }
         }
 
         // Add / Edit Member Modal
@@ -1054,7 +955,6 @@
             document.getElementById('btnDeleteFamily').classList.add('hidden');
             document.getElementById('quickMonthsBlock').classList.remove('hidden');
 
-            // render checkboxes for quick creation
             const boxContainer = document.getElementById('familyMonthCheckboxes');
             let cbHtml = '';
             MONTH_NAMES.forEach((mName, idx) => {
@@ -1084,7 +984,7 @@
             openModal('familyModal');
         }
 
-        function handleSaveFamily(e) {
+        async function handleSaveFamily(e) {
             e.preventDefault();
             const id = document.getElementById('editFamilyId').value;
             const name = document.getElementById('inputFamilyName').value.trim();
@@ -1092,61 +992,77 @@
 
             if (!name) return;
 
-            if (id) {
-                // Update
-                const member = appData.members.find(m => m.id === id);
-                if (member) {
-                    member.name = name;
-                    member.phone = phone;
-                }
-                showToast('Data anggota diperbarui');
-            } else {
-                // Create
-                const newId = Date.now().toString();
-                const newMember = {
-                    id: newId,
-                    name: name,
-                    phone: phone,
-                    payments: {}
-                };
+            try {
+                if (id) {
+                    const { error } = await supabase.from('members').update({ name, phone }).eq('id', id);
+                    if (error) throw error;
+                    
+                    const member = appData.members.find(m => m.id === id);
+                    if (member) {
+                        member.name = name;
+                        member.phone = phone;
+                    }
+                    showToast('Data anggota diperbarui');
+                } else {
+                    const newId = Date.now().toString();
+                    
+                    const { error: err1 } = await supabase.from('members').insert([{ id: newId, name, phone }]);
+                    if (err1) throw err1;
 
-                // Check quick checked months
-                const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
-                const now = new Date();
-                const todayStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
+                    const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
+                    const now = new Date();
+                    const todayStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
 
-                checkedBoxes.forEach(cb => {
-                    const m = Number(cb.value);
-                    newMember.payments[m] = {
-                        paid: true,
-                        date: todayStr,
-                        amount: STANDARD_MONTHLY_FEE
+                    const newMember = {
+                        id: newId,
+                        name: name,
+                        phone: phone,
+                        payments: {}
                     };
-                });
 
-                appData.members.push(newMember);
-                showToast('Anggota baru berhasil ditambahkan');
+                    if (checkedBoxes.length > 0) {
+                        const paymentsToInsert = [];
+                        checkedBoxes.forEach(cb => {
+                            const m = Number(cb.value);
+                            paymentsToInsert.push({ member_id: newId, month: m, amount: STANDARD_MONTHLY_FEE, date_text: todayStr });
+                            newMember.payments[m] = { paid: true, date: todayStr, amount: STANDARD_MONTHLY_FEE };
+                        });
+                        const { error: err2 } = await supabase.from('payments').insert(paymentsToInsert);
+                        if(err2) throw err2;
+                    }
+
+                    appData.members.push(newMember);
+                    showToast('Anggota baru berhasil ditambahkan');
+                }
+                
+                renderApp();
+                closeModal('familyModal');
+            } catch (e) {
+                console.error(e);
+                showToast("Gagal menyimpan data ke database");
             }
-
-            saveStorage();
-            renderApp();
-            closeModal('familyModal');
         }
 
-        function handleDeleteFamily() {
+        async function handleDeleteFamily() {
             const id = document.getElementById('editFamilyId').value;
             if (!id) return;
 
             const member = appData.members.find(m => m.id === id);
             const memberName = member ? member.name : 'Anggota ini';
 
-            // Custom UI confirmation
             if (window.confirm(`Hapus ${memberName} dari daftar kas keluarga?`)) {
-                appData.members = appData.members.filter(m => m.id !== id);
-                saveStorage();
-                renderApp();
-                closeModal('familyModal');
-                showToast('Anggota telah dihapus');
+                try {
+                    const { error } = await supabase.from('members').delete().eq('id', id);
+                    if (error) throw error;
+                    
+                    appData.members = appData.members.filter(m => m.id !== id);
+                    renderApp();
+                    closeModal('familyModal');
+                    showToast('Anggota telah dihapus');
+                } catch (e) {
+                    console.error(e);
+                    showToast('Gagal menghapus dari database');
+                }
             }
         }
 
@@ -1156,13 +1072,20 @@
             openModal('saldoModal');
         }
 
-        function saveSaldoAwal() {
+        async function saveSaldoAwal() {
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
-            appData.saldoAwal = val;
-            saveStorage();
-            renderApp();
-            closeModal('saldoModal');
-            showToast('Sisa saldo kas 2025 berhasil disimpan');
+            try {
+                const { error } = await supabase.from('settings').upsert({ id: 1, saldo_awal: val });
+                if(error) throw error;
+                
+                appData.saldoAwal = val;
+                renderApp();
+                closeModal('saldoModal');
+                showToast('Sisa saldo kas berhasil disimpan');
+            } catch (e) {
+                console.error(e);
+                showToast('Gagal update saldo awal');
+            }
         }
 
         // Copy BCA Number
@@ -1335,7 +1258,6 @@
             loadStorage();
             setupPwaManifest();
             checkScreenSize();
-            renderApp();
         });
     </script>
 </body>
