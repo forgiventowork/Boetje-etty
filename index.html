@@ -11,6 +11,7 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
@@ -641,25 +642,55 @@
         let currentModalMonthIndex = null;
         let deferredPrompt = null;
 
-        // Load data from localStorage if exists
-        function loadStorage() {
+        // Supabase Configuration
+        // GANTI URL DAN KEY DI BAWAH INI DENGAN PROJECT SUPABASE ANDA
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+        const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+        
+        let supabaseClient = null;
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+
+        // Load data from Supabase (or localStorage fallback)
+        async function loadStorage() {
             try {
-                const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
-                if (saved) {
-                    appData = JSON.parse(saved);
+                if (supabaseClient) {
+                    const { data, error } = await supabaseClient.from('app_state').select('data').eq('id', 1).single();
+                    if (error && error.code !== 'PGRST116') throw error; // ignore row not found error
+                    
+                    if (data && data.data) {
+                        appData = data.data;
+                    } else {
+                        await saveStorage(); // initialize cloud data
+                    }
                 } else {
-                    saveStorage();
+                    const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
+                    if (saved) {
+                        appData = JSON.parse(saved);
+                    } else {
+                        saveStorage();
+                    }
                 }
+                renderApp();
             } catch (e) {
                 console.error("Storage error:", e);
+                showToast("Error memuat data: " + e.message);
+                renderApp();
             }
         }
 
-        function saveStorage() {
+        async function saveStorage() {
             try {
-                localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
+                if (supabaseClient) {
+                    const { error } = await supabaseClient.from('app_state').upsert({ id: 1, data: appData });
+                    if (error) throw error;
+                } else {
+                    localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
+                }
             } catch (e) {
                 console.error("Save error:", e);
+                showToast("Error menyimpan data: " + e.message);
             }
         }
 
@@ -1331,11 +1362,10 @@
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadStorage();
+        window.addEventListener('DOMContentLoaded', async () => {
             setupPwaManifest();
             checkScreenSize();
-            renderApp();
+            await loadStorage();
         });
     </script>
 </body>
