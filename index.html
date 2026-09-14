@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="description" content="Aplikasi Pencatatan Iuran Kas Keluarga Boetje Etty Salhuteru 2026">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Iuran Kas Keluarga Boetje Etty Salhuteru 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbars and table styles */
+        ::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .print-table {
+                font-size: 9px !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-blue-100 selection:text-blue-900 pb-16 md:pb-8">
+
+    <!-- Top App Bar -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white shadow-md sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center shadow-inner">
+                    <svg class="w-6 h-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold leading-tight tracking-wide">IURAN KELUARGA 2026</h1>
+                    <p class="text-xs text-blue-200">Keluarga Boetje Etty Salhuteru</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Actions -->
+            <div class="flex items-center space-x-2">
+                <!-- PWA Install button -->
+                <button id="pwaInstallBtn" onclick="handlePwaInstallPrompt()" class="hidden sm:flex items-center space-x-1.5 bg-yellow-400 hover:bg-yellow-300 text-yellow-950 px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9992.4482.9992.9993s-.4482.9997-.9992.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993s-.4482.9997-.9993.9997m11.4045-6.02l1.996-3.4568a.4166.4166 0 00-.1523-.5676.416.416 0 00-.568.1523l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3115-5.1369.8523L4.8408 5.4493a.4166.4166 0 00-.568-.1523.416.416 0 00-.1523.5676l1.996 3.4568C2.688 11.2863.344 15.228 0 19.95h24c-.344-4.722-2.688-8.6637-6.1185-10.6286"/>
+                    </svg>
+                    <span>Install Aplikasi</span>
+                </button>
+                <button onclick="openAddFamilyModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition shadow border border-blue-400/40">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span class="hidden sm:inline">Tambah Anggota</span>
+                    <span class="sm:hidden">Tambah</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bank Info & Notice Banner -->
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200/80 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs sm:text-sm">
+            <div class="flex items-center space-x-2 text-amber-900">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-200/70 text-amber-800 flex items-center justify-center font-bold">ℹ</span>
+                <p>
+                    <span class="font-bold">Info Transfer:</span> Iuran bulanan <b>Rp 20.000 / bln</b> dapat ditransfer ke 
+                    <span class="font-bold text-blue-900 bg-white px-1.5 py-0.5 rounded border border-amber-300">BCA 0440876757</span> 
+                    a.n. <b>Pricilia Linda Salhuteru</b>
+                </p>
+            </div>
+            <button onclick="copyBcaNumber()" class="self-end sm:self-center inline-flex items-center space-x-1 text-xs font-bold text-blue-700 bg-white hover:bg-blue-50 border border-blue-300 px-2.5 py-1 rounded shadow-sm transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <span>Salin No. Rekening</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 py-5 flex-1 w-full space-y-5">
+
+        <!-- Top Statistics Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <!-- Saldo Awal -->
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
+                <div class="flex items-center justify-between text-slate-500 text-xs font-medium">
+                    <span>Sisa Saldo 2025</span>
+                    <button onclick="openEditSaldoAwalModal()" class="text-blue-600 hover:text-blue-800 font-bold text-[11px] underline">Ubah</button>
+                </div>
+                <div class="text-lg sm:text-2xl font-black text-slate-800 mt-1" id="statSaldoAwal">Rp 0</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Saldo per 31 Des 2025</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-blue-50 rounded-full opacity-60 pointer-events-none"></div>
+            </div>
+
+            <!-- Iuran Masuk 2026 -->
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden">
+                <div class="text-slate-500 text-xs font-medium">Iuran Terkumpul 2026</div>
+                <div class="text-lg sm:text-2xl font-black text-emerald-600 mt-1" id="statIuranMasuk">Rp 0</div>
+                <div class="text-[10px] text-emerald-600 font-medium mt-0.5" id="statTotalBulanLunas">0 bulan terbayar</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-50 rounded-full opacity-60 pointer-events-none"></div>
+            </div>
+
+            <!-- Total Kas Sekarang -->
+            <div class="bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-2xl p-3.5 sm:p-4 shadow-md relative overflow-hidden col-span-2 sm:col-span-1">
+                <div class="text-blue-200 text-xs font-medium">Total Kas Keseluruhan</div>
+                <div class="text-xl sm:text-2xl font-black text-white mt-1" id="statSubTotal">Rp 0</div>
+                <div class="text-[10px] text-blue-200 mt-0.5">Saldo Awal + Iuran Masuk</div>
+                <div class="absolute right-2 top-2 opacity-20">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Jumlah Anggota Aktif -->
+            <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-sm relative overflow-hidden col-span-2 sm:col-span-1">
+                <div class="text-slate-500 text-xs font-medium">Data Anggota Keluarga</div>
+                <div class="text-lg sm:text-2xl font-black text-slate-800 mt-1" id="statTotalAnggota">0 Kepala Keluarga</div>
+                <div class="text-[10px] text-slate-500 mt-0.5" id="statPartisipasi">Partisipasi iuran</div>
+                <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-indigo-50 rounded-full opacity-60 pointer-events-none"></div>
+            </div>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div class="bg-white p-3 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <!-- Search & Filter -->
+            <div class="flex items-center space-x-2 flex-1">
+                <div class="relative flex-1 max-w-sm">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama keluarga..." class="w-full pl-8 pr-3 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                
+                <select id="filterStatus" onchange="renderApp()" class="text-xs bg-slate-50 border border-slate-200 py-2 px-2.5 rounded-xl font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="all">Semua Status</option>
+                    <option value="paid">Sudah Bayar Sebagian / Lunas</option>
+                    <option value="unpaid">Belum Bayar Sama Sekali</option>
+                </select>
+            </div>
+
+            <!-- View Switcher & Action Tools -->
+            <div class="flex items-center justify-between md:justify-end space-x-2">
+                <!-- View Mode Buttons -->
+                <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-white text-blue-900 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span class="hidden sm:inline">Tabel Matrix</span>
+                        <span class="sm:hidden">Tabel</span>
+                    </button>
+                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 text-slate-600 hover:text-slate-900 transition">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                        <span>Kartu HP</span>
+                    </button>
+                </div>
+
+                <!-- Export / Share Dropdown -->
+                <button onclick="openShareWhatsAppModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 shadow transition">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                    </svg>
+                    <span>Kirim WA</span>
+                </button>
+
+                <button onclick="exportToCsv()" title="Unduh File CSV / Excel" class="p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </button>
+
+                <button onclick="window.print()" title="Cetak Laporan / PDF" class="p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW 1: MATRIX SPREADSHEET (Desktop & Tablet optimized) -->
+        <div id="tableViewContainer" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+            <div class="p-3.5 bg-slate-50/70 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Tabel Iuran Bulanan 2026 (Klik kotak bulan untuk mencatat)</span>
+                </div>
+                <div class="text-[11px] text-slate-500">
+                    <span class="inline-block w-3 h-3 bg-emerald-100 border border-emerald-300 rounded mr-1 align-middle"></span>Lunas Rp 20k
+                    <span class="inline-block w-3 h-3 bg-amber-100 border border-amber-300 rounded ml-2 mr-1 align-middle"></span>Parsial (10rb/15rb)
+                    <span class="inline-block w-3 h-3 bg-slate-100 border border-slate-200 rounded ml-2 mr-1 align-middle"></span>Belum
+                </div>
+            </div>
+
+            <div class="overflow-x-auto print-table">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-100/90 text-slate-700 font-bold border-b border-slate-300 text-center">
+                            <th class="py-3 px-3.5 sticky-col bg-slate-100 text-left min-w-[170px] border-r border-slate-300 shadow-[2px_0_4px_rgba(0,0,0,0.03)]">
+                                KELUARGA
+                            </th>
+                            <!-- Months 1 - 11 as shown in user's image (plus 12 optional) -->
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">1</span>JAN</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">2</span>FEB</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">3</span>MARET</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">4</span>APRIL</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">5</span>MEI</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">6</span>JUNI</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">7</span>JULI</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">8</span>AUG</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">9</span>SEPT</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">10</span>OKT</th>
+                            <th class="py-2.5 px-2 min-w-[76px] border-r border-slate-200"><span class="text-[10px] text-slate-400 block font-normal">11</span>NOV</th>
+                            <th class="py-3 px-3 text-right font-black text-slate-800 min-w-[100px]">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-slate-200">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                    <tfoot class="border-t-2 border-slate-300 bg-slate-100/80 font-bold">
+                        <!-- Sisa Saldo Row -->
+                        <tr class="bg-blue-50/40 text-slate-700">
+                            <td class="py-2.5 px-3.5 sticky-col bg-blue-50 font-bold border-r border-slate-300">
+                                Sisa Saldo per 31 Des 25
+                            </td>
+                            <td colspan="11" class="text-center text-slate-400 italic text-[11px]">
+                                Saldo Kas Periode Sebelumnya
+                            </td>
+                            <td class="py-2.5 px-3 text-right font-black text-blue-900 text-sm" id="tableSaldoAwal">
+                                625,000
+                            </td>
+                        </tr>
+                        <!-- Sub Total / Grand Total Row -->
+                        <tr class="bg-slate-200 text-slate-900 text-sm">
+                            <td class="py-3.5 px-3.5 sticky-col bg-slate-200 font-black tracking-wider text-right border-r border-slate-300" colspan="1">
+                                Sub Total
+                            </td>
+                            <td colspan="11" class="py-3.5 px-2 text-center text-xs font-semibold text-slate-500">
+                                Total Kas Terkumpul (Saldo Awal + Iuran Berjalan)
+                            </td>
+                            <td class="py-3.5 px-3 text-right font-black text-blue-900 text-base" id="tableGrandTotal">
+                                1,930,000
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIEW 2: SMARTPHONE CARD VIEW (Touch friendly mobile view) -->
+        <div id="cardsViewContainer" class="hidden space-y-3">
+            <!-- List of family cards generated dynamically -->
+            <div id="cardsList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Quick Batch Entry helper note -->
+        <div class="text-center text-xs text-slate-400 py-1">
+            Tip: Sentuh atau klik nama keluarga untuk opsi rincian, atau klik tombol bulan untuk ubah status pembayaran.
+        </div>
+    </main>
+
+    <!-- Modal: Cell Payment Editor -->
+    <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-bold text-base" id="modalFamilyName">Kel. D. Salhuteru</h3>
+                        <p class="text-xs text-blue-200" id="modalMonthName">Bulan: Januari 2026</p>
+                    </div>
+                    <button onclick="closeModal('paymentModal')" class="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-4 space-y-3.5">
+                <!-- Status Switch -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Status Pembayaran</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="btnStatusPaid" onclick="setModalPaymentStatus(true)" class="py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition">
+                            <span>✓ Sudah Bayar</span>
+                        </button>
+                        <button type="button" id="btnStatusUnpaid" onclick="setModalPaymentStatus(false)" class="py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition">
+                            <span>✕ Belum Bayar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="paidFieldsContainer" class="space-y-3">
+                    <!-- Date Input -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Tanggal Bayar / Teks Catatan</label>
+                        <input type="text" id="modalDateInput" placeholder="Contoh: 15/4/26 atau 12/7/2026" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <p class="text-[10px] text-slate-400 mt-1">Bisa tanggal (cth: 14/4/26) atau keterangan parsial.</p>
+                    </div>
+
+                    <!-- Amount Input -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Jumlah Nominal (Rp)</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="modalAmountInput" step="1000" placeholder="20000" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none font-semibold">
+                            <button type="button" onclick="setModalAmount(20000)" class="px-2.5 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-xl text-xs font-bold whitespace-nowrap hover:bg-blue-100">20rb</button>
+                            <button type="button" onclick="setModalAmount(10000)" class="px-2 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold whitespace-nowrap hover:bg-amber-100">10rb</button>
+                            <button type="button" onclick="setModalAmount(15000)" class="px-2 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-xl text-xs font-bold whitespace-nowrap hover:bg-amber-100">15rb</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="pt-2 flex items-center justify-end space-x-2">
+                    <button type="button" onclick="closeModal('paymentModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Batal</button>
+                    <button type="button" onclick="savePaymentModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition">Simpan Perubahan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add or Edit Family Member -->
+    <div id="familyModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4 flex justify-between items-center">
+                <h3 class="font-bold text-base" id="familyModalTitle">Tambah Anggota Keluarga</h3>
+                <button onclick="closeModal('familyModal')" class="text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveFamily(event)" class="p-4 space-y-3.5">
+                <input type="hidden" id="editFamilyId">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Keluarga / Kepala Keluarga</label>
+                    <input type="text" id="inputFamilyName" required placeholder="Contoh: Kel. R. Salaka" class="w-full px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nomor WhatsApp / Telepon (Opsional)</label>
+                    <input type="tel" id="inputFamilyPhone" placeholder="Contoh: 081234567890" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <!-- Quick Payment Initializer -->
+                <div id="quickMonthsBlock">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Bulan yang langsung dibayar saat pendaftaran:</label>
+                    <div class="grid grid-cols-4 sm:grid-cols-6 gap-1.5 text-[11px]" id="familyMonthCheckboxes">
+                        <!-- Injected checkboxes -->
+                    </div>
+                </div>
+
+                <div class="pt-3 flex items-center justify-between border-t border-slate-100">
+                    <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-xs text-rose-600 hover:text-rose-800 font-bold hidden">
+                        Hapus Anggota
+                    </button>
+                    <div class="flex items-center space-x-2 ml-auto">
+                        <button type="button" onclick="closeModal('familyModal')" class="px-3.5 py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Saldo Awal -->
+    <div id="saldoModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-xs rounded-2xl shadow-xl p-4 space-y-3">
+            <h3 class="font-bold text-sm text-slate-800">Ubah Sisa Saldo Kas 2025</h3>
+            <p class="text-xs text-slate-500">Masukkan nominal sisa saldo kas per 31 Desember 2025.</p>
+            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2 border rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeModal('saldoModal')" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold">Batal</button>
+                <button onclick="saveSaldoAwal()" class="px-4 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: WhatsApp Share Generator -->
+    <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-4 sm:p-5 space-y-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-base text-slate-900 flex items-center space-x-1.5">
+                    <span class="text-emerald-600">💬</span>
+                    <span>Rekap Laporan WhatsApp</span>
+                </h3>
+                <button onclick="closeModal('shareModal')" class="text-slate-400 hover:text-slate-700">✕</button>
+            </div>
+            <p class="text-xs text-slate-500">Pesan ini siap dibagikan ke Grup WhatsApp Keluarga Boetje Etty Salhuteru:</p>
+            
+            <textarea id="waMessageText" rows="11" readonly class="w-full p-3 font-mono text-[11px] bg-slate-50 border border-slate-200 rounded-xl focus:outline-none select-all text-slate-800"></textarea>
+
+            <div class="flex items-center justify-end space-x-2 pt-2">
+                <button onclick="copyWaMessage()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Salin Teks</span>
+                </button>
+                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center space-x-1.5">
+                    <span>Buka WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast (No alert() rule) -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center space-x-2 text-xs font-semibold">
+        <span id="toastIcon">✓</span>
+        <span id="toastMsg">Tindakan berhasil</span>
+    </div>
+
+    <script>
+        // Default standard fee per month
+        const STANDARD_MONTHLY_FEE = 20000;
+        const MONTH_NAMES = ['JAN', 'FEB', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AUG', 'SEPT', 'OKT', 'NOV'];
+
+        // Initial Data directly extracted from the user's provided document image
+        const INITIAL_DATA = {
+            saldoAwal: 625000,
+            year: 2026,
+            bankInfo: {
+                bank: 'BCA',
+                accountNumber: '0440876757',
+                accountHolder: 'Pricilia Linda Salhuteru'
+            },
+            members: [
+                {
+                    id: '1',
+                    name: 'Kel. R. Salaka',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '14/4/26', amount: 20000 },
+                        2: { paid: true, date: '14/4/26', amount: 20000 },
+                        3: { paid: true, date: '14/4/26', amount: 20000 },
+                        4: { paid: true, date: '14/4/26', amount: 20000 },
+                        5: { paid: true, date: '14/4/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '2',
+                    name: 'Kel. T. Latuheru',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '10/4/2026', amount: 20000 },
+                        2: { paid: true, date: '10/4/2026', amount: 20000 },
+                        3: { paid: true, date: '10rb', amount: 10000 } // partial 10rb
+                    }
+                },
+                {
+                    id: '3',
+                    name: 'Kel. D. Salhuteru',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '15/4/26', amount: 20000 },
+                        2: { paid: true, date: '15/4/26', amount: 20000 },
+                        3: { paid: true, date: '15/4/26', amount: 20000 },
+                        4: { paid: true, date: '15/4/26', amount: 20000 },
+                        5: { paid: true, date: '15/4/26', amount: 20000 },
+                        6: { paid: true, date: '15/4/26', amount: 20000 },
+                        7: { paid: true, date: '15/4/26', amount: 20000 },
+                        8: { paid: true, date: '15/4/26', amount: 20000 },
+                        9: { paid: true, date: '15/4/26', amount: 20000 },
+                        10: { paid: true, date: '15/4/26', amount: 20000 },
+                        11: { paid: true, date: '15/4/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '4',
+                    name: 'Kel. V. Salhuteru',
+                    phone: '',
+                    payments: {}
+                },
+                {
+                    id: '5',
+                    name: 'Kel. Nan Salhuteru',
+                    phone: '',
+                    payments: {}
+                },
+                {
+                    id: '6',
+                    name: 'Kel. Rlx. deFretes',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/4/2026', amount: 20000 },
+                        2: { paid: true, date: '12/4/2026', amount: 20000 },
+                        3: { paid: true, date: '12/4/2026', amount: 20000 },
+                        4: { paid: true, date: '12/4/2026', amount: 20000 },
+                        5: { paid: true, date: '12/4/2026', amount: 20000 },
+                        6: { paid: true, date: '12/4/2026', amount: 20000 },
+                        7: { paid: true, date: '12/4/2026', amount: 20000 },
+                        8: { paid: true, date: '12/4/2026', amount: 20000 },
+                        9: { paid: true, date: '12/4/2026', amount: 20000 },
+                        10: { paid: true, date: '12/4/2026', amount: 20000 },
+                        11: { paid: true, date: '12/4/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '7',
+                    name: 'Kel. U. Ririassa',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '15/4/26', amount: 20000 },
+                        2: { paid: true, date: '15/4/26', amount: 20000 },
+                        3: { paid: true, date: '15/4/26', amount: 20000 },
+                        4: { paid: true, date: '15/4/26', amount: 20000 },
+                        5: { paid: true, date: '15/4/26', amount: 20000 },
+                        6: { paid: true, date: '15/4/26', amount: 20000 },
+                        7: { paid: true, date: '15/4/26', amount: 20000 },
+                        8: { paid: true, date: '15/4/26', amount: 20000 },
+                        9: { paid: true, date: '15/4/26', amount: 20000 },
+                        10: { paid: true, date: '15/4/26', amount: 20000 },
+                        11: { paid: true, date: '15/4/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '8',
+                    name: 'Kel. M. Salhuteru',
+                    phone: '',
+                    payments: {}
+                },
+                {
+                    id: '9',
+                    name: 'Kel. Rlv. Defretes',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/7/2026', amount: 20000 },
+                        2: { paid: true, date: '12/7/2026', amount: 20000 },
+                        3: { paid: true, date: '12/7/2026', amount: 20000 },
+                        4: { paid: true, date: '12/7/2026', amount: 20000 },
+                        5: { paid: true, date: '12/7/2026', amount: 20000 },
+                        6: { paid: true, date: '12/7/2026', amount: 20000 },
+                        7: { paid: true, date: '12/7/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '10',
+                    name: 'Kel. A. Nussy',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/4/2026', amount: 20000 },
+                        2: { paid: true, date: '12/4/2026', amount: 20000 },
+                        3: { paid: true, date: '12/4/2026', amount: 20000 },
+                        4: { paid: true, date: '12/4/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '11',
+                    name: 'Kel. Venter Salhuteru',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/7/2026', amount: 20000 },
+                        2: { paid: true, date: '12/7/2026', amount: 20000 },
+                        3: { paid: true, date: '12/7/2026', amount: 20000 },
+                        4: { paid: true, date: '12/7/2026', amount: 20000 },
+                        5: { paid: true, date: '12/7/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '12',
+                    name: 'Kel. I. Luturmas',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '10/4/2026', amount: 20000 },
+                        2: { paid: true, date: '10/4/2026', amount: 20000 },
+                        3: { paid: true, date: '10/4/2026', amount: 20000 },
+                        4: { paid: true, date: '15rb', amount: 15000 } // partial 15rb
+                    }
+                },
+                {
+                    id: '13',
+                    name: 'Kel. R. Lokolo',
+                    phone: '',
+                    payments: {
+                        1: { paid: true, date: '14/4/26', amount: 20000 },
+                        2: { paid: true, date: '14/4/26', amount: 20000 },
+                        3: { paid: true, date: '14/4/26', amount: 20000 },
+                        4: { paid: true, date: '14/4/26', amount: 20000 },
+                        5: { paid: true, date: '14/4/26', amount: 20000 }
+                    }
+                }
+            ]
+        };
+
+        // App state
+        let appData = { ...INITIAL_DATA };
+        let activeView = 'table'; // 'table' or 'cards'
+        let currentModalMemberId = null;
+        let currentModalMonthIndex = null;
+        let deferredPrompt = null;
+
+        // Load data from localStorage if exists
+        function loadStorage() {
+            try {
+                const saved = localStorage.getItem('SALHUTERU_IURAN_2026_DATA');
+                if (saved) {
+                    appData = JSON.parse(saved);
+                } else {
+                    saveStorage();
+                }
+            } catch (e) {
+                console.error("Storage error:", e);
+            }
+        }
+
+        function saveStorage() {
+            try {
+                localStorage.setItem('SALHUTERU_IURAN_2026_DATA', JSON.stringify(appData));
+            } catch (e) {
+                console.error("Save error:", e);
+            }
+        }
+
+        // Currency Formatter
+        function formatRupiah(num) {
+            if (num === null || num === undefined) return '0';
+            return new Intl.NumberFormat('id-ID').format(num);
+        }
+
+        // Calculate totals
+        function calculateTotals() {
+            let totalIuranCollected = 0;
+            let totalMonthsPaid = 0;
+            let activeContributorsCount = 0;
+
+            appData.members.forEach(member => {
+                let memberTotal = 0;
+                for (let m = 1; m <= 11; m++) {
+                    const payment = member.payments && member.payments[m];
+                    if (payment && payment.paid) {
+                        const amount = Number(payment.amount) || STANDARD_MONTHLY_FEE;
+                        memberTotal += amount;
+                        totalMonthsPaid++;
+                    }
+                }
+                member.computedTotal = memberTotal;
+                totalIuranCollected += memberTotal;
+                if (memberTotal > 0) activeContributorsCount++;
+            });
+
+            const grandTotalKas = (Number(appData.saldoAwal) || 0) + totalIuranCollected;
+
+            return {
+                saldoAwal: Number(appData.saldoAwal) || 0,
+                totalIuranCollected,
+                grandTotalKas,
+                totalMonthsPaid,
+                totalMembers: appData.members.length,
+                activeContributorsCount
+            };
+        }
+
+        // Render dashboard statistics
+        function renderStats() {
+            const stats = calculateTotals();
+            document.getElementById('statSaldoAwal').textContent = 'Rp ' + formatRupiah(stats.saldoAwal);
+            document.getElementById('statIuranMasuk').textContent = 'Rp ' + formatRupiah(stats.totalIuranCollected);
+            document.getElementById('statSubTotal').textContent = 'Rp ' + formatRupiah(stats.grandTotalKas);
+            document.getElementById('statTotalBulanLunas').textContent = `${stats.totalMonthsPaid} bulan tercatat`;
+            document.getElementById('statTotalAnggota').textContent = `${stats.totalMembers} Keluarga`;
+            document.getElementById('statPartisipasi').textContent = `${stats.activeContributorsCount} dari ${stats.totalMembers} keluarga aktif`;
+
+            document.getElementById('tableSaldoAwal').textContent = formatRupiah(stats.saldoAwal);
+            document.getElementById('tableGrandTotal').textContent = formatRupiah(stats.grandTotalKas);
+        }
+
+        // Filter helper
+        function getFilteredMembers() {
+            const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+            const filterStatus = document.getElementById('filterStatus')?.value || 'all';
+
+            return appData.members.filter(m => {
+                const matchesSearch = m.name.toLowerCase().includes(query);
+                if (!matchesSearch) return false;
+
+                if (filterStatus === 'paid') {
+                    return (m.computedTotal || 0) > 0;
+                } else if (filterStatus === 'unpaid') {
+                    return (m.computedTotal || 0) === 0;
+                }
+                return true;
+            });
+        }
+
+        // Render Main Spreadsheet Table
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const members = getFilteredMembers();
+            
+            if (members.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="13" class="py-8 text-center text-slate-400">
+                            Tidak ada data keluarga yang sesuai dengan pencarian.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            members.forEach((member, idx) => {
+                const isEven = idx % 2 === 0;
+                const rowBg = isEven ? 'bg-white' : 'bg-slate-50/40';
+
+                html += `<tr class="${rowBg} hover:bg-blue-50/30 transition border-b border-slate-200 text-center">`;
+                
+                // Family name column
+                html += `
+                    <td class="py-2.5 px-3.5 sticky-col ${rowBg} text-left font-bold text-slate-800 border-r border-slate-300 shadow-[2px_0_4px_rgba(0,0,0,0.02)]">
+                        <div class="flex items-center justify-between group">
+                            <span class="truncate cursor-pointer hover:text-blue-700" onclick="openEditFamilyModal('${member.id}')" title="Klik untuk ubah">${member.name}</span>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-blue-600 ml-1 p-0.5" title="Edit Anggota">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                // 11 Months columns
+                for (let m = 1; m <= 11; m++) {
+                    const p = member.payments && member.payments[m];
+                    const isPaid = p && p.paid;
+                    const dateText = p?.date || '';
+                    const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
+
+                    // Color theme matching the user's paper highlighting
+                    let cellColor = 'bg-transparent text-slate-300 hover:bg-slate-100 cursor-pointer';
+                    if (isPaid) {
+                        if (isPartial) {
+                            cellColor = 'bg-amber-100/90 text-amber-900 font-semibold border-amber-300 hover:bg-amber-200 cursor-pointer';
+                        } else if (member.id === '9' || member.id === '11') {
+                            // Orange highlight from image for Rlv. Defretes & Venter
+                            cellColor = 'bg-orange-100/90 text-orange-900 font-medium hover:bg-orange-200 cursor-pointer';
+                        } else if (member.id === '6') {
+                            // Subtle gray/tan tone from image for Rlx. defretes
+                            cellColor = 'bg-stone-100 text-stone-900 font-medium hover:bg-stone-200 cursor-pointer';
+                        } else {
+                            cellColor = 'bg-emerald-50/60 text-slate-800 font-medium hover:bg-emerald-100 cursor-pointer';
+                        }
+                    }
+
+                    html += `
+                        <td onclick="openPaymentModal('${member.id}', ${m})" class="py-2 px-1 text-[11px] border-r border-slate-200 transition ${cellColor}" title="Bulan ${MONTH_NAMES[m-1]}: Klik untuk ubah">
+                            ${isPaid ? (dateText || '✓') : '<span class="text-slate-200">-</span>'}
+                        </td>
+                    `;
+                }
+
+                // Member Total column
+                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
+                html += `
+                    <td class="py-2.5 px-3 text-right font-black text-slate-800 ${member.computedTotal > 0 ? 'text-blue-900' : 'text-slate-400'}">
+                        ${totalDisplay}
+                    </td>
+                `;
+
+                html += `</tr>`;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // Render Mobile Cards View (Optimized for Android)
+        function renderCards() {
+            const list = document.getElementById('cardsList');
+            const members = getFilteredMembers();
+
+            if (members.length === 0) {
+                list.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-white rounded-2xl border border-slate-200 p-4">
+                        Tidak ada anggota keluarga yang cocok.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            members.forEach(member => {
+                const totalText = member.computedTotal > 0 ? 'Rp ' + formatRupiah(member.computedTotal) : 'Belum Ada';
+                
+                // count paid months
+                let paidMonthsCount = 0;
+                for (let m = 1; m <= 11; m++) {
+                    if (member.payments && member.payments[m]?.paid) paidMonthsCount++;
+                }
+
+                html += `
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-sm hover:shadow-md transition">
+                        <div class="flex items-start justify-between pb-2 border-b border-slate-100">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm flex items-center space-x-1.5">
+                                    <span>${member.name}</span>
+                                    <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-blue-600 p-0.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                    </button>
+                                </h4>
+                                <div class="text-[11px] text-slate-400 mt-0.5">${paidMonthsCount} / 11 Bulan Terbayar</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-bold ${member.computedTotal > 0 ? 'text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200' : 'text-slate-400 bg-slate-50 px-2 py-0.5 rounded-full'}">
+                                    ${totalText}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Month Buttons Grid for touch devices -->
+                        <div class="mt-3">
+                            <div class="text-[11px] font-semibold text-slate-500 mb-1.5">Status Iuran Bulanan:</div>
+                            <div class="grid grid-cols-4 gap-1.5">
+                `;
+
+                for (let m = 1; m <= 11; m++) {
+                    const p = member.payments && member.payments[m];
+                    const isPaid = p && p.paid;
+                    const label = MONTH_NAMES[m-1];
+                    const dateDesc = p?.date || (isPaid ? 'Lunas' : '');
+
+                    let btnClass = 'bg-slate-100 text-slate-400 border-slate-200';
+                    if (isPaid) {
+                        if (p.amount && p.amount < STANDARD_MONTHLY_FEE) {
+                            btnClass = 'bg-amber-100 text-amber-900 border-amber-300 font-bold';
+                        } else {
+                            btnClass = 'bg-emerald-100 text-emerald-900 border-emerald-300 font-bold';
+                        }
+                    }
+
+                    html += `
+                        <button onclick="openPaymentModal('${member.id}', ${m})" class="p-1.5 rounded-xl border text-center transition active:scale-95 flex flex-col items-center justify-center ${btnClass}">
+                            <span class="text-[10px] font-extrabold uppercase">${label}</span>
+                            <span class="text-[9px] truncate max-w-full block leading-none mt-0.5">${isPaid ? (dateDesc || 'Lunas') : '-'}</span>
+                        </button>
+                    `;
+                }
+
+                html += `
+                            </div>
+                        </div>
+
+                        <!-- Quick batch action -->
+                        <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-blue-600 hover:text-blue-800 font-semibold text-[11px]">
+                                + Bayar Penuh 11 Bulan
+                            </button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-slate-700 text-[11px]">
+                                Opsi Anggota & Kontak
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            list.innerHTML = html;
+        }
+
+        function renderApp() {
+            renderStats();
+            renderTable();
+            renderCards();
+        }
+
+        // Switch active visual layout
+        function switchView(mode) {
+            activeView = mode;
+            const tableView = document.getElementById('tableViewContainer');
+            const cardsView = document.getElementById('cardsViewContainer');
+            const btnTable = document.getElementById('btnViewTable');
+            const btnCards = document.getElementById('btnViewCards');
+
+            if (mode === 'table') {
+                tableView.classList.remove('hidden');
+                cardsView.classList.add('hidden');
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-white text-blue-900 shadow-sm";
+                btnCards.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 text-slate-600 hover:text-slate-900 transition";
+            } else {
+                tableView.classList.add('hidden');
+                cardsView.classList.remove('hidden');
+                btnCards.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-white text-blue-900 shadow-sm";
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 text-slate-600 hover:text-slate-900 transition";
+            }
+        }
+
+        function handleSearch() {
+            renderApp();
+        }
+
+        // Payment modal interaction
+        let modalIsPaid = false;
+
+        function openPaymentModal(memberId, monthIndex) {
+            currentModalMemberId = memberId;
+            currentModalMonthIndex = monthIndex;
+
+            const member = appData.members.find(m => m.id === memberId);
+            if (!member) return;
+
+            document.getElementById('modalFamilyName').textContent = member.name;
+            document.getElementById('modalMonthName').textContent = `Bulan: ${MONTH_NAMES[monthIndex-1]} 2026`;
+
+            const current = member.payments && member.payments[monthIndex];
+            modalIsPaid = !!(current && current.paid);
+
+            const dateInput = document.getElementById('modalDateInput');
+            const amountInput = document.getElementById('modalAmountInput');
+
+            if (current && current.paid) {
+                dateInput.value = current.date || '';
+                amountInput.value = current.amount || STANDARD_MONTHLY_FEE;
+            } else {
+                // Pre-fill with today formatted (e.g., 14/4/26) or default
+                const now = new Date();
+                dateInput.value = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+                amountInput.value = STANDARD_MONTHLY_FEE;
+            }
+
+            updateModalStatusUI();
+            openModal('paymentModal');
+        }
+
+        function setModalPaymentStatus(isPaid) {
+            modalIsPaid = isPaid;
+            updateModalStatusUI();
+        }
+
+        function setModalAmount(val) {
+            document.getElementById('modalAmountInput').value = val;
+            if (val === 10000) {
+                document.getElementById('modalDateInput').value = '10rb';
+            } else if (val === 15000) {
+                document.getElementById('modalDateInput').value = '15rb';
+            }
+        }
+
+        function updateModalStatusUI() {
+            const btnPaid = document.getElementById('btnStatusPaid');
+            const btnUnpaid = document.getElementById('btnStatusUnpaid');
+            const fields = document.getElementById('paidFieldsContainer');
+
+            if (modalIsPaid) {
+                btnPaid.className = 'py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition bg-emerald-600 text-white border-emerald-700 shadow-sm';
+                btnUnpaid.className = 'py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition bg-slate-50 text-slate-600 border-slate-200';
+                fields.classList.remove('hidden');
+            } else {
+                btnUnpaid.className = 'py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition bg-rose-600 text-white border-rose-700 shadow-sm';
+                btnPaid.className = 'py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center space-x-1.5 transition bg-slate-50 text-slate-600 border-slate-200';
+                fields.classList.add('hidden');
+            }
+        }
+
+        function savePaymentModal() {
+            const member = appData.members.find(m => m.id === currentModalMemberId);
+            if (!member) return;
+
+            if (!member.payments) member.payments = {};
+
+            if (modalIsPaid) {
+                const dateVal = document.getElementById('modalDateInput').value.trim() || 'Lunas';
+                const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
+                member.payments[currentModalMonthIndex] = {
+                    paid: true,
+                    date: dateVal,
+                    amount: amtVal
+                };
+            } else {
+                delete member.payments[currentModalMonthIndex];
+            }
+
+            saveStorage();
+            renderApp();
+            closeModal('paymentModal');
+            showToast('Data pembayaran berhasil diperbarui');
+        }
+
+        // Quick batch pay all 11 months
+        function quickMarkAllMonths(memberId) {
+            const member = appData.members.find(m => m.id === memberId);
+            if (!member) return;
+
+            const now = new Date();
+            const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+
+            if (!member.payments) member.payments = {};
+            for (let m = 1; m <= 11; m++) {
+                member.payments[m] = {
+                    paid: true,
+                    date: dateStr,
+                    amount: STANDARD_MONTHLY_FEE
+                };
+            }
+
+            saveStorage();
+            renderApp();
+            showToast(`11 Bulan berhasil dicatat untuk ${member.name}`);
+        }
+
+        // Add / Edit Member Modal
+        function openAddFamilyModal() {
+            document.getElementById('familyModalTitle').textContent = 'Tambah Anggota Keluarga Baru';
+            document.getElementById('editFamilyId').value = '';
+            document.getElementById('inputFamilyName').value = '';
+            document.getElementById('inputFamilyPhone').value = '';
+            document.getElementById('btnDeleteFamily').classList.add('hidden');
+            document.getElementById('quickMonthsBlock').classList.remove('hidden');
+
+            // render checkboxes for quick creation
+            const boxContainer = document.getElementById('familyMonthCheckboxes');
+            let cbHtml = '';
+            MONTH_NAMES.forEach((mName, idx) => {
+                cbHtml += `
+                    <label class="flex items-center space-x-1 border border-slate-200 rounded-lg p-1 hover:bg-slate-50 cursor-pointer">
+                        <input type="checkbox" name="quickMonth" value="${idx+1}" class="rounded text-blue-600">
+                        <span>${mName}</span>
+                    </label>
+                `;
+            });
+            boxContainer.innerHTML = cbHtml;
+
+            openModal('familyModal');
+        }
+
+        function openEditFamilyModal(memberId) {
+            const member = appData.members.find(m => m.id === memberId);
+            if (!member) return;
+
+            document.getElementById('familyModalTitle').textContent = 'Edit Anggota Keluarga';
+            document.getElementById('editFamilyId').value = member.id;
+            document.getElementById('inputFamilyName').value = member.name;
+            document.getElementById('inputFamilyPhone').value = member.phone || '';
+            document.getElementById('btnDeleteFamily').classList.remove('hidden');
+            document.getElementById('quickMonthsBlock').classList.add('hidden');
+
+            openModal('familyModal');
+        }
+
+        function handleSaveFamily(e) {
+            e.preventDefault();
+            const id = document.getElementById('editFamilyId').value;
+            const name = document.getElementById('inputFamilyName').value.trim();
+            const phone = document.getElementById('inputFamilyPhone').value.trim();
+
+            if (!name) return;
+
+            if (id) {
+                // Update
+                const member = appData.members.find(m => m.id === id);
+                if (member) {
+                    member.name = name;
+                    member.phone = phone;
+                }
+                showToast('Data anggota diperbarui');
+            } else {
+                // Create
+                const newId = Date.now().toString();
+                const newMember = {
+                    id: newId,
+                    name: name,
+                    phone: phone,
+                    payments: {}
+                };
+
+                // Check quick checked months
+                const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
+                const now = new Date();
+                const todayStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
+
+                checkedBoxes.forEach(cb => {
+                    const m = Number(cb.value);
+                    newMember.payments[m] = {
+                        paid: true,
+                        date: todayStr,
+                        amount: STANDARD_MONTHLY_FEE
+                    };
+                });
+
+                appData.members.push(newMember);
+                showToast('Anggota baru berhasil ditambahkan');
+            }
+
+            saveStorage();
+            renderApp();
+            closeModal('familyModal');
+        }
+
+        function handleDeleteFamily() {
+            const id = document.getElementById('editFamilyId').value;
+            if (!id) return;
+
+            const member = appData.members.find(m => m.id === id);
+            const memberName = member ? member.name : 'Anggota ini';
+
+            // Custom UI confirmation
+            if (window.confirm(`Hapus ${memberName} dari daftar kas keluarga?`)) {
+                appData.members = appData.members.filter(m => m.id !== id);
+                saveStorage();
+                renderApp();
+                closeModal('familyModal');
+                showToast('Anggota telah dihapus');
+            }
+        }
+
+        // Saldo Awal Editor
+        function openEditSaldoAwalModal() {
+            document.getElementById('inputSaldoAwal').value = appData.saldoAwal || 0;
+            openModal('saldoModal');
+        }
+
+        function saveSaldoAwal() {
+            const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
+            appData.saldoAwal = val;
+            saveStorage();
+            renderApp();
+            closeModal('saldoModal');
+            showToast('Sisa saldo kas 2025 berhasil disimpan');
+        }
+
+        // Copy BCA Number
+        function copyBcaNumber() {
+            const temp = document.createElement('textarea');
+            temp.value = '0440876757';
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('Nomor Rekening BCA 0440876757 disalin');
+        }
+
+        // WhatsApp Report Generator
+        function openShareWhatsAppModal() {
+            const stats = calculateTotals();
+            let msg = `*LAPORAN IURAN KAS KELUARGA BOETJE ETTY SALHUTERU 2026*\n`;
+            msg += `_Per Tanggal: ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}_\n\n`;
+            msg += `💰 *Sisa Saldo 2025:* Rp ${formatRupiah(stats.saldoAwal)}\n`;
+            msg += `📥 *Iuran Terkumpul 2026:* Rp ${formatRupiah(stats.totalIuranCollected)}\n`;
+            msg += `🏦 *TOTAL KAS SEKARANG:* Rp ${formatRupiah(stats.grandTotalKas)}\n\n`;
+            msg += `📋 *RINCIAN IURAN ANGGOTA:*\n`;
+
+            appData.members.forEach((m, idx) => {
+                let paidMonthsList = [];
+                for (let mon = 1; mon <= 11; mon++) {
+                    if (m.payments && m.payments[mon]?.paid) {
+                        paidMonthsList.push(MONTH_NAMES[mon-1]);
+                    }
+                }
+
+                const totalStr = m.computedTotal > 0 ? `Rp ${formatRupiah(m.computedTotal)}` : 'Belum Ada';
+                const monthsStr = paidMonthsList.length > 0 ? `(${paidMonthsList.join(', ')})` : '(Belum bayar)';
+                msg += `${idx+1}. *${m.name}* : ${totalStr} ${monthsStr}\n`;
+            });
+
+            msg += `\n💳 *Info Transfer:*\n`;
+            msg += `BCA: 0440876757\n`;
+            msg += `a.n. Pricilia Linda Salhuteru\n`;
+            msg += `Iuran: Rp 20.000 / bulan\n\n`;
+            msg += `_Terima kasih atas kebersamaan & partisipasi seluruh keluarga._ 🙏`;
+
+            document.getElementById('waMessageText').value = msg;
+            
+            const encoded = encodeURIComponent(msg);
+            document.getElementById('btnSendWaDirect').href = `https://api.whatsapp.com/send?text=${encoded}`;
+
+            openModal('shareModal');
+        }
+
+        function copyWaMessage() {
+            const el = document.getElementById('waMessageText');
+            el.select();
+            document.execCommand('copy');
+            showToast('Laporan disalin! Buka WhatsApp untuk paste');
+        }
+
+        // Export to CSV / Excel
+        function exportToCsv() {
+            const stats = calculateTotals();
+            let csvContent = "data:text/csv;charset=utf-8,";
+            
+            // Header
+            csvContent += "IURAN KELUARGA BOETJE ETTY SALHUTERU 2026\r\n";
+            csvContent += "KELUARGA,JAN,FEB,MARET,APRIL,MEI,JUNI,JULI,AUG,SEPT,OKT,NOV,TOTAL\r\n";
+            csvContent += `Sisa Saldo per 31 Des 25,,,,,,,,,,,,"${stats.saldoAwal}"\r\n`;
+
+            appData.members.forEach(m => {
+                let row = `"${m.name}"`;
+                for (let i = 1; i <= 11; i++) {
+                    const p = m.payments && m.payments[i];
+                    row += `,"${p && p.paid ? (p.date || 'Lunas') : ''}"`;
+                }
+                row += `,"${m.computedTotal || 0}"\r\n`;
+            });
+
+            csvContent += `Sub Total,,,,,,,,,,,,"${stats.grandTotalKas}"\r\n`;
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Iuran_Keluarga_Boetje_Etty_Salhuteru_2026.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('File CSV berhasil diunduh');
+        }
+
+        // PWA Setup
+        function setupPwaManifest() {
+            const manifestObj = {
+                "name": "Iuran Kas Keluarga Salhuteru 2026",
+                "short_name": "Iuran 2026",
+                "description": "Pencatatan Iuran Keluarga Boetje Etty Salhuteru 2026",
+                "start_url": "./",
+                "display": "standalone",
+                "background_color": "#1e3a8a",
+                "theme_color": "#1e3a8a",
+                "icons": [
+                    {
+                        "src": "https://placehold.co/192x192/1e3a8a/ffffff.png?text=Iuran+2026",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "https://placehold.co/512x512/1e3a8a/ffffff.png?text=Iuran+2026",
+                        "sizes": "512x512",
+                        "type": "image/png"
+                    }
+                ]
+            };
+            const stringManifest = JSON.stringify(manifestObj);
+            const blob = new Blob([stringManifest], {type: 'application/json'});
+            const manifestURL = URL.createObjectURL(blob);
+            const linkTag = document.createElement('link');
+            linkTag.rel = 'manifest';
+            linkTag.href = manifestURL;
+            document.head.appendChild(linkTag);
+        }
+
+        // Listen for PWA beforeinstallprompt on Android/Chrome
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('pwaInstallBtn');
+            if (btn) btn.classList.remove('hidden');
+        });
+
+        function handlePwaInstallPrompt() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('Aplikasi sedang diinstall ke ponsel Android');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                showToast('Di Android, ketuk Menu (⋮) browser lalu "Tambahkan ke Layar Utama"');
+            }
+        }
+
+        // UI Utility Modals & Toasts
+        function openModal(modalId) {
+            document.getElementById(modalId)?.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId)?.classList.add('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Auto-switch view to Cards on small mobile screens
+        function checkScreenSize() {
+            if (window.innerWidth < 640) {
+                switchView('cards');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStorage();
+            setupPwaManifest();
+            checkScreenSize();
+            renderApp();
+        });
+    </script>
+</body>
+</html>
