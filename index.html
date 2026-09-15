@@ -89,19 +89,30 @@
     <!-- Main Content Container -->
     <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full space-y-4">
 
-        <!-- Info Banner -->
-        <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3 opacity-0 animate-fade-in-up delay-100 transition-all hover:shadow-md">
-            <div class="flex items-center space-x-3">
-                <div class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <!-- Elegant Light Bank Info Banner -->
+        <div class="bg-white rounded-2xl p-1 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between opacity-0 animate-fade-in-up delay-100 transition-all hover:shadow-md">
+            <div class="flex items-center gap-4 p-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 flex items-center justify-center flex-shrink-0 shadow-inner">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                 </div>
-                <p class="text-[11px] md:text-xs text-slate-600 font-medium">
-                    Iuran <b class="text-slate-900">Rp 20.000 / bln</b>. Transfer: <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 transition-all hover:bg-slate-200 cursor-default">BCA 0440876757</span> (Pricilia Linda)
-                </p>
+                <div>
+                    <div class="flex items-center gap-2 mb-0.5">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Pembayaran BCA</span>
+                        <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">Iuran 20k/bln</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-sm md:text-base font-black text-slate-900 tracking-tight">0440 876 757</span>
+                        <span class="text-[10px] md:text-xs text-slate-500 font-medium">a.n Pricilia Linda</span>
+                    </div>
+                </div>
             </div>
-            <button id="btnCopyRek" onclick="copyBcaNumber()" class="text-[11px] font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg active:scale-95 whitespace-nowrap self-start md:self-auto transition-all w-32 text-center">
-                Salin Rekening
-            </button>
+            
+            <div class="p-2 md:p-3 w-full md:w-auto">
+                <button id="btnCopyRek" onclick="copyBcaNumber()" class="w-full md:w-auto flex items-center justify-center gap-2 text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 px-5 py-2.5 rounded-xl active:scale-95 transition-all shadow-md">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    <span>Salin Rekening</span>
+                </button>
+            </div>
         </div>
 
         <!-- Structured Stats Section (Professional) -->
@@ -761,14 +772,14 @@
                 if(!btn) return;
                 const oriText = btn.innerHTML;
                 btn.innerHTML = 'Tersalin! ✅';
-                btn.classList.add('bg-emerald-100', 'text-emerald-700', 'scale-105');
-                btn.classList.remove('text-blue-600', 'bg-blue-50');
+                btn.classList.add('bg-emerald-500', 'scale-105');
+                btn.classList.remove('bg-slate-900');
                 
                 setTimeout(() => {
                     btn.innerHTML = oriText;
-                    btn.classList.remove('bg-emerald-100', 'text-emerald-700', 'scale-105');
-                    btn.classList.add('text-blue-600', 'bg-blue-50');
-                }, 2500);
+                    btn.classList.remove('bg-emerald-500', 'scale-105');
+                    btn.classList.add('bg-slate-900');
+                }, 2000);
             };
 
             const fallback = () => {
