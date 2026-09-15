@@ -195,7 +195,7 @@
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">SEP</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">OKT</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">NOV</th>
-                            <th class="py-3 px-3 text-right font-black text-slate-900 border-b-2 border-slate-200 border-l-2 min-w-[90px]">TOTAL</th>
+                            <th class="py-3 px-3 text-right font-black text-slate-900 border-b-2 border-slate-200 border-l-2 bg-slate-50 min-w-[90px]">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-100">
@@ -548,7 +548,7 @@
                 html += `
                     <td class="py-2.5 px-3 sticky-col text-left align-middle font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
                         <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
-                        ${isComplete ? '<span class="ml-1.5 px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide align-middle">✓ COMPLETE</span>' : ''}
+                        ${isComplete ? '<span class="ml-1.5 px-1.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded text-[7.5px] font-bold tracking-wide align-middle shadow-sm">✓ COMPLETE</span>' : ''}
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -557,7 +557,7 @@
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
                     
-                    let pillHTML = '<span class="text-slate-300 font-bold text-[10px]">—</span>';
+                    let pillHTML = '<span class="text-slate-300 font-bold text-[14px]">&bull;</span>';
                     
                     if (isPaid) {
                         let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
@@ -565,12 +565,12 @@
                         let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
                         let displayText = isPartial ? amtStr : formatShortDate(dateText || 'Lunas');
                         
-                        pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105">${displayText}</span>`;
+                        pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105 shadow-sm">${displayText}</span>`;
                     }
                     html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center align-middle cursor-pointer border-l border-slate-100">${pillHTML}</td>`;
                 }
-                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
+                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 font-bold text-[14px]">&bull;</span>';
+                html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 bg-slate-50/50 group-hover:bg-slate-100 transition-colors ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-400'}">${totalDisplay}</td></tr>`;
             });
 
             const stats = calculateTotals();
@@ -921,7 +921,7 @@
                 <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 20px 30px; background-color: #ffffff; color: #334155; width: 1050px; box-sizing: border-box; margin: 0; position: relative;">
                     
                     <!-- Header Section -->
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0f172a; padding-bottom: 10px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #334155; padding-bottom: 10px; margin-bottom: 15px;">
                         <div>
                             <h1 style="margin: 0; font-size: 22px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px;">LAPORAN KAS KELUARGA</h1>
                             <p style="margin: 4px 0 0 0; font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Boetje Etty Salhuteru &bull; Periode 2026</p>
@@ -942,7 +942,7 @@
                             <p style="margin: 0 0 5px 0; font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase;">Iuran Masuk 2026</p>
                             <p style="margin: 0; font-size: 18px; color: #0f172a; font-weight: 800;">Rp ${formatRupiah(stats.totalIuranCollected)}</p>
                         </div>
-                        <div style="flex: 1; background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #0f172a; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        <div style="flex: 1; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 12px; border-radius: 8px; border: 1px solid #1e293b; border-top: 3px solid #fbbf24; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                             <p style="margin: 0 0 5px 0; font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Grand Total Kas</p>
                             <p style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 800;">Rp ${formatRupiah(stats.grandTotalKas)}</p>
                         </div>
@@ -963,7 +963,7 @@
                                 <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
                                 <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
                                 <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
-                                <th style="padding: 6px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
+                                <th style="padding: 6px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #cbd5e1; background-color: #f8fafc; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -984,7 +984,7 @@
                 htmlStr += `<tr style="background-color: ${rowBg};">`;
                 htmlStr += `<td style="padding: 4px 6px 10px 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: left; vertical-align: middle;">
                     ${member.name}
-                    ${isComplete ? '<span style="display:inline-block; vertical-align: middle; margin-left: 6px; padding: 2px 4px; background-color: #ecfdf5; color: #059669; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">✓ COMPLETE</span>' : ''}
+                    ${isComplete ? '<span style="display:inline-block; vertical-align: middle; margin-left: 6px; padding: 2px 4px; background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">✓ COMPLETE</span>' : ''}
                 </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
@@ -996,11 +996,11 @@
                         let textColor = isPartial ? '#d97706' : '#059669';
                         htmlStr += `<td style="padding: 4px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
                     } else {
-                        htmlStr += `<td style="padding: 4px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; color: #cbd5e1; font-weight: 400;">-</td>`;
+                        htmlStr += `<td style="padding: 4px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; color: #cbd5e1; font-weight: 400; font-size: 14px;">&bull;</td>`;
                     }
                 }
-                const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                htmlStr += `<td style="padding: 4px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
+                const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span style="color: #cbd5e1; font-size: 14px;">&bull;</span>';
+                htmlStr += `<td style="padding: 4px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; background-color: #f8fafc; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
             });
 
             const dateStr = new Date().toLocaleDateString('id-ID', { month: 'short', year: 'numeric' }).replace(' ', '_');
@@ -1011,16 +1011,16 @@
                     </table>
 
                     <!-- Footer Note -->
-                    <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 30px; height: 30px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 14px;">🏦</div>
-                            <div>
-                                <p style="margin: 0; font-size: 9px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Rekening Pembayaran Kas</p>
-                                <p style="margin: 0; font-size: 12px; color: #0f172a; font-weight: 800;">BCA 0440876757 <span style="font-weight: 500; color: #64748b;">a.n. Pricilia Linda Salhuteru</span></p>
+                    <div style="margin-top: 25px; padding-top: 12px; border-top: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 14px;">🏦</div>
+                            <div style="display: flex; flex-direction: column; justify-content: center; height: 32px;">
+                                <p style="margin: 0 0 2px 0; font-size: 8px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; line-height: 1;">Rekening Pembayaran Kas</p>
+                                <p style="margin: 0; font-size: 11px; color: #0f172a; font-weight: 800; line-height: 1;">BCA 0440876757 <span style="font-weight: 500; color: #64748b;">a.n. Pricilia Linda Salhuteru</span></p>
                             </div>
                         </div>
-                        <div style="text-align: right;">
-                            <p style="margin: 0; font-size: 9px; color: #94a3b8; font-weight: 500;">Di-generate otomatis oleh Sistem Digital</p>
+                        <div style="display: flex; align-items: center; height: 32px;">
+                            <p style="margin: 0; font-size: 9px; color: #94a3b8; font-weight: 500; line-height: 1;">Di-generate otomatis oleh Sistem Digital</p>
                         </div>
                     </div>
                 </div>
