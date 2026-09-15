@@ -454,6 +454,19 @@
             });
         }
 
+        function formatShortDate(val) {
+            if (!val) return '';
+            let parts = val.toString().split('/');
+            if (parts.length >= 2) {
+                let d = parts[0].padStart(2, '0');
+                let m = parts[1].padStart(2, '0');
+                let y = parts[2] ? parts[2] : '26';
+                if (y.length === 4) y = y.slice(-2);
+                return `${d}/${m}/${y}`;
+            }
+            return val;
+        }
+
         function renderTable() {
             const tbody = document.getElementById('tableBody');
             const members = getFilteredMembers();
@@ -495,7 +508,7 @@
                         let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
                             
                         let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
-                        let displayText = isPartial ? amtStr : (dateText || 'Lunas');
+                        let displayText = isPartial ? amtStr : formatShortDate(dateText || 'Lunas');
                         
                         pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105">${displayText}</span>`;
                     }
@@ -554,7 +567,7 @@
 
                     let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200') : 'bg-slate-50 text-slate-400 border border-slate-100';
                     let amtStr = isPartial && p.amount >= 1000 ? (p.amount/1000) + 'k' : (isPartial ? p.amount : null);
-                    let displayText = isPaid ? (isPartial ? amtStr : (dateText || 'Lunas')) : MONTH_NAMES[m-1];
+                    let displayText = isPaid ? (isPartial ? amtStr : formatShortDate(dateText || 'Lunas')) : MONTH_NAMES[m-1];
                     html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[8px] font-bold">${displayText}</span></button>`;
                 }
                 html += `
@@ -616,7 +629,10 @@
                 dateInput.value = current.date || ''; amountInput.value = current.amount || STANDARD_MONTHLY_FEE; 
             } else { 
                 const now = new Date(); 
-                dateInput.value = `${now.getDate()}/${now.getMonth()+1}`; 
+                const d = String(now.getDate()).padStart(2, '0');
+                const m = String(now.getMonth()+1).padStart(2, '0');
+                const y = String(now.getFullYear()).slice(-2);
+                dateInput.value = `${d}/${m}/${y}`; 
                 amountInput.value = STANDARD_MONTHLY_FEE; 
             }
             updateModalStatusUI(); openModal('paymentModal');
@@ -891,7 +907,7 @@
                     if (p && p.paid) {
                         const isPartial = p.amount < STANDARD_MONTHLY_FEE;
                         let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
-                        const text = isPartial ? amtStr : (p.date || 'Lunas');
+                        const text = isPartial ? amtStr : formatShortDate(p.date || 'Lunas');
                         
                         let textColor = isPartial ? '#d97706' : '#059669';
                         htmlStr += `<td style="padding: 6px 2px; text-align: center; border-bottom: 1px solid #f1f5f9; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
