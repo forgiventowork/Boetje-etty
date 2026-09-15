@@ -816,77 +816,72 @@
             
             const stats = calculateTotals();
             
-            // Build a completely isolated, clean HTML table for the PDF to ensure it never fails or goes blank
+            // Build a completely isolated, clean HTML table for the PDF to exactly match the reference layout
             let htmlStr = `
-                <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; color: #000000;">
-                    <h2 style="text-align: center; margin-bottom: 5px; font-size: 22px; color: #1e293b;">LAPORAN IURAN KAS KELUARGA</h2>
-                    <h3 style="text-align: center; margin-top: 0; color: #64748b; font-size: 14px; font-weight: normal; margin-bottom: 25px;">Boetje Etty Salhuteru 2026</h3>
+                <div style="font-family: 'Times New Roman', Times, serif; padding: 10px 20px; background-color: #ffffff; color: #000000; width: 100%; box-sizing: border-box;">
+                    <h2 style="text-align: center; margin-bottom: 15px; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">
+                        IURAN KELUARGA BOETJE ETTY SALHUTERU 2026
+                    </h2>
                     
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
-                        <div><strong>Total Keluarga:</strong> ${stats.totalMembers}</div>
-                        <div><strong>Tanggal Cetak:</strong> ${new Date().toLocaleDateString('id-ID')}</div>
-                    </div>
-                    
-                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11px; border: 2px solid #000;">
                         <thead>
-                            <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
-                                <th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">KELUARGA</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">JAN</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">FEB</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">MAR</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">APR</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">MEI</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">JUN</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">JUL</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">AUG</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">SEP</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">OKT</th>
-                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">NOV</th>
-                                <th style="padding: 10px; text-align: right;">TOTAL</th>
+                            <tr style="border-bottom: 2px solid #000;">
+                                <th style="padding: 6px; text-align: center; border: 1px solid #000; width: 18%; font-size: 11px;">KELUARGA</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">1</span><br>JAN</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">2</span><br>FEB</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">3</span><br>MARET</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">4</span><br>APRIL</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">5</span><br>MEI</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">6</span><br>JUNI</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">7</span><br>JULI</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">8</span><br>AUG</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">9</span><br>SEPT</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">10</span><br>OKT</th>
+                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">11</span><br>NOV</th>
+                                <th style="padding: 6px; text-align: center; border: 1px solid #000; width: 10%; font-size: 11px;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Saldo Awal -->
+                            <tr style="border-bottom: 1px solid #000;">
+                                <td colspan="12" style="padding: 4px 6px; border: 1px solid #000; font-weight: normal;">Sisa Saldo per 31 Des 25</td>
+                                <td style="padding: 4px 6px; text-align: right; border: 1px solid #000;">${formatRupiah(stats.saldoAwal)}</td>
+                            </tr>
             `;
 
             appData.members.forEach(member => {
-                let paidMonthsCount = 0;
-                for (let m = 1; m <= 11; m++) {
-                    if (member.payments && member.payments[m] && member.payments[m].paid && member.payments[m].amount >= STANDARD_MONTHLY_FEE) {
-                        paidMonthsCount++;
-                    }
-                }
-                const isComplete = paidMonthsCount === 11;
-
-                htmlStr += `<tr style="border-bottom: 1px solid #f1f5f9;">`;
-                htmlStr += `<td style="padding: 10px; font-weight: bold; border-right: 1px solid #f1f5f9;">
-                    ${member.name}
-                    ${isComplete ? '<span style="margin-left: 5px; padding: 2px 4px; background-color: #fef08a; color: #a16207; font-size: 8px; border-radius: 4px; font-weight: bold;">COMPLETE</span>' : ''}
-                </td>`;
+                htmlStr += `<tr style="border-bottom: 1px solid #000;">`;
+                htmlStr += `<td style="padding: 4px 6px; border: 1px solid #000;">${member.name}</td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
                     if (p && p.paid) {
                         const isPartial = p.amount < STANDARD_MONTHLY_FEE;
-                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
-                        const text = isPartial ? amtStr : (p.date || 'Lunas');
-                        htmlStr += `<td style="padding: 10px; text-align: center; font-weight: bold; border-right: 1px solid #f1f5f9; color: ${isPartial ? '#d97706' : '#059669'};">${text}</td>`;
+                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'rb' : p.amount;
+                        const text = isPartial ? amtStr : (p.date || '');
+                        // Color styling to closely mimic reference if partial, otherwise plain
+                        let bgStyle = isPartial ? 'background-color: #fce7f3;' : 'background-color: #f3f4f6;';
+                        if(!text || text === 'Lunas') bgStyle = ''; // default empty bg if no custom date/amount
+                        htmlStr += `<td style="padding: 2px; text-align: center; border: 1px solid #000; font-size: 10px; ${bgStyle}">${text}</td>`;
                     } else {
-                        htmlStr += `<td style="padding: 10px; text-align: center; color: #cbd5e1; border-right: 1px solid #f1f5f9;">-</td>`;
+                        htmlStr += `<td style="padding: 2px; text-align: center; border: 1px solid #000;"></td>`;
                     }
                 }
                 const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                htmlStr += `<td style="padding: 10px; text-align: right; font-weight: bold;">${total}</td></tr>`;
+                htmlStr += `<td style="padding: 4px 6px; text-align: right; border: 1px solid #000;">${total}</td></tr>`;
             });
 
             htmlStr += `
-                        <tr style="background-color: #f8fafc; font-weight: bold; border-top: 2px solid #cbd5e1;">
-                            <td style="padding: 12px 10px; text-align: right;" colspan="12">SUB TOTAL 2026:</td>
-                            <td style="padding: 12px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.totalIuranCollected)}</td>
-                        </tr>
-                        <tr style="background-color: #f8fafc; font-weight: bold;">
-                            <td style="padding: 12px 10px; text-align: right;" colspan="12">SALDO 2025:</td>
-                            <td style="padding: 12px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.saldoAwal)}</td>
-                        </tr>
-                        <tr style="background-color: #e2e8f0; font-weight: bold; font-size: 14px;">
-                            <td style="padding: 15px 10px; text-align: right;" colspan="12">GRAND TOTAL KAS:</td>
-                            <td style="padding: 15px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.grandTotalKas)}</td>
-                        </tr>
+                            <tr>
+                                <td colspan="12" style="padding: 6px 15px 6px 6px; text-align: right; font-weight: bold; border-right: 1px solid transparent;">Sub Total</td>
+                                <td style="padding: 4px 6px; text-align: right; border: 2px solid #000; border-bottom: 2px solid #000; font-weight: bold;">${formatRupiah(stats.grandTotalKas)}</td>
+                            </tr>
                         </tbody>
                     </table>
+                    
+                    <div style="margin-top: 15px; font-size: 11px; font-family: 'Times New Roman', Times, serif;">
+                        <div>Note :</div>
+                        <div style="margin-left: 20px; margin-top: 3px;">Iuran dapat ditransfer ke No Rek. <b>BCA 0440876757</b> an. Pricilia Linda Salhuteru</div>
+                    </div>
                 </div>
             `;
 
