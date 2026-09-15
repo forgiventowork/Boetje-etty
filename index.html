@@ -493,7 +493,7 @@
                 html += `
                     <td class="py-2.5 px-3 sticky-col text-left font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
                         <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
-                        ${isComplete ? '<span class="ml-1 px-1.5 py-0.5 bg-yellow-100 text-yellow-700 border border-yellow-300 rounded text-[7px] font-black tracking-wider shadow-sm align-middle">COMPLETE</span>' : ''}
+                        ${isComplete ? '<span class="ml-1.5 px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide align-middle">✓ COMPLETE</span>' : ''}
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -553,7 +553,7 @@
                         <div class="flex justify-between items-center mb-3">
                             <div class="flex items-center gap-1.5 truncate pr-2">
                                 <h4 class="font-black text-slate-900 text-[11px] truncate">${member.name}</h4>
-                                ${isComplete ? '<span class="px-1.5 py-0.5 bg-yellow-100 text-yellow-700 border border-yellow-300 rounded text-[7px] font-black tracking-wider shadow-sm flex-shrink-0">COMPLETE</span>' : ''}
+                                ${isComplete ? '<span class="px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide flex-shrink-0">✓ COMPLETE</span>' : ''}
                             </div>
                             <span class="text-[10px] font-black flex-shrink-0 ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
                         </div>
@@ -900,7 +900,7 @@
                 htmlStr += `<tr style="background-color: ${rowBg};">`;
                 htmlStr += `<td style="padding: 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px;">
                     ${member.name}
-                    ${isComplete ? '<span style="display:inline-block; margin-left: 6px; padding: 2px 5px; background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #ffffff; font-size: 7px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">⭐ COMPLETE</span>' : ''}
+                    ${isComplete ? '<span style="display:inline-block; margin-left: 6px; padding: 2px 4px; background-color: #ecfdf5; color: #059669; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">✓ COMPLETE</span>' : ''}
                 </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
