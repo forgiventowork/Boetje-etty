@@ -164,11 +164,11 @@
                     <thead>
                         <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-widest font-bold border-b border-slate-200 text-center">
                             <th class="py-3 px-3 sticky-col bg-slate-50 text-left min-w-[120px] border-r border-slate-200 z-20 shadow-[1px_0_0_0_#e2e8f0]">KELUARGA</th>
-                            <th class="py-3 px-1 min-w-[45px]">JAN</th><th class="py-3 px-1 min-w-[45px]">FEB</th><th class="py-3 px-1 min-w-[45px]">MAR</th>
-                            <th class="py-3 px-1 min-w-[45px]">APR</th><th class="py-3 px-1 min-w-[45px]">MEI</th><th class="py-3 px-1 min-w-[45px]">JUN</th>
-                            <th class="py-3 px-1 min-w-[45px]">JUL</th><th class="py-3 px-1 min-w-[45px]">AUG</th><th class="py-3 px-1 min-w-[45px]">SEP</th>
-                            <th class="py-3 px-1 min-w-[45px]">OKT</th><th class="py-3 px-1 min-w-[45px]">NOV</th>
-                            <th class="py-3 px-3 text-right text-slate-800 min-w-[80px]">TOTAL</th>
+                            <th class="py-3 px-1 min-w-[45px] border-l border-slate-200">JAN</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">FEB</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">MAR</th>
+                            <th class="py-3 px-1 min-w-[45px] border-l border-slate-200">APR</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">MEI</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">JUN</th>
+                            <th class="py-3 px-1 min-w-[45px] border-l border-slate-200">JUL</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">AUG</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">SEP</th>
+                            <th class="py-3 px-1 min-w-[45px] border-l border-slate-200">OKT</th><th class="py-3 px-1 min-w-[45px] border-l border-slate-200">NOV</th>
+                            <th class="py-3 px-3 text-right text-slate-800 min-w-[80px] border-l border-slate-200">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-100">
@@ -512,10 +512,10 @@
                         
                         pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105">${displayText}</span>`;
                     }
-                    html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center cursor-pointer">${pillHTML}</td>`;
+                    html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center cursor-pointer border-l border-slate-100">${pillHTML}</td>`;
                 }
                 const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                html += `<td class="py-2.5 px-3 text-right font-black text-[11px] ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
+                html += `<td class="py-2.5 px-3 text-right font-black text-[11px] border-l border-slate-200 ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
             });
 
             const stats = calculateTotals();
@@ -868,18 +868,18 @@
                         <thead>
                             <tr>
                                 <th style="padding: 8px 6px; text-align: left; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">Keluarga</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JAN</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">FEB</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MAR</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">APR</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MEI</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUN</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUL</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">AUG</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
-                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
-                                <th style="padding: 8px 6px; text-align: right; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JAN</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">FEB</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MAR</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">APR</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MEI</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUN</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUL</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">AUG</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
+                                <th style="padding: 8px 2px; text-align: center; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
+                                <th style="padding: 8px 6px; text-align: right; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -910,13 +910,13 @@
                         const text = isPartial ? amtStr : formatShortDate(p.date || 'Lunas');
                         
                         let textColor = isPartial ? '#d97706' : '#059669';
-                        htmlStr += `<td style="padding: 6px 2px; text-align: center; border-bottom: 1px solid #f1f5f9; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
+                        htmlStr += `<td style="padding: 6px 2px; text-align: center; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
                     } else {
-                        htmlStr += `<td style="padding: 6px 2px; text-align: center; border-bottom: 1px solid #f1f5f9; color: #cbd5e1; font-weight: 400;">-</td>`;
+                        htmlStr += `<td style="padding: 6px 2px; text-align: center; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; color: #cbd5e1; font-weight: 400;">-</td>`;
                     }
                 }
                 const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                htmlStr += `<td style="padding: 6px; text-align: right; border-bottom: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
+                htmlStr += `<td style="padding: 6px; text-align: right; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
             });
 
             const dateStr = new Date().toLocaleDateString('id-ID', { month: 'short', year: 'numeric' }).replace(' ', '_');
