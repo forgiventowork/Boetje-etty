@@ -468,7 +468,7 @@
         // Supabase credentials placeholder
         const SUPABASE_URL = 'https://jjqqgtdptqjwydqbgdqb.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqcXFndGRwdHFqd3lkcWJnZHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0MDE2MjksImV4cCI6MjEwNDk3NzYyOX0.TwhCQqip_t0tWSQP43WE3eJgyjPhq3eVToMALWcFH1U';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // Default standard fee per month
         const STANDARD_MONTHLY_FEE = 20000;
@@ -498,15 +498,15 @@
                     return;
                 }
 
-                const { data: settings, error: errS } = await supabase.from('settings').select('*').eq('id', 1).single();
+                const { data: settings, error: errS } = await supa.from('settings').select('*').eq('id', 1).single();
                 if (settings) {
                     appData.saldoAwal = settings.saldo_awal;
                 }
 
-                const { data: members, error: errM } = await supabase.from('members').select('*').order('created_at', { ascending: true });
+                const { data: members, error: errM } = await supa.from('members').select('*').order('created_at', { ascending: true });
                 if (errM) throw errM;
 
-                const { data: payments, error: errP } = await supabase.from('payments').select('*');
+                const { data: payments, error: errP } = await supa.from('payments').select('*');
                 if (errP) throw errP;
 
                 appData.members = members.map(m => {
@@ -878,7 +878,7 @@
                     const dateVal = document.getElementById('modalDateInput').value.trim() || 'Lunas';
                     const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
                     
-                    const { error } = await supabase.from('payments').upsert({
+                    const { error } = await supa.from('payments').upsert({
                         member_id: member.id,
                         month: currentModalMonthIndex,
                         amount: amtVal,
@@ -893,7 +893,7 @@
                         amount: amtVal
                     };
                 } else {
-                    const { error } = await supabase.from('payments')
+                    const { error } = await supa.from('payments')
                         .delete()
                         .match({ member_id: member.id, month: currentModalMonthIndex });
                     if(error) throw error;
@@ -931,7 +931,7 @@
             }
 
             try {
-                const { error } = await supabase.from('payments').upsert(records, { onConflict: 'member_id, month' });
+                const { error } = await supa.from('payments').upsert(records, { onConflict: 'member_id, month' });
                 if (error) throw error;
 
                 for (let m = 1; m <= 11; m++) {
@@ -994,7 +994,7 @@
 
             try {
                 if (id) {
-                    const { error } = await supabase.from('members').update({ name, phone }).eq('id', id);
+                    const { error } = await supa.from('members').update({ name, phone }).eq('id', id);
                     if (error) throw error;
                     
                     const member = appData.members.find(m => m.id === id);
@@ -1006,7 +1006,7 @@
                 } else {
                     const newId = Date.now().toString();
                     
-                    const { error: err1 } = await supabase.from('members').insert([{ id: newId, name, phone }]);
+                    const { error: err1 } = await supa.from('members').insert([{ id: newId, name, phone }]);
                     if (err1) throw err1;
 
                     const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
@@ -1027,7 +1027,7 @@
                             paymentsToInsert.push({ member_id: newId, month: m, amount: STANDARD_MONTHLY_FEE, date_text: todayStr });
                             newMember.payments[m] = { paid: true, date: todayStr, amount: STANDARD_MONTHLY_FEE };
                         });
-                        const { error: err2 } = await supabase.from('payments').insert(paymentsToInsert);
+                        const { error: err2 } = await supa.from('payments').insert(paymentsToInsert);
                         if(err2) throw err2;
                     }
 
@@ -1052,7 +1052,7 @@
 
             if (window.confirm(`Hapus ${memberName} dari daftar kas keluarga?`)) {
                 try {
-                    const { error } = await supabase.from('members').delete().eq('id', id);
+                    const { error } = await supa.from('members').delete().eq('id', id);
                     if (error) throw error;
                     
                     appData.members = appData.members.filter(m => m.id !== id);
@@ -1075,7 +1075,7 @@
         async function saveSaldoAwal() {
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
             try {
-                const { error } = await supabase.from('settings').upsert({ id: 1, saldo_awal: val });
+                const { error } = await supa.from('settings').upsert({ id: 1, saldo_awal: val });
                 if(error) throw error;
                 
                 appData.saldoAwal = val;
