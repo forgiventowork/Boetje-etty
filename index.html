@@ -981,13 +981,26 @@
                     
                     document.getElementById('btnDownloadJpg').onclick = () => {
                         showToast('Memproses JPG High-Res... ⏳');
-                        html2canvas(wrapper, { scale: 4, scrollX: 0, scrollY: 0, useCORS: true }).then(canvas => {
+                        
+                        const jpgWrapper = document.createElement('div');
+                        jpgWrapper.style.width = '1050px';
+                        jpgWrapper.style.backgroundColor = '#ffffff';
+                        jpgWrapper.style.position = 'absolute';
+                        jpgWrapper.style.left = '-9999px';
+                        jpgWrapper.style.top = '0';
+                        jpgWrapper.innerHTML = htmlStr;
+                        document.body.appendChild(jpgWrapper);
+
+                        html2canvas(jpgWrapper, { scale: 3, scrollX: 0, scrollY: 0, useCORS: true }).then(canvas => {
+                            document.body.removeChild(jpgWrapper);
                             const link = document.createElement('a');
                             link.download = pdfFileName.replace('.pdf', '.jpg');
                             link.href = canvas.toDataURL('image/jpeg', 1.0);
                             link.click();
                             showToast('JPG Berhasil Diunduh! ✅');
-                        }).catch(() => {
+                        }).catch((e) => {
+                            console.error(e);
+                            if (document.body.contains(jpgWrapper)) document.body.removeChild(jpgWrapper);
                             showToast('Gagal memproses JPG ❌');
                         });
                     };
