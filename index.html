@@ -982,7 +982,16 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadStorage();
-            if (window.innerWidth >= 768) switchView('table'); else switchView('table');
+            if (window.innerWidth >= 768) switchView('table'); else switchView('cards');
+        });
+
+        // Auto-switch when device orientation changes or window resizes
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 768 && activeView === 'table') {
+                switchView('cards');
+            } else if (window.innerWidth >= 768 && activeView === 'cards') {
+                switchView('table');
+            }
         });
     </script>
 </body>
