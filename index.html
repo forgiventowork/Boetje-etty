@@ -60,33 +60,32 @@
 
     <!-- Professional Glassmorphism Header -->
     <header class="glass-header border-b border-slate-200/50 sticky top-0 z-40 opacity-0 animate-fade-in-up">
-        <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3 md:gap-4">
+        <div class="max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-2 md:gap-4 flex-shrink-0 min-w-0">
                 <!-- Premium Logo -->
-                <div class="w-10 h-10 md:w-11 md:h-11 rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center shadow-[0_4px_12px_rgba(15,23,42,0.15)] border border-slate-700/50 relative overflow-hidden transition-transform hover:scale-105 cursor-pointer flex-shrink-0">
+                <div class="w-9 h-9 md:w-11 md:h-11 rounded-xl md:rounded-2xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center shadow-[0_4px_12px_rgba(15,23,42,0.15)] border border-slate-700/50 relative overflow-hidden transition-transform hover:scale-105 cursor-pointer flex-shrink-0">
                     <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-                    <svg class="w-5 h-5 md:w-5 md:h-5 text-white/95 relative z-10 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 text-white/95 relative z-10 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4L4 8l8 4 8-4-8-4z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12l8 4 8-4"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l8 4 8-4"></path>
                     </svg>
                 </div>
-                <div>
-                    <h1 class="text-sm md:text-base font-black tracking-tight text-slate-900 leading-none flex items-center gap-1.5 md:gap-2">
+                <div class="min-w-0">
+                    <h1 class="text-[13px] md:text-base font-black tracking-tight text-slate-900 leading-none flex items-center gap-1.5 md:gap-2 whitespace-nowrap">
                         Iuran Keluarga
-                        <span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded-md text-[9px] md:text-[10px] font-extrabold border border-slate-200/80 shadow-sm">2026</span>
+                        <span class="bg-slate-100 text-slate-600 px-1 md:px-1.5 py-0.5 rounded md:rounded-md text-[8.5px] md:text-[10px] font-extrabold border border-slate-200/80 shadow-sm flex-shrink-0">2026</span>
                     </h1>
-                    <p class="text-[8.5px] md:text-[9.5px] font-bold text-slate-400 mt-1.5 uppercase tracking-[0.2em] md:tracking-[0.25em]">Boetje Etty Salhuteru</p>
+                    <p class="text-[8px] md:text-[9.5px] font-bold text-slate-400 mt-1 md:mt-1.5 uppercase tracking-wider md:tracking-[0.25em] truncate">Boetje Etty Salhuteru</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <button onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 px-3 md:px-3.5 py-2 rounded-xl text-[11px] font-bold flex items-center gap-1.5 transition-all border border-slate-200 shadow-sm active:scale-95">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <button onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
+                    <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
-                    <span class="md:hidden">Install</span>
                 </button>
-                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-3 md:px-3.5 py-2 rounded-xl text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">
+                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 md:px-3.5 py-2 rounded-xl text-[10px] md:text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">
                     <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                     <span class="hidden md:inline">Tambah Data</span>
                     <span class="md:hidden">Tambah</span>
