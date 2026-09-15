@@ -24,8 +24,7 @@
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     boxShadow: {
-                        'soft': '0 2px 10px -2px rgba(0, 0, 0, 0.04)',
-                        'float': '0 10px 30px -4px rgba(0, 0, 0, 0.08)',
+                        'soft': '0 2px 12px -2px rgba(0, 0, 0, 0.05)',
                     }
                 }
             }
@@ -33,39 +32,37 @@
     </script>
     <style>
         body { background-color: #F8F9FA; -webkit-font-smoothing: antialiased; }
-        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .sticky-col { position: sticky; left: 0; z-index: 10; background: inherit; }
-        .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .compact-p { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .glass-header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     </style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col pb-10">
 
-    <!-- Premium Glassmorphism Header -->
-    <header class="glass-header border-b border-slate-200/50 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 py-2 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-lg shadow-slate-900/20">
+    <!-- Professional Glassmorphism Header -->
+    <header class="glass-header border-b border-slate-200/60 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h1 class="text-sm md:text-lg font-extrabold tracking-tight text-slate-900 leading-none">IURAN KELUARGA <span class="text-slate-400 font-medium">2026</span></h1>
-                    <p class="text-[9px] font-semibold text-slate-500 mt-0.5 uppercase tracking-wider">Boetje Etty Salhuteru</p>
+                    <h1 class="text-sm md:text-base font-extrabold tracking-tight text-slate-900 leading-none">IURAN KELUARGA <span class="text-slate-400 font-medium">2026</span></h1>
+                    <p class="text-[10px] font-semibold text-slate-500 mt-1 uppercase tracking-widest">Boetje Etty Salhuteru</p>
                 </div>
             </div>
 
-            <!-- Header Quick Actions -->
-            <div class="flex items-center space-x-1.5">
-                <button onclick="handleManualInstall()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-2.5 py-1.5 rounded-xl text-[10px] font-bold flex items-center space-x-1 transition shadow-sm border border-indigo-100">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <div class="flex items-center space-x-2">
+                <button onclick="handleManualInstall()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition border border-indigo-100">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                     <span class="md:hidden">Install</span>
                 </button>
-                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-xl text-[10px] font-bold flex items-center space-x-1 transition shadow-lg shadow-slate-900/20">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition shadow-md">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                     <span class="hidden md:inline">Tambah Data</span>
                     <span class="md:hidden">Tambah</span>
                 </button>
@@ -73,149 +70,139 @@
         </div>
     </header>
 
-    <!-- Main Content Container (Super Compact) -->
-    <main class="max-w-7xl mx-auto px-2 sm:px-4 py-2 flex-1 w-full space-y-2.5">
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full space-y-4">
 
-        <!-- Compact Info Banner -->
-        <div class="bg-white rounded-xl p-2 shadow-sm border border-slate-100 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <!-- Info Banner -->
+        <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                <p class="text-[9px] md:text-xs text-slate-600 font-medium">
-                    Iuran <b class="text-slate-900">Rp 20rb/bln</b>. Transfer: <span class="font-bold text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">BCA 0440876757</span> (Pricilia Linda)
+                <p class="text-[11px] md:text-xs text-slate-600 font-medium">
+                    Iuran <b class="text-slate-900">Rp 20.000 / bln</b>. Transfer: <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">BCA 0440876757</span> (Pricilia Linda)
                 </p>
             </div>
-            <button onclick="copyBcaNumber()" class="text-[9px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-2.5 py-1.5 rounded-lg active:scale-95 whitespace-nowrap">
-                Salin
+            <button onclick="copyBcaNumber()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg active:scale-95 whitespace-nowrap self-start md:self-auto">
+                Salin Rekening
             </button>
         </div>
 
-        <!-- Super Compact Stats Section -->
-        <div class="grid grid-cols-4 gap-2">
-            <!-- Hero Stat: Grand Total -->
-            <div class="col-span-4 md:col-span-1 bg-gradient-to-br from-slate-900 to-slate-700 rounded-xl p-3 shadow-soft flex flex-row md:flex-col justify-between items-center md:items-start text-white">
-                <div>
-                    <div class="text-[9px] font-semibold text-slate-300 uppercase tracking-widest mb-0.5">Total Kas</div>
-                    <div class="text-xl md:text-2xl font-black tracking-tighter" id="statSubTotal">Rp 0</div>
-                </div>
-                <div class="flex items-center space-x-1.5 text-[8px] font-medium bg-white/10 px-2 py-1 rounded-full border border-white/10">
-                    <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span></span>
-                    <span>Real-time</span>
-                </div>
+        <!-- Structured Stats Section (Professional) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Kas</div>
+                <div class="text-xl md:text-2xl font-black text-slate-900 tracking-tight" id="statSubTotal">Rp 0</div>
             </div>
-
-            <!-- Secondary Stats (3 columns) -->
-            <div class="col-span-4 md:col-span-3 grid grid-cols-3 gap-2">
-                <div class="bg-white rounded-xl p-2.5 shadow-sm border border-slate-100 relative">
-                    <div class="flex justify-between items-start mb-0.5">
-                        <div class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-wider">Saldo '25</div>
-                        <button onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
-                    </div>
-                    <div class="text-sm md:text-base font-extrabold text-slate-800" id="statSaldoAwal">Rp 0</div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 relative">
+                <div class="flex justify-between items-start mb-1">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saldo 2025</div>
+                    <button onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                 </div>
-                <div class="bg-white rounded-xl p-2.5 shadow-sm border border-slate-100">
-                    <div class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Iuran '26</div>
-                    <div class="text-sm md:text-base font-extrabold text-blue-600" id="statIuranMasuk">Rp 0</div>
-                </div>
-                <div class="bg-white rounded-xl p-2.5 shadow-sm border border-slate-100 flex flex-col justify-between">
-                    <div class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Anggota</div>
-                    <div class="flex justify-between items-end">
-                        <div class="text-sm md:text-base font-extrabold text-slate-800" id="statTotalAnggota">0</div>
-                        <button onclick="openShareWhatsAppModal()" class="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-[8px] font-bold border border-emerald-100">Share WA</button>
-                    </div>
+                <div class="text-base md:text-xl font-bold text-slate-700" id="statSaldoAwal">Rp 0</div>
+            </div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Iuran 2026</div>
+                <div class="text-base md:text-xl font-bold text-blue-600" id="statIuranMasuk">Rp 0</div>
+            </div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col justify-between">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Data</div>
+                <div class="flex justify-between items-end">
+                    <div class="text-base md:text-xl font-bold text-slate-700" id="statTotalAnggota">0</div>
+                    <button onclick="openShareWhatsAppModal()" class="text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded text-[10px] font-bold border border-emerald-100 flex items-center">
+                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                        WA
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Controls Toolbar -->
-        <div class="flex items-center justify-between gap-2 py-1">
+        <!-- Toolbar (Search, Filter, Export) -->
+        <div class="flex items-center justify-between gap-3 py-1">
             <div class="flex flex-1 space-x-2">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari..." class="w-full pl-3 pr-2 py-1.5 text-[10px] bg-white border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 transition">
-                <select id="filterStatus" onchange="renderApp()" class="w-24 text-[10px] bg-white border border-slate-200 py-1.5 px-2 rounded-lg shadow-sm font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-900">
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama..." class="w-full md:max-w-xs px-3 py-2 text-[11px] md:text-xs bg-white border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 transition">
+                <select id="filterStatus" onchange="renderApp()" class="w-28 text-[11px] md:text-xs bg-white border border-slate-200 px-2 py-2 rounded-lg shadow-sm font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-900">
                     <option value="all">Semua</option>
                     <option value="paid">Lunas</option>
                     <option value="unpaid">Belum</option>
                 </select>
             </div>
 
-            <!-- View Switcher & Export -->
-            <div class="flex space-x-1.5">
-                <div class="inline-flex bg-slate-200/50 p-0.5 rounded-lg border border-slate-200/50">
-                    <button onclick="switchView('table')" id="btnViewTable" class="px-2.5 py-1 rounded-md text-[9px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1">Tabel</button>
-                    <button onclick="switchView('cards')" id="btnViewCards" class="px-2.5 py-1 rounded-md text-[9px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1">Kartu</button>
+            <div class="flex space-x-2">
+                <div class="hidden md:inline-flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1">Tabel</button>
+                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1">Kartu</button>
                 </div>
                 
-                <button onclick="exportToCsv()" class="px-2 py-1 bg-white text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg shadow-sm text-[9px] font-bold">CSV</button>
-                <button onclick="exportToPdf()" class="px-2 py-1 bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 rounded-lg shadow-sm text-[9px] font-bold flex items-center"><svg class="w-3 h-3 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> PDF</button>
+                <button onclick="exportToCsv()" class="px-3 py-1.5 bg-white text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg shadow-sm text-[11px] font-bold">CSV</button>
+                <button onclick="exportToPdf()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg shadow-sm text-[11px] font-bold flex items-center"><svg class="w-3.5 h-3.5 md:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="hidden md:inline">PDF</span></button>
             </div>
         </div>
 
-        <!-- VIEW 1: PREMIUM COMPACT TABLE (Fits on 1 page mostly) -->
-        <div id="tableViewContainer" class="bg-white rounded-xl shadow-soft border border-slate-100 overflow-hidden">
+        <!-- PROFESSIONAL TABLE VIEW -->
+        <div id="tableViewContainer" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
             <div class="overflow-x-auto print-table">
                 <table class="w-full text-left border-collapse whitespace-nowrap" id="exportTableEl">
                     <thead>
-                        <tr class="bg-slate-50/50 text-slate-500 text-[8px] uppercase tracking-widest font-bold border-b border-slate-100 text-center">
-                            <th class="py-2 px-2 sticky-col bg-slate-50 text-left min-w-[90px] border-r border-slate-100 z-20">KELUARGA</th>
-                            <th class="py-2 px-1 min-w-[35px]">JAN</th><th class="py-2 px-1 min-w-[35px]">FEB</th><th class="py-2 px-1 min-w-[35px]">MAR</th>
-                            <th class="py-2 px-1 min-w-[35px]">APR</th><th class="py-2 px-1 min-w-[35px]">MEI</th><th class="py-2 px-1 min-w-[35px]">JUN</th>
-                            <th class="py-2 px-1 min-w-[35px]">JUL</th><th class="py-2 px-1 min-w-[35px]">AUG</th><th class="py-2 px-1 min-w-[35px]">SEP</th>
-                            <th class="py-2 px-1 min-w-[35px]">OKT</th><th class="py-2 px-1 min-w-[35px]">NOV</th>
-                            <th class="py-2 px-2 text-right text-slate-800 min-w-[60px]">TOTAL</th>
+                        <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-widest font-bold border-b border-slate-200 text-center">
+                            <th class="py-3 px-3 sticky-col bg-slate-50 text-left min-w-[120px] border-r border-slate-200 z-20 shadow-[1px_0_0_0_#e2e8f0]">KELUARGA</th>
+                            <th class="py-3 px-1 min-w-[45px]">JAN</th><th class="py-3 px-1 min-w-[45px]">FEB</th><th class="py-3 px-1 min-w-[45px]">MAR</th>
+                            <th class="py-3 px-1 min-w-[45px]">APR</th><th class="py-3 px-1 min-w-[45px]">MEI</th><th class="py-3 px-1 min-w-[45px]">JUN</th>
+                            <th class="py-3 px-1 min-w-[45px]">JUL</th><th class="py-3 px-1 min-w-[45px]">AUG</th><th class="py-3 px-1 min-w-[45px]">SEP</th>
+                            <th class="py-3 px-1 min-w-[45px]">OKT</th><th class="py-3 px-1 min-w-[45px]">NOV</th>
+                            <th class="py-3 px-3 text-right text-slate-800 min-w-[80px]">TOTAL</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody" class="divide-y divide-slate-50">
+                    <tbody id="tableBody" class="divide-y divide-slate-100">
                         <!-- Populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- VIEW 2: SMARTPHONE CARDS (Compact Grid) -->
+        <!-- CARDS VIEW (For small screens alternative) -->
         <div id="cardsViewContainer" class="hidden">
-            <div id="cardsList" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2"></div>
+            <div id="cardsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"></div>
         </div>
 
-        <div class="text-center text-[9px] text-slate-400 py-2 font-medium">Ketuk bulan untuk mengubah status pembayaran.</div>
+        <div class="text-center text-[11px] text-slate-400 py-2 font-medium">Ketuk bulan untuk mengubah status pembayaran.</div>
     </main>
 
     <!-- Modals -->
-    
     <!-- Modal: Payment Editor -->
     <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="paymentModalContent">
-            <div class="p-4">
+        <div class="bg-white w-full max-w-xs rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="paymentModalContent">
+            <div class="p-5">
                 <div class="flex justify-between items-start mb-4">
                     <div>
-                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5" id="modalMonthName">Januari 2026</p>
-                        <h3 class="font-black text-sm text-slate-900" id="modalFamilyName">Kel. D. Salhuteru</h3>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1" id="modalMonthName">Januari 2026</p>
+                        <h3 class="font-black text-base text-slate-900" id="modalFamilyName">Kel. D. Salhuteru</h3>
                     </div>
-                    <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-1.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
 
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Status</label>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Status</label>
                         <div class="flex bg-slate-100 p-1 rounded-xl">
-                            <button type="button" id="btnStatusPaid" onclick="setModalPaymentStatus(true)" class="flex-1 py-1.5 text-[10px] font-bold rounded-lg transition-all z-10">Lunas</button>
-                            <button type="button" id="btnStatusUnpaid" onclick="setModalPaymentStatus(false)" class="flex-1 py-1.5 text-[10px] font-bold rounded-lg transition-all z-10">Belum</button>
+                            <button type="button" id="btnStatusPaid" onclick="setModalPaymentStatus(true)" class="flex-1 py-2 text-[11px] font-bold rounded-lg transition-all z-10">Lunas</button>
+                            <button type="button" id="btnStatusUnpaid" onclick="setModalPaymentStatus(false)" class="flex-1 py-2 text-[11px] font-bold rounded-lg transition-all z-10">Belum</button>
                         </div>
                     </div>
-                    <div id="paidFieldsContainer" class="space-y-2">
+                    <div id="paidFieldsContainer" class="space-y-3">
                         <div>
-                            <label class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Tanggal / Info</label>
-                            <input type="text" id="modalDateInput" class="w-full px-3 py-1.5 text-[10px] bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tanggal (Cth: 15/09)</label>
+                            <input type="text" id="modalDateInput" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
                         </div>
                         <div>
-                            <label class="block text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">Nominal (Rp)</label>
-                            <div class="flex items-center space-x-1.5">
-                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-1.5 text-[10px] font-black bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
-                                <button type="button" onclick="setModalAmount(20000)" class="px-2 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-[10px] font-bold">20k</button>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nominal (Rp)</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-2 text-xs font-black bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                                <button type="button" onclick="setModalAmount(20000)" class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-bold">20k</button>
                             </div>
                         </div>
                     </div>
-                    <button type="button" onclick="savePaymentModal()" class="w-full py-2 bg-slate-900 text-white rounded-xl text-[10px] font-bold shadow-lg mt-2">Simpan</button>
+                    <button type="button" onclick="savePaymentModal()" class="w-full py-2.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold shadow-md mt-2">Simpan Perubahan</button>
                 </div>
             </div>
         </div>
@@ -223,29 +210,29 @@
 
     <!-- Modal: Add/Edit Family -->
     <div id="familyModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="familyModalContent">
-            <div class="p-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-black text-sm text-slate-900" id="familyModalTitle">Data Keluarga</h3>
-                    <button onclick="closeModal('familyModal')" class="text-slate-400 bg-slate-100 p-1.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="familyModalContent">
+            <div class="p-5">
+                <div class="flex justify-between items-center mb-5">
+                    <h3 class="font-black text-base text-slate-900" id="familyModalTitle">Data Keluarga</h3>
+                    <button onclick="closeModal('familyModal')" class="text-slate-400 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
-                <form onsubmit="handleSaveFamily(event)" class="space-y-3">
+                <form onsubmit="handleSaveFamily(event)" class="space-y-4">
                     <input type="hidden" id="editFamilyId">
                     <div>
-                        <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Nama</label>
-                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2 text-[10px] bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Nama</label>
+                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
                     </div>
                     <div>
-                        <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Telepon</label>
-                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2 text-[10px] bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Telepon</label>
+                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
                     </div>
                     <div id="quickMonthsBlock">
-                        <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Lunas Bulan:</label>
-                        <div class="grid grid-cols-6 gap-1" id="familyMonthCheckboxes"></div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Tandai Lunas Bulan:</label>
+                        <div class="grid grid-cols-4 md:grid-cols-6 gap-1.5" id="familyMonthCheckboxes"></div>
                     </div>
-                    <div class="pt-3 mt-1 border-t border-slate-100 flex items-center justify-between">
-                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[9px] text-rose-500 font-bold hidden px-2 py-1.5 bg-rose-50 rounded-lg">Hapus</button>
-                        <button type="submit" class="ml-auto px-4 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-bold shadow-lg">Simpan</button>
+                    <div class="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between">
+                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[11px] text-rose-500 font-bold hidden px-3 py-2 bg-rose-50 rounded-lg">Hapus</button>
+                        <button type="submit" class="ml-auto px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold shadow-md">Simpan Data</button>
                     </div>
                 </form>
             </div>
@@ -254,36 +241,37 @@
 
     <!-- Modal: Saldo Awal -->
     <div id="saldoModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl p-4 transform scale-95 transition-transform duration-300" id="saldoModalContent">
-            <h3 class="font-black text-sm text-slate-900 mb-1">Saldo 2025</h3>
-            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2 text-sm font-black bg-slate-50 border border-slate-200 rounded-lg mb-3">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-5 transform scale-95 transition-transform duration-300" id="saldoModalContent">
+            <h3 class="font-black text-base text-slate-900 mb-1">Saldo 2025</h3>
+            <p class="text-[10px] text-slate-500 mb-3">Sisa saldo periode sebelumnya.</p>
+            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2.5 text-base font-black bg-slate-50 border border-slate-200 rounded-lg mb-4">
             <div class="flex justify-end space-x-2">
-                <button onclick="closeModal('saldoModal')" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-[10px] font-bold">Batal</button>
-                <button onclick="saveSaldoAwal()" class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-[10px] font-bold">Simpan</button>
+                <button onclick="closeModal('saldoModal')" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-bold">Batal</button>
+                <button onclick="saveSaldoAwal()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-[11px] font-bold shadow-md">Simpan</button>
             </div>
         </div>
     </div>
 
     <!-- Modal: Share WA -->
     <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl p-4 transform scale-95 transition-transform duration-300" id="shareModalContent">
-            <div class="flex justify-between items-center mb-2">
-                <h3 class="font-black text-sm text-slate-900 flex items-center gap-1">WA</h3>
-                <button onclick="closeModal('shareModal')" class="text-slate-400 bg-slate-100 p-1.5 rounded-full"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-transform duration-300" id="shareModalContent">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-black text-base text-slate-900 flex items-center gap-2">Laporan WA</h3>
+                <button onclick="closeModal('shareModal')" class="text-slate-400 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
-            <textarea id="waMessageText" rows="6" readonly class="w-full p-2 font-mono text-[8px] bg-slate-50 border border-slate-200 rounded-lg mb-3 resize-none"></textarea>
+            <textarea id="waMessageText" rows="7" readonly class="w-full p-3 font-mono text-[10px] bg-slate-50 border border-slate-200 rounded-lg mb-4 resize-none focus:outline-none"></textarea>
             <div class="flex items-center justify-end space-x-2">
-                <button onclick="copyWaMessage()" class="px-3 py-1.5 bg-slate-100 text-slate-700 text-[10px] font-bold rounded-lg">Salin</button>
-                <a id="btnSendWaDirect" target="_blank" class="px-3 py-1.5 bg-emerald-500 text-white text-[10px] font-bold rounded-lg">Kirim WA</a>
+                <button onclick="copyWaMessage()" class="px-4 py-2 bg-slate-100 text-slate-700 text-[11px] font-bold rounded-lg">Salin Teks</button>
+                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-500 text-white text-[11px] font-bold rounded-lg shadow-md">Kirim WA</a>
             </div>
         </div>
     </div>
 
     <!-- Toast -->
-    <div id="toastNotification" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 translate-y-10 opacity-0 transition-all duration-400 z-50 pointer-events-none">
-        <div class="bg-slate-900 text-white px-3 py-1.5 rounded-full shadow-float flex items-center space-x-2 text-[10px] font-bold backdrop-blur-md whitespace-nowrap">
+    <div id="toastNotification" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-10 opacity-0 transition-all duration-400 z-50 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 text-[11px] font-bold backdrop-blur-md whitespace-nowrap">
             <span class="bg-emerald-500 text-white rounded-full p-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
-            <span id="toastMsg">Berhasil</span>
+            <span id="toastMsg">Berhasil disimpan</span>
         </div>
     </div>
 
@@ -308,9 +296,9 @@
             } else {
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                 if (isIOS) {
-                    alert("Untuk pengguna iPhone/iPad:\n1. Buka di browser Safari\n2. Tekan icon Share (Bagikan) di bawah\n3. Pilih 'Add to Home Screen' (Tambah ke Layar Utama)");
+                    alert("Untuk iPhone/iPad:\n1. Buka di browser Safari\n2. Tekan icon Share (Bagikan) di bawah\n3. Pilih 'Add to Home Screen' (Tambah ke Layar Utama)");
                 } else {
-                    alert("Aplikasi sudah ter-install, atau tekan menu browser (titik tiga) lalu pilih 'Install App' / 'Tambahkan ke Layar Utama'.");
+                    alert("Aplikasi sudah ter-install, atau tekan menu browser lalu pilih 'Install App' / 'Tambahkan ke Layar Utama'.");
                 }
             }
         }
@@ -409,16 +397,16 @@
             const tbody = document.getElementById('tableBody');
             const members = getFilteredMembers();
             if (members.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="13" class="py-4 text-center text-[10px] text-slate-400">Tidak ada data.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="13" class="py-6 text-center text-xs text-slate-400">Tidak ada data keluarga.</td></tr>`;
                 return;
             }
 
             let html = '';
             members.forEach((member) => {
-                html += `<tr class="table-row-hover group border-b border-slate-50">`;
+                html += `<tr class="table-row-hover group border-b border-slate-100 hover:bg-slate-50 transition-colors">`;
                 html += `
-                    <td class="py-2 px-2 sticky-col text-left font-bold text-slate-800 border-r border-slate-50 bg-white group-hover:bg-slate-50 text-[9px] z-20">
-                        <span class="truncate cursor-pointer" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
+                    <td class="py-2.5 px-3 sticky-col text-left font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0]">
+                        <span class="truncate cursor-pointer hover:text-blue-600 transition" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -426,26 +414,30 @@
                     const isPaid = p && p.paid;
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
-                    let pillHTML = '<span class="text-slate-200 font-bold text-[8px]">—</span>';
+                    
+                    let pillHTML = '<span class="text-slate-300 font-bold text-[10px]">—</span>';
                     
                     if (isPaid) {
-                        let pillClass = isPartial ? "bg-amber-50 text-amber-600 ring-amber-500/20" : 
-                            (member.id === '9' || member.id === '11') ? "bg-orange-50 text-orange-600 ring-orange-500/20" : 
-                            (member.id === '6') ? "bg-slate-100 text-slate-600 ring-slate-500/20" : 
-                            "bg-emerald-50 text-emerald-600 ring-emerald-500/20";
-                        pillHTML = `<span class="inline-flex items-center px-1 py-0.5 text-[7px] font-bold rounded ring-1 ring-inset ${pillClass}">${isPartial ? 'Parsial' : '✓'}</span>`;
+                        let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : 
+                            (member.id === '9' || member.id === '11') ? "bg-orange-50 text-orange-700 border-orange-200" : 
+                            (member.id === '6') ? "bg-slate-100 text-slate-700 border-slate-300" : 
+                            "bg-emerald-50 text-emerald-700 border-emerald-200";
+                            
+                        let displayText = isPartial ? 'Parsial' : (dateText || 'Lunas');
+                        
+                        pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass}">${displayText}</span>`;
                     }
-                    html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2 px-1 text-center cursor-pointer">${pillHTML}</td>`;
+                    html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center cursor-pointer">${pillHTML}</td>`;
                 }
                 const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                html += `<td class="py-2 px-2 text-right font-black text-[9px] ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
+                html += `<td class="py-2.5 px-3 text-right font-black text-[11px] ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
             });
 
             const stats = calculateTotals();
-            html += `<tr class="bg-slate-50/50">
-                <td class="py-2 px-2 sticky-col bg-slate-50/50 font-bold text-slate-500 text-right uppercase text-[8px] border-r border-slate-100 z-20">Sub Total</td>
-                <td colspan="11" class="py-2"></td>
-                <td class="py-2 px-2 text-right font-black text-slate-900 text-[10px]">${formatRupiah(stats.grandTotalKas)}</td>
+            html += `<tr class="bg-slate-50">
+                <td class="py-3 px-3 sticky-col bg-slate-50 font-bold text-slate-500 text-right uppercase text-[10px] border-r border-slate-200 z-20 shadow-[1px_0_0_0_#e2e8f0]">Sub Total</td>
+                <td colspan="11" class="py-3"></td>
+                <td class="py-3 px-3 text-right font-black text-slate-900 text-[12px]">${formatRupiah(stats.grandTotalKas)}</td>
             </tr>`;
             tbody.innerHTML = html;
         }
@@ -454,7 +446,7 @@
             const list = document.getElementById('cardsList');
             const members = getFilteredMembers();
             if (members.length === 0) {
-                list.innerHTML = `<div class="col-span-full py-4 text-center text-[10px] text-slate-400">Tidak ada data.</div>`;
+                list.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-400">Tidak ada data.</div>`;
                 return;
             }
 
@@ -462,24 +454,27 @@
             members.forEach(member => {
                 const totalText = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '0';
                 html += `
-                    <div class="bg-white rounded-xl p-2 shadow-sm border border-slate-100 flex flex-col h-full">
-                        <div class="flex justify-between mb-2">
-                            <h4 class="font-black text-slate-900 text-[9px] truncate pr-1">${member.name}</h4>
-                            <span class="text-[8px] font-black ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded' : 'text-slate-400'}">${totalText}</span>
+                    <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col h-full">
+                        <div class="flex justify-between mb-3">
+                            <h4 class="font-black text-slate-900 text-[11px] truncate pr-2">${member.name}</h4>
+                            <span class="text-[10px] font-black ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
                         </div>
-                        <div class="grid grid-cols-4 gap-1 mb-2">
+                        <div class="grid grid-cols-4 gap-1.5 mb-3">
                 `;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
                     let isPaid = p && p.paid;
-                    let btnClass = isPaid ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-50 text-slate-400';
-                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex items-center justify-center ${btnClass}"><span class="text-[7px] font-black">${MONTH_NAMES[m-1]}</span></button>`;
+                    const dateText = p?.date || '';
+                    let btnClass = isPaid ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-50 text-slate-400 border border-slate-100';
+                    
+                    let displayText = isPaid ? (dateText || 'Lunas') : MONTH_NAMES[m-1];
+                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass}"><span class="text-[8px] font-bold">${displayText}</span></button>`;
                 }
                 html += `
                         </div>
-                        <div class="mt-auto pt-1.5 border-t border-slate-50 flex justify-between">
-                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-slate-900 bg-slate-100 px-2 py-1 rounded text-[8px] font-bold">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 p-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                        <div class="mt-auto pt-2 border-t border-slate-100 flex justify-between">
+                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-[9px] font-bold transition">Lunas Semua</button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-slate-900 p-1.5 rounded-lg bg-white border border-slate-200"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                         </div>
                     </div>
                 `;
@@ -498,12 +493,12 @@
 
             if (mode === 'table') {
                 tableView.classList.remove('hidden'); cardsView.classList.add('hidden');
-                btnTable.className = "px-2.5 py-1 rounded-md text-[9px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
-                btnCards.className = "px-2.5 py-1 rounded-md text-[9px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             } else {
                 tableView.classList.add('hidden'); cardsView.classList.remove('hidden');
-                btnCards.className = "px-2.5 py-1 rounded-md text-[9px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
-                btnTable.className = "px-2.5 py-1 rounded-md text-[9px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             }
         }
 
@@ -511,16 +506,12 @@
 
         let modalIsPaid = false;
         function openModal(id) {
-            const m = document.getElementById(id);
-            const c = document.getElementById(id + 'Content');
-            m.classList.remove('hidden');
-            requestAnimationFrame(() => { m.classList.remove('opacity-0', 'pointer-events-none'); if(c) c.classList.remove('scale-95'); });
+            const m = document.getElementById(id); const c = document.getElementById(id + 'Content');
+            m.classList.remove('hidden'); requestAnimationFrame(() => { m.classList.remove('opacity-0', 'pointer-events-none'); if(c) c.classList.remove('scale-95'); });
         }
         function closeModal(id) {
-            const m = document.getElementById(id);
-            const c = document.getElementById(id + 'Content');
-            m.classList.add('opacity-0', 'pointer-events-none');
-            if(c) c.classList.add('scale-95');
+            const m = document.getElementById(id); const c = document.getElementById(id + 'Content');
+            m.classList.add('opacity-0', 'pointer-events-none'); if(c) c.classList.add('scale-95');
             setTimeout(() => { m.classList.add('hidden'); }, 300);
         }
 
@@ -534,8 +525,13 @@
             modalIsPaid = !!(current && current.paid);
             const dateInput = document.getElementById('modalDateInput');
             const amountInput = document.getElementById('modalAmountInput');
-            if (current && current.paid) { dateInput.value = current.date || ''; amountInput.value = current.amount || STANDARD_MONTHLY_FEE; } 
-            else { const now = new Date(); dateInput.value = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`; amountInput.value = STANDARD_MONTHLY_FEE; }
+            if (current && current.paid) { 
+                dateInput.value = current.date || ''; amountInput.value = current.amount || STANDARD_MONTHLY_FEE; 
+            } else { 
+                const now = new Date(); 
+                dateInput.value = `${now.getDate()}/${now.getMonth()+1}`; 
+                amountInput.value = STANDARD_MONTHLY_FEE; 
+            }
             updateModalStatusUI(); openModal('paymentModal');
         }
 
@@ -544,12 +540,12 @@
         function updateModalStatusUI() {
             const btnPaid = document.getElementById('btnStatusPaid'); const btnUnpaid = document.getElementById('btnStatusUnpaid'); const fields = document.getElementById('paidFieldsContainer');
             if (modalIsPaid) {
-                btnPaid.className = 'flex-1 py-1.5 text-[10px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200/50';
-                btnUnpaid.className = 'flex-1 py-1.5 text-[10px] font-bold rounded-lg text-slate-500';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500';
                 fields.classList.remove('hidden');
             } else {
-                btnUnpaid.className = 'flex-1 py-1.5 text-[10px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200/50';
-                btnPaid.className = 'flex-1 py-1.5 text-[10px] font-bold rounded-lg text-slate-500';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500';
                 fields.classList.add('hidden');
             }
         }
@@ -574,7 +570,7 @@
 
         async function quickMarkAllMonths(memberId) {
             const member = appData.members.find(m => m.id === memberId);
-            if (!member) return; const now = new Date(); const dateStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
+            if (!member) return; const now = new Date(); const dateStr = `${now.getDate()}/${now.getMonth()+1}`;
             if (!member.payments) member.payments = {}; const records = [];
             for (let m = 1; m <= 11; m++) records.push({ member_id: member.id, month: m, amount: STANDARD_MONTHLY_FEE, date_text: dateStr });
             try {
@@ -591,8 +587,8 @@
             document.getElementById('btnDeleteFamily').classList.add('hidden'); document.getElementById('quickMonthsBlock').classList.remove('hidden');
             const boxContainer = document.getElementById('familyMonthCheckboxes');
             boxContainer.innerHTML = MONTH_NAMES.map((mName, idx) => `
-                <label class="flex items-center justify-center p-1 rounded-md bg-slate-50 border border-slate-100 cursor-pointer">
-                    <input type="checkbox" name="quickMonth" value="${idx+1}" class="hidden peer"><span class="text-[7px] font-bold text-slate-400 peer-checked:text-slate-900">${mName}</span>
+                <label class="flex items-center justify-center p-1.5 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer">
+                    <input type="checkbox" name="quickMonth" value="${idx+1}" class="hidden peer"><span class="text-[9px] font-bold text-slate-400 peer-checked:text-slate-900">${mName}</span>
                 </label>
             `).join('');
             openModal('familyModal');
@@ -616,7 +612,7 @@
                 } else {
                     const newId = Date.now().toString(); const { error: err1 } = await supa.from('members').insert([{ id: newId, name, phone }]); if (err1) throw err1;
                     const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
-                    const now = new Date(); const todayStr = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear().toString().slice(-2)}`;
+                    const now = new Date(); const todayStr = `${now.getDate()}/${now.getMonth()+1}`;
                     const newMember = { id: newId, name: name, phone: phone, payments: {} };
                     if (checkedBoxes.length > 0) {
                         const records = [];
@@ -695,7 +691,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadStorage();
-            if (window.innerWidth >= 768) switchView('table'); else switchView('table'); // Default fit to table for now
+            if (window.innerWidth >= 768) switchView('table'); else switchView('table'); // Default to table for compactness
         });
     </script>
 </body>
