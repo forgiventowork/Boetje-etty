@@ -1,0 +1,22 @@
+{
+  "name": "Iuran Kas Keluarga",
+  "short_name": "Kas Keluarga",
+  "description": "Aplikasi Pencatatan Iuran Kas Keluarga Boetje Etty Salhuteru 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F9FA",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192.png?text=Kas",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512.png?text=Kas+Keluarga",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
