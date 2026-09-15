@@ -669,9 +669,11 @@
         }
 
         function copyBcaNumber() { 
-            navigator.clipboard.writeText('0440876757').then(() => {
+            const textToCopy = '0440876757';
+            const handleSuccess = () => {
                 showToast('Rekening disalin! ✅'); 
                 const btn = document.getElementById('btnCopyRek');
+                if(!btn) return;
                 const oriText = btn.innerHTML;
                 btn.innerHTML = 'Tersalin! ✅';
                 btn.classList.add('bg-emerald-100', 'text-emerald-700', 'scale-105');
@@ -682,7 +684,30 @@
                     btn.classList.remove('bg-emerald-100', 'text-emerald-700', 'scale-105');
                     btn.classList.add('text-blue-600', 'bg-blue-50');
                 }, 2500);
-            });
+            };
+
+            const fallback = () => {
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    handleSuccess();
+                } catch (err) {
+                    showToast('Gagal menyalin ❌');
+                }
+                textArea.remove();
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(handleSuccess).catch(fallback);
+            } else {
+                fallback();
+            }
         }
 
         function openShareWhatsAppModal() {
