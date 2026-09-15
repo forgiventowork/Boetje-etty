@@ -816,71 +816,109 @@
             
             const stats = calculateTotals();
             
-            // Build a completely isolated, clean HTML table for the PDF to exactly match the reference layout
+            // Build a completely isolated, clean HTML table for the PDF to ensure it never fails or goes blank
             let htmlStr = `
-                <div style="font-family: 'Times New Roman', Times, serif; padding: 10px 20px; background-color: #ffffff; color: #000000; width: 100%; box-sizing: border-box;">
-                    <h2 style="text-align: center; margin-bottom: 15px; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">
-                        IURAN KELUARGA BOETJE ETTY SALHUTERU 2026
-                    </h2>
+                <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 40px; background-color: #ffffff; color: #334155; width: 100%; box-sizing: border-box;">
                     
-                    <table style="width: 100%; border-collapse: collapse; font-size: 11px; border: 2px solid #000;">
+                    <!-- Header Section -->
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #0f172a; padding-bottom: 15px; margin-bottom: 25px;">
+                        <div>
+                            <h1 style="margin: 0; font-size: 22px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px;">LAPORAN KAS KELUARGA</h1>
+                            <p style="margin: 4px 0 0 0; font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Boetje Etty Salhuteru &bull; Periode 2026</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0 0 4px 0; font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Tanggal Cetak</p>
+                            <p style="margin: 0; font-size: 13px; color: #334155; font-weight: 700;">${new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year:'numeric'})}</p>
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                        <div style="flex: 1; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <p style="margin: 0 0 5px 0; font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase;">Sisa Saldo 2025</p>
+                            <p style="margin: 0; font-size: 18px; color: #0f172a; font-weight: 800;">Rp ${formatRupiah(stats.saldoAwal)}</p>
+                        </div>
+                        <div style="flex: 1; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <p style="margin: 0 0 5px 0; font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase;">Iuran Masuk 2026</p>
+                            <p style="margin: 0; font-size: 18px; color: #0f172a; font-weight: 800;">Rp ${formatRupiah(stats.totalIuranCollected)}</p>
+                        </div>
+                        <div style="flex: 1; background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #0f172a; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                            <p style="margin: 0 0 5px 0; font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Grand Total Kas</p>
+                            <p style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 800;">Rp ${formatRupiah(stats.grandTotalKas)}</p>
+                        </div>
+                    </div>
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                         <thead>
-                            <tr style="border-bottom: 2px solid #000;">
-                                <th style="padding: 6px; text-align: center; border: 1px solid #000; width: 18%; font-size: 11px;">KELUARGA</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">1</span><br>JAN</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">2</span><br>FEB</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">3</span><br>MARET</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">4</span><br>APRIL</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">5</span><br>MEI</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">6</span><br>JUNI</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">7</span><br>JULI</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">8</span><br>AUG</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">9</span><br>SEPT</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">10</span><br>OKT</th>
-                                <th style="padding: 2px; text-align: center; border: 1px solid #000; width: 6.5%;"><span style="font-weight:normal; font-size:9px;">11</span><br>NOV</th>
-                                <th style="padding: 6px; text-align: center; border: 1px solid #000; width: 10%; font-size: 11px;">TOTAL</th>
+                            <tr>
+                                <th style="padding: 10px 8px; text-align: left; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">Keluarga</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JAN</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">FEB</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MAR</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">APR</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MEI</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUN</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUL</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">AUG</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
+                                <th style="padding: 10px 4px; text-align: center; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
+                                <th style="padding: 10px 8px; text-align: right; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Saldo Awal -->
-                            <tr style="border-bottom: 1px solid #000;">
-                                <td colspan="12" style="padding: 4px 6px; border: 1px solid #000; font-weight: normal;">Sisa Saldo per 31 Des 25</td>
-                                <td style="padding: 4px 6px; text-align: right; border: 1px solid #000;">${formatRupiah(stats.saldoAwal)}</td>
-                            </tr>
             `;
 
-            appData.members.forEach(member => {
-                htmlStr += `<tr style="border-bottom: 1px solid #000;">`;
-                htmlStr += `<td style="padding: 4px 6px; border: 1px solid #000;">${member.name}</td>`;
+            appData.members.forEach((member, idx) => {
+                let isEven = idx % 2 === 0;
+                let rowBg = isEven ? '#ffffff' : '#f8fafc';
+                
+                let paidMonthsCount = 0;
+                for (let m = 1; m <= 11; m++) {
+                    if (member.payments && member.payments[m] && member.payments[m].paid && member.payments[m].amount >= STANDARD_MONTHLY_FEE) {
+                        paidMonthsCount++;
+                    }
+                }
+                const isComplete = paidMonthsCount === 11;
+
+                htmlStr += `<tr style="background-color: ${rowBg};">`;
+                htmlStr += `<td style="padding: 8px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px;">
+                    ${member.name}
+                    ${isComplete ? '<span style="display:inline-block; margin-left: 6px; padding: 2px 5px; background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: #ffffff; font-size: 7px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">⭐ COMPLETE</span>' : ''}
+                </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
                     if (p && p.paid) {
                         const isPartial = p.amount < STANDARD_MONTHLY_FEE;
-                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'rb' : p.amount;
-                        const text = isPartial ? amtStr : (p.date || '');
-                        // Color styling to closely mimic reference if partial, otherwise plain
-                        let bgStyle = isPartial ? 'background-color: #fce7f3;' : 'background-color: #f3f4f6;';
-                        if(!text || text === 'Lunas') bgStyle = ''; // default empty bg if no custom date/amount
-                        htmlStr += `<td style="padding: 2px; text-align: center; border: 1px solid #000; font-size: 10px; ${bgStyle}">${text}</td>`;
+                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
+                        const text = isPartial ? amtStr : (p.date || 'Lunas');
+                        
+                        let textColor = isPartial ? '#d97706' : '#059669';
+                        htmlStr += `<td style="padding: 8px 4px; text-align: center; border-bottom: 1px solid #f1f5f9; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
                     } else {
-                        htmlStr += `<td style="padding: 2px; text-align: center; border: 1px solid #000;"></td>`;
+                        htmlStr += `<td style="padding: 8px 4px; text-align: center; border-bottom: 1px solid #f1f5f9; color: #cbd5e1; font-weight: 400;">-</td>`;
                     }
                 }
                 const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                htmlStr += `<td style="padding: 4px 6px; text-align: right; border: 1px solid #000;">${total}</td></tr>`;
+                htmlStr += `<td style="padding: 8px; text-align: right; border-bottom: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
             });
 
             htmlStr += `
-                            <tr>
-                                <td colspan="12" style="padding: 6px 15px 6px 6px; text-align: right; font-weight: bold; border-right: 1px solid transparent;">Sub Total</td>
-                                <td style="padding: 4px 6px; text-align: right; border: 2px solid #000; border-bottom: 2px solid #000; font-weight: bold;">${formatRupiah(stats.grandTotalKas)}</td>
-                            </tr>
                         </tbody>
                     </table>
-                    
-                    <div style="margin-top: 15px; font-size: 11px; font-family: 'Times New Roman', Times, serif;">
-                        <div>Note :</div>
-                        <div style="margin-left: 20px; margin-top: 3px;">Iuran dapat ditransfer ke No Rek. <b>BCA 0440876757</b> an. Pricilia Linda Salhuteru</div>
+
+                    <!-- Footer Note -->
+                    <div style="margin-top: 35px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px;">🏦</div>
+                            <div>
+                                <p style="margin: 0; font-size: 9px; color: #64748b; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Rekening Pembayaran Kas</p>
+                                <p style="margin: 0; font-size: 12px; color: #0f172a; font-weight: 800;">BCA 0440876757 <span style="font-weight: 500; color: #64748b;">a.n. Pricilia Linda Salhuteru</span></p>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0; font-size: 9px; color: #94a3b8; font-weight: 500;">Di-generate otomatis oleh Sistem Digital</p>
+                        </div>
                     </div>
                 </div>
             `;
