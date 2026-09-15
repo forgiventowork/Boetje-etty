@@ -315,13 +315,13 @@
                     </button>
                 </div>
             </div>
-            <!-- Iframe Container -->
-            <div class="flex-1 bg-slate-200 w-full relative overflow-hidden rounded-b-2xl">
+            <!-- Preview Container -->
+            <div class="flex-1 bg-slate-200 w-full relative overflow-auto rounded-b-2xl p-2 md:p-4 flex flex-col items-center">
                 <div id="pdfLoadingIndicator" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 z-10">
                     <svg class="w-8 h-8 text-rose-500 animate-spin mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    <p class="text-xs font-bold text-slate-500 animate-pulse">Membuat Dokumen...</p>
+                    <p class="text-xs font-bold text-slate-500 animate-pulse">Menyiapkan Preview...</p>
                 </div>
-                <iframe id="pdfPreviewFrame" class="w-full h-full border-0 hidden"></iframe>
+                <img id="pdfPreviewImage" class="max-w-full h-auto shadow-lg bg-white hidden object-contain">
             </div>
         </div>
     </div>
@@ -880,8 +880,8 @@
             
             // reset UI
             document.getElementById('pdfLoadingIndicator').classList.remove('hidden');
-            document.getElementById('pdfPreviewFrame').classList.add('hidden');
-            document.getElementById('pdfPreviewFrame').src = '';
+            const imgEl = document.getElementById('pdfPreviewImage');
+            if(imgEl) { imgEl.classList.add('hidden'); imgEl.src = ''; }
             
             openModal('pdfPreviewModal');
             
@@ -997,68 +997,56 @@
                 </div>
             `;
 
+            // Clean up any old wrapper if it exists
+            let oldWrapper = document.getElementById('pdfGeneratorWrapper');
+            if (oldWrapper) document.body.removeChild(oldWrapper);
+
             const wrapper = document.createElement('div');
+            wrapper.id = 'pdfGeneratorWrapper';
             wrapper.style.width = '1050px';
-            wrapper.style.margin = '0';
-            wrapper.style.padding = '0';
             wrapper.style.backgroundColor = '#ffffff';
-            wrapper.style.position = 'relative';
+            wrapper.style.position = 'absolute';
+            wrapper.style.left = '-9999px';
+            wrapper.style.top = '0';
             wrapper.innerHTML = htmlStr;
+            document.body.appendChild(wrapper);
             
             setTimeout(() => {
-                html2pdf().set({
-                    margin: 0.2,
-                    filename: pdfFileName,
-                    image: { type: 'jpeg', quality: 1.0 },
-                    html2canvas: { scale: 3, scrollX: 0, scrollY: 0, useCORS: true },
-                    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-                }).from(wrapper).output('bloburl').then((blobUrl) => {
-                    currentPdfBlobUrl = blobUrl;
-                    const iframe = document.getElementById('pdfPreviewFrame');
-                    iframe.src = blobUrl;
-                    iframe.onload = () => {
-                        document.getElementById('pdfLoadingIndicator').classList.add('hidden');
-                        iframe.classList.remove('hidden');
+                html2canvas(wrapper, { scale: 2.5, scrollX: 0, scrollY: 0, useCORS: true }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                    const imgEl = document.getElementById('pdfPreviewImage');
+                    if(imgEl) {
+                        imgEl.src = imgData;
+                        imgEl.classList.remove('hidden');
+                    }
+                    document.getElementById('pdfLoadingIndicator').classList.add('hidden');
+                    
+                    document.getElementById('btnDownloadJpg').onclick = () => {
+                        const link = document.createElement('a');
+                        link.download = pdfFileName.replace('.pdf', '.jpg');
+                        link.href = imgData;
+                        link.click();
+                        showToast('JPG Berhasil Diunduh! ✅');
                     };
                     
                     document.getElementById('btnDownloadPdf').onclick = () => {
-                        const link = document.createElement('a');
-                        link.href = blobUrl;
-                        link.download = pdfFileName;
-                        link.click();
-                        showToast('PDF Berhasil Diunduh! ✅');
-                    };
-                    
-                    document.getElementById('btnDownloadJpg').onclick = () => {
-                        showToast('Memproses JPG High-Res... ⏳');
-                        
-                        const jpgWrapper = document.createElement('div');
-                        jpgWrapper.style.width = '1050px';
-                        jpgWrapper.style.backgroundColor = '#ffffff';
-                        jpgWrapper.style.position = 'absolute';
-                        jpgWrapper.style.left = '-9999px';
-                        jpgWrapper.style.top = '0';
-                        jpgWrapper.innerHTML = htmlStr;
-                        document.body.appendChild(jpgWrapper);
-
-                        html2canvas(jpgWrapper, { scale: 3, scrollX: 0, scrollY: 0, useCORS: true }).then(canvas => {
-                            document.body.removeChild(jpgWrapper);
-                            const link = document.createElement('a');
-                            link.download = pdfFileName.replace('.pdf', '.jpg');
-                            link.href = canvas.toDataURL('image/jpeg', 1.0);
-                            link.click();
-                            showToast('JPG Berhasil Diunduh! ✅');
-                        }).catch((e) => {
-                            console.error(e);
-                            if (document.body.contains(jpgWrapper)) document.body.removeChild(jpgWrapper);
-                            showToast('Gagal memproses JPG ❌');
+                        showToast('Memproses PDF... ⏳');
+                        html2pdf().set({
+                            margin: 0.2,
+                            filename: pdfFileName,
+                            image: { type: 'jpeg', quality: 1.0 },
+                            html2canvas: { scale: 3, scrollX: 0, scrollY: 0, useCORS: true },
+                            jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+                        }).from(wrapper).save().then(() => {
+                            showToast('PDF Berhasil Diunduh! ✅');
                         });
                     };
-                }).catch(() => {
-                    showToast('Gagal memproses PDF ❌');
-                    closeModal('pdfPreviewModal');
+                }).catch(e => {
+                    console.error(e);
+                    showToast('Gagal memproses Preview ❌');
+                    document.getElementById('pdfLoadingIndicator').classList.add('hidden');
                 });
-            }, 600);
+            }, 100);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
