@@ -25,28 +25,43 @@
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                     boxShadow: {
                         'soft': '0 2px 12px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(52, 211, 153, 0.4)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #F8F9FA; -webkit-font-smoothing: antialiased; }
+        body { background-color: #F8F9FA; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .sticky-col { position: sticky; left: 0; z-index: 10; background: inherit; }
         .glass-header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        
+        /* Utility for delayed animations */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
     </style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen flex flex-col pb-10">
 
     <!-- Professional Glassmorphism Header -->
-    <header class="glass-header border-b border-slate-200/60 sticky top-0 z-40">
+    <header class="glass-header border-b border-slate-200/60 sticky top-0 z-40 opacity-0 animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md">
+                <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md transition-transform hover:scale-105 cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
@@ -56,12 +71,12 @@
             </div>
 
             <div class="flex items-center space-x-2">
-                <button onclick="handleManualInstall()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition border border-indigo-100">
+                <button onclick="handleManualInstall()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition-all border border-indigo-100 active:scale-95">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                     <span class="md:hidden">Install</span>
                 </button>
-                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition shadow-md">
+                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-lg text-[11px] font-bold flex items-center space-x-1.5 transition-all shadow-md active:scale-95">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                     <span class="hidden md:inline">Tambah Data</span>
                     <span class="md:hidden">Tambah</span>
@@ -74,42 +89,42 @@
     <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full space-y-4">
 
         <!-- Info Banner -->
-        <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3 opacity-0 animate-fade-in-up delay-100 transition-all hover:shadow-md">
             <div class="flex items-center space-x-3">
                 <div class="w-7 h-7 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <p class="text-[11px] md:text-xs text-slate-600 font-medium">
-                    Iuran <b class="text-slate-900">Rp 20.000 / bln</b>. Transfer: <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">BCA 0440876757</span> (Pricilia Linda)
+                    Iuran <b class="text-slate-900">Rp 20.000 / bln</b>. Transfer: <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 transition-all hover:bg-slate-200 cursor-default">BCA 0440876757</span> (Pricilia Linda)
                 </p>
             </div>
-            <button onclick="copyBcaNumber()" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg active:scale-95 whitespace-nowrap self-start md:self-auto">
+            <button id="btnCopyRek" onclick="copyBcaNumber()" class="text-[11px] font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg active:scale-95 whitespace-nowrap self-start md:self-auto transition-all w-32 text-center">
                 Salin Rekening
             </button>
         </div>
 
         <!-- Structured Stats Section (Professional) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 opacity-0 animate-fade-in-up delay-200">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Kas</div>
-                <div class="text-xl md:text-2xl font-black text-slate-900 tracking-tight" id="statSubTotal">Rp 0</div>
+                <div class="text-xl md:text-2xl font-black text-slate-900 tracking-tight transition-all" id="statSubTotal">Rp 0</div>
             </div>
-            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 relative">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 relative transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="flex justify-between items-start mb-1">
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saldo 2025</div>
-                    <button onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                    <button onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                 </div>
-                <div class="text-base md:text-xl font-bold text-slate-700" id="statSaldoAwal">Rp 0</div>
+                <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statSaldoAwal">Rp 0</div>
             </div>
-            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Iuran 2026</div>
-                <div class="text-base md:text-xl font-bold text-blue-600" id="statIuranMasuk">Rp 0</div>
+                <div class="text-base md:text-xl font-bold text-blue-600 transition-all" id="statIuranMasuk">Rp 0</div>
             </div>
-            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col justify-between transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Data</div>
                 <div class="flex justify-between items-end">
-                    <div class="text-base md:text-xl font-bold text-slate-700" id="statTotalAnggota">0</div>
-                    <button onclick="openShareWhatsAppModal()" class="text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded text-[10px] font-bold border border-emerald-100 flex items-center">
+                    <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statTotalAnggota">0</div>
+                    <button onclick="openShareWhatsAppModal()" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1.5 rounded text-[10px] font-bold border border-emerald-100 flex items-center transition-all active:scale-95">
                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                         WA
                     </button>
@@ -118,10 +133,10 @@
         </div>
 
         <!-- Toolbar (Search, Filter, Export) -->
-        <div class="flex items-center justify-between gap-3 py-1">
+        <div class="flex items-center justify-between gap-3 py-1 opacity-0 animate-fade-in-up delay-300">
             <div class="flex flex-1 space-x-2">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama..." class="w-full md:max-w-xs px-3 py-2 text-[11px] md:text-xs bg-white border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 transition">
-                <select id="filterStatus" onchange="renderApp()" class="w-28 text-[11px] md:text-xs bg-white border border-slate-200 px-2 py-2 rounded-lg shadow-sm font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-900">
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama..." class="w-full md:max-w-xs px-3 py-2 text-[11px] md:text-xs bg-white border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all">
+                <select id="filterStatus" onchange="renderApp()" class="w-28 text-[11px] md:text-xs bg-white border border-slate-200 px-2 py-2 rounded-lg shadow-sm font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all cursor-pointer">
                     <option value="all">Semua</option>
                     <option value="paid">Lunas</option>
                     <option value="unpaid">Belum</option>
@@ -130,17 +145,20 @@
 
             <div class="flex space-x-2">
                 <div class="hidden md:inline-flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1">Tabel</button>
-                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1">Kartu</button>
+                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all bg-white text-slate-900 shadow-sm flex items-center space-x-1">Tabel</button>
+                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all text-slate-500 hover:text-slate-900 flex items-center space-x-1">Kartu</button>
                 </div>
                 
-                <button onclick="exportToCsv()" class="px-3 py-1.5 bg-white text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg shadow-sm text-[11px] font-bold">CSV</button>
-                <button onclick="exportToPdf()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg shadow-sm text-[11px] font-bold flex items-center"><svg class="w-3.5 h-3.5 md:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="hidden md:inline">PDF</span></button>
+                <button onclick="exportToCsv()" class="px-3 py-1.5 bg-white text-slate-700 hover:text-slate-900 border border-slate-200 rounded-lg shadow-sm text-[11px] font-bold transition-all active:scale-95">CSV</button>
+                <button onclick="exportToPdf()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg shadow-sm text-[11px] font-bold flex items-center transition-all active:scale-95">
+                    <svg class="w-3.5 h-3.5 md:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span class="hidden md:inline">PDF</span>
+                </button>
             </div>
         </div>
 
         <!-- PROFESSIONAL TABLE VIEW -->
-        <div id="tableViewContainer" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div id="tableViewContainer" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden opacity-0 animate-fade-in-up delay-300">
             <div class="overflow-x-auto print-table">
                 <table class="w-full text-left border-collapse whitespace-nowrap" id="exportTableEl">
                     <thead>
@@ -165,20 +183,21 @@
             <div id="cardsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"></div>
         </div>
 
-        <div class="text-center text-[11px] text-slate-400 py-2 font-medium">Ketuk bulan untuk mengubah status pembayaran.</div>
+        <div class="text-center text-[11px] text-slate-400 py-2 font-medium opacity-0 animate-fade-in-up delay-300">Ketuk bulan untuk mengubah status pembayaran.</div>
     </main>
 
     <!-- Modals -->
+    
     <!-- Modal: Payment Editor -->
-    <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="paymentModalContent">
+    <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-xs rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-300" id="paymentModalContent">
             <div class="p-5">
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1" id="modalMonthName">Januari 2026</p>
                         <h3 class="font-black text-base text-slate-900" id="modalFamilyName">Kel. D. Salhuteru</h3>
                     </div>
-                    <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
 
                 <div class="space-y-4">
@@ -192,47 +211,47 @@
                     <div id="paidFieldsContainer" class="space-y-3">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tanggal (Cth: 15/09)</label>
-                            <input type="text" id="modalDateInput" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                            <input type="text" id="modalDateInput" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nominal (Rp)</label>
                             <div class="flex items-center space-x-2">
-                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-2 text-xs font-black bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
-                                <button type="button" onclick="setModalAmount(20000)" class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-bold">20k</button>
+                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-2 text-xs font-black bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
+                                <button type="button" onclick="setModalAmount(20000)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition-colors">20k</button>
                             </div>
                         </div>
                     </div>
-                    <button type="button" onclick="savePaymentModal()" class="w-full py-2.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold shadow-md mt-2">Simpan Perubahan</button>
+                    <button type="button" onclick="savePaymentModal()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md mt-2 transition-all active:scale-95">Simpan Perubahan</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal: Add/Edit Family -->
-    <div id="familyModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300" id="familyModalContent">
+    <div id="familyModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-300" id="familyModalContent">
             <div class="p-5">
                 <div class="flex justify-between items-center mb-5">
                     <h3 class="font-black text-base text-slate-900" id="familyModalTitle">Data Keluarga</h3>
-                    <button onclick="closeModal('familyModal')" class="text-slate-400 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="closeModal('familyModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
                 <form onsubmit="handleSaveFamily(event)" class="space-y-4">
                     <input type="hidden" id="editFamilyId">
                     <div>
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Nama</label>
-                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Telepon</label>
-                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                     </div>
                     <div id="quickMonthsBlock">
                         <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Tandai Lunas Bulan:</label>
                         <div class="grid grid-cols-4 md:grid-cols-6 gap-1.5" id="familyMonthCheckboxes"></div>
                     </div>
                     <div class="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between">
-                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[11px] text-rose-500 font-bold hidden px-3 py-2 bg-rose-50 rounded-lg">Hapus</button>
-                        <button type="submit" class="ml-auto px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[11px] font-bold shadow-md">Simpan Data</button>
+                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[11px] text-rose-500 hover:text-rose-700 font-bold hidden px-3 py-2 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors">Hapus</button>
+                        <button type="submit" class="ml-auto px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan Data</button>
                     </div>
                 </form>
             </div>
@@ -240,36 +259,36 @@
     </div>
 
     <!-- Modal: Saldo Awal -->
-    <div id="saldoModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-xs rounded-2xl p-5 transform scale-95 transition-transform duration-300" id="saldoModalContent">
+    <div id="saldoModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-5 transform scale-95 transition-all duration-300" id="saldoModalContent">
             <h3 class="font-black text-base text-slate-900 mb-1">Saldo 2025</h3>
             <p class="text-[10px] text-slate-500 mb-3">Sisa saldo periode sebelumnya.</p>
-            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2.5 text-base font-black bg-slate-50 border border-slate-200 rounded-lg mb-4">
+            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2.5 text-base font-black bg-slate-50 border border-slate-200 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
             <div class="flex justify-end space-x-2">
-                <button onclick="closeModal('saldoModal')" class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-bold">Batal</button>
-                <button onclick="saveSaldoAwal()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-[11px] font-bold shadow-md">Simpan</button>
+                <button onclick="closeModal('saldoModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition-colors">Batal</button>
+                <button onclick="saveSaldoAwal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan</button>
             </div>
         </div>
     </div>
 
     <!-- Modal: Share WA -->
-    <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-transform duration-300" id="shareModalContent">
+    <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-all duration-300" id="shareModalContent">
             <div class="flex justify-between items-center mb-3">
                 <h3 class="font-black text-base text-slate-900 flex items-center gap-2">Laporan WA</h3>
-                <button onclick="closeModal('shareModal')" class="text-slate-400 bg-slate-100 p-2 rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                <button onclick="closeModal('shareModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
-            <textarea id="waMessageText" rows="7" readonly class="w-full p-3 font-mono text-[10px] bg-slate-50 border border-slate-200 rounded-lg mb-4 resize-none focus:outline-none"></textarea>
+            <textarea id="waMessageText" rows="7" readonly class="w-full p-3 font-mono text-[10px] bg-slate-50 border border-slate-200 rounded-lg mb-4 resize-none focus:outline-none transition-shadow"></textarea>
             <div class="flex items-center justify-end space-x-2">
-                <button onclick="copyWaMessage()" class="px-4 py-2 bg-slate-100 text-slate-700 text-[11px] font-bold rounded-lg">Salin Teks</button>
-                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-500 text-white text-[11px] font-bold rounded-lg shadow-md">Kirim WA</a>
+                <button onclick="copyWaMessage()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-lg transition-colors">Salin Teks</button>
+                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-bold rounded-lg shadow-md transition-all active:scale-95">Kirim WA</a>
             </div>
         </div>
     </div>
 
     <!-- Toast -->
     <div id="toastNotification" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-10 opacity-0 transition-all duration-400 z-50 pointer-events-none">
-        <div class="bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 text-[11px] font-bold backdrop-blur-md whitespace-nowrap">
+        <div class="bg-slate-900 text-white px-4 py-2 rounded-full shadow-glow flex items-center space-x-2 text-[11px] font-bold backdrop-blur-md whitespace-nowrap border border-slate-700">
             <span class="bg-emerald-500 text-white rounded-full p-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
             <span id="toastMsg">Berhasil disimpan</span>
         </div>
@@ -402,11 +421,14 @@
             }
 
             let html = '';
-            members.forEach((member) => {
-                html += `<tr class="table-row-hover group border-b border-slate-100 hover:bg-slate-50 transition-colors">`;
+            members.forEach((member, index) => {
+                // Staggered animation delay
+                const delayStr = index < 10 ? `style="animation-delay: ${index * 50}ms;"` : '';
+                
+                html += `<tr class="table-row-hover group border-b border-slate-100 hover:bg-slate-50 transition-colors opacity-0 animate-fade-in-up" ${delayStr}>`;
                 html += `
-                    <td class="py-2.5 px-3 sticky-col text-left font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0]">
-                        <span class="truncate cursor-pointer hover:text-blue-600 transition" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
+                    <td class="py-2.5 px-3 sticky-col text-left font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
+                        <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -425,7 +447,7 @@
                             
                         let displayText = isPartial ? 'Parsial' : (dateText || 'Lunas');
                         
-                        pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass}">${displayText}</span>`;
+                        pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105">${displayText}</span>`;
                     }
                     html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center cursor-pointer">${pillHTML}</td>`;
                 }
@@ -434,7 +456,7 @@
             });
 
             const stats = calculateTotals();
-            html += `<tr class="bg-slate-50">
+            html += `<tr class="bg-slate-50 opacity-0 animate-fade-in-up" style="animation-delay: ${(members.length * 50 > 500 ? 500 : members.length * 50)}ms;">
                 <td class="py-3 px-3 sticky-col bg-slate-50 font-bold text-slate-500 text-right uppercase text-[10px] border-r border-slate-200 z-20 shadow-[1px_0_0_0_#e2e8f0]">Sub Total</td>
                 <td colspan="11" class="py-3"></td>
                 <td class="py-3 px-3 text-right font-black text-slate-900 text-[12px]">${formatRupiah(stats.grandTotalKas)}</td>
@@ -451,10 +473,12 @@
             }
 
             let html = '';
-            members.forEach(member => {
+            members.forEach((member, index) => {
                 const totalText = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '0';
+                const delayStr = index < 10 ? `style="animation-delay: ${index * 50}ms;"` : '';
+                
                 html += `
-                    <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col h-full">
+                    <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
                         <div class="flex justify-between mb-3">
                             <h4 class="font-black text-slate-900 text-[11px] truncate pr-2">${member.name}</h4>
                             <span class="text-[10px] font-black ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
@@ -466,15 +490,14 @@
                     let isPaid = p && p.paid;
                     const dateText = p?.date || '';
                     let btnClass = isPaid ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-50 text-slate-400 border border-slate-100';
-                    
                     let displayText = isPaid ? (dateText || 'Lunas') : MONTH_NAMES[m-1];
-                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass}"><span class="text-[8px] font-bold">${displayText}</span></button>`;
+                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[8px] font-bold">${displayText}</span></button>`;
                 }
                 html += `
                         </div>
                         <div class="mt-auto pt-2 border-t border-slate-100 flex justify-between">
-                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-[9px] font-bold transition">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-slate-900 p-1.5 rounded-lg bg-white border border-slate-200"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-[9px] font-bold transition-colors">Lunas Semua</button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-slate-900 p-1.5 rounded-lg bg-white border border-slate-200 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                         </div>
                     </div>
                 `;
@@ -493,12 +516,12 @@
 
             if (mode === 'table') {
                 tableView.classList.remove('hidden'); cardsView.classList.add('hidden');
-                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
-                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             } else {
                 tableView.classList.add('hidden'); cardsView.classList.remove('hidden');
-                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition bg-white text-slate-900 shadow-sm flex items-center space-x-1";
-                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition text-slate-500 hover:text-slate-900 flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             }
         }
 
@@ -540,12 +563,12 @@
         function updateModalStatusUI() {
             const btnPaid = document.getElementById('btnStatusPaid'); const btnUnpaid = document.getElementById('btnStatusUnpaid'); const fields = document.getElementById('paidFieldsContainer');
             if (modalIsPaid) {
-                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200';
-                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200 transition-colors';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 hover:bg-slate-200 transition-colors';
                 fields.classList.remove('hidden');
             } else {
-                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200';
-                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200 transition-colors';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 hover:bg-slate-200 transition-colors';
                 fields.classList.add('hidden');
             }
         }
@@ -564,7 +587,7 @@
                     const { error } = await supa.from('payments').delete().match({ member_id: member.id, month: currentModalMonthIndex });
                     if(error) throw error; delete member.payments[currentModalMonthIndex];
                 }
-                renderApp(); closeModal('paymentModal'); showToast('Tersimpan');
+                renderApp(); closeModal('paymentModal'); showToast('Tersimpan ✅');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
 
@@ -577,7 +600,7 @@
                 const { error } = await supa.from('payments').upsert(records, { onConflict: 'member_id, month' });
                 if (error) throw error;
                 for (let m = 1; m <= 11; m++) member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
-                renderApp(); showToast('11 Bulan dilunasi');
+                renderApp(); showToast('11 Bulan dilunasi ✅');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
 
@@ -587,7 +610,7 @@
             document.getElementById('btnDeleteFamily').classList.add('hidden'); document.getElementById('quickMonthsBlock').classList.remove('hidden');
             const boxContainer = document.getElementById('familyMonthCheckboxes');
             boxContainer.innerHTML = MONTH_NAMES.map((mName, idx) => `
-                <label class="flex items-center justify-center p-1.5 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer">
+                <label class="flex items-center justify-center p-1.5 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
                     <input type="checkbox" name="quickMonth" value="${idx+1}" class="hidden peer"><span class="text-[9px] font-bold text-slate-400 peer-checked:text-slate-900">${mName}</span>
                 </label>
             `).join('');
@@ -621,7 +644,7 @@
                     }
                     appData.members.push(newMember);
                 }
-                renderApp(); closeModal('familyModal'); showToast('Tersimpan');
+                renderApp(); closeModal('familyModal'); showToast('Tersimpan ✅');
             } catch (e) { console.error(e); showToast("Gagal"); }
         }
 
@@ -631,7 +654,7 @@
                 try {
                     const { error } = await supa.from('members').delete().eq('id', id); if (error) throw error;
                     appData.members = appData.members.filter(m => m.id !== id);
-                    renderApp(); closeModal('familyModal'); showToast('Dihapus');
+                    renderApp(); closeModal('familyModal'); showToast('Dihapus ✅');
                 } catch (e) { console.error(e); showToast('Gagal'); }
             }
         }
@@ -641,11 +664,26 @@
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
             try {
                 const { error } = await supa.from('settings').upsert({ id: 1, saldo_awal: val }); if(error) throw error;
-                appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan');
+                appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan ✅');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
 
-        function copyBcaNumber() { navigator.clipboard.writeText('0440876757').then(() => showToast('Disalin!')); }
+        function copyBcaNumber() { 
+            navigator.clipboard.writeText('0440876757').then(() => {
+                showToast('Rekening disalin! ✅'); 
+                const btn = document.getElementById('btnCopyRek');
+                const oriText = btn.innerHTML;
+                btn.innerHTML = 'Tersalin! ✅';
+                btn.classList.add('bg-emerald-100', 'text-emerald-700', 'scale-105');
+                btn.classList.remove('text-blue-600', 'bg-blue-50');
+                
+                setTimeout(() => {
+                    btn.innerHTML = oriText;
+                    btn.classList.remove('bg-emerald-100', 'text-emerald-700', 'scale-105');
+                    btn.classList.add('text-blue-600', 'bg-blue-50');
+                }, 2500);
+            });
+        }
 
         function openShareWhatsAppModal() {
             const stats = calculateTotals(); let msg = `*LAPORAN IURAN KAS KELUARGA BOETJE ETTY SALHUTERU 2026*\n\n`;
@@ -659,7 +697,7 @@
             openModal('shareModal');
         }
 
-        function copyWaMessage() { document.getElementById('waMessageText').select(); document.execCommand('copy'); showToast('Disalin'); }
+        function copyWaMessage() { document.getElementById('waMessageText').select(); document.execCommand('copy'); showToast('Disalin ✅'); }
 
         function exportToCsv() {
             const stats = calculateTotals(); let csvContent = "data:text/csv;charset=utf-8,IURAN 2026\r\nKELUARGA,JAN,FEB,MAR,APR,MEI,JUN,JUL,AUG,SEP,OKT,NOV,TOTAL\r\n";
@@ -672,26 +710,96 @@
             csvContent += `Sub Total,,,,,,,,,,,,"${stats.grandTotalKas}"\r\n`;
             const link = document.createElement("a"); link.href = encodeURI(csvContent); link.download = "Iuran_2026.csv";
             document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            showToast('CSV Diunduh ✅');
         }
 
         function exportToPdf() {
-            switchView('table'); // Ensure table is visible
+            showToast('Memproses PDF... ⏳');
+            const stats = calculateTotals();
+            
+            // Build a completely isolated, clean HTML table for the PDF to ensure it never fails or goes blank
+            let htmlStr = `
+                <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff; color: #000000;">
+                    <h2 style="text-align: center; margin-bottom: 5px; font-size: 22px; color: #1e293b;">LAPORAN IURAN KAS KELUARGA</h2>
+                    <h3 style="text-align: center; margin-top: 0; color: #64748b; font-size: 14px; font-weight: normal; margin-bottom: 25px;">Boetje Etty Salhuteru 2026</h3>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                        <div><strong>Total Keluarga:</strong> ${stats.totalMembers}</div>
+                        <div><strong>Tanggal Cetak:</strong> ${new Date().toLocaleDateString('id-ID')}</div>
+                    </div>
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+                                <th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">KELUARGA</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">JAN</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">FEB</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">MAR</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">APR</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">MEI</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">JUN</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">JUL</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">AUG</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">SEP</th><th style="padding: 10px; border-right: 1px solid #e2e8f0;">OKT</th>
+                                <th style="padding: 10px; border-right: 1px solid #e2e8f0;">NOV</th>
+                                <th style="padding: 10px; text-align: right;">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            appData.members.forEach(member => {
+                htmlStr += `<tr style="border-bottom: 1px solid #f1f5f9;">`;
+                htmlStr += `<td style="padding: 10px; font-weight: bold; border-right: 1px solid #f1f5f9;">${member.name}</td>`;
+                for (let m = 1; m <= 11; m++) {
+                    const p = member.payments && member.payments[m];
+                    if (p && p.paid) {
+                        const isPartial = p.amount < STANDARD_MONTHLY_FEE;
+                        const text = isPartial ? 'Parsial' : (p.date || 'Lunas');
+                        htmlStr += `<td style="padding: 10px; text-align: center; font-weight: bold; border-right: 1px solid #f1f5f9; color: ${isPartial ? '#d97706' : '#059669'};">${text}</td>`;
+                    } else {
+                        htmlStr += `<td style="padding: 10px; text-align: center; color: #cbd5e1; border-right: 1px solid #f1f5f9;">-</td>`;
+                    }
+                }
+                const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
+                htmlStr += `<td style="padding: 10px; text-align: right; font-weight: bold;">${total}</td></tr>`;
+            });
+
+            htmlStr += `
+                        <tr style="background-color: #f8fafc; font-weight: bold; border-top: 2px solid #cbd5e1;">
+                            <td style="padding: 12px 10px; text-align: right;" colspan="12">SUB TOTAL 2026:</td>
+                            <td style="padding: 12px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.totalIuranCollected)}</td>
+                        </tr>
+                        <tr style="background-color: #f8fafc; font-weight: bold;">
+                            <td style="padding: 12px 10px; text-align: right;" colspan="12">SALDO 2025:</td>
+                            <td style="padding: 12px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.saldoAwal)}</td>
+                        </tr>
+                        <tr style="background-color: #e2e8f0; font-weight: bold; font-size: 14px;">
+                            <td style="padding: 15px 10px; text-align: right;" colspan="12">GRAND TOTAL KAS:</td>
+                            <td style="padding: 15px 10px; text-align: right; color: #0f172a;">Rp ${formatRupiah(stats.grandTotalKas)}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = htmlStr;
+            
             setTimeout(() => {
-                showToast('Memproses PDF...');
-                const element = document.getElementById('exportTableEl');
-                const opt = {
-                    margin: 0.2, filename: 'Laporan_Iuran_2026.pdf',
+                html2pdf().set({
+                    margin: 0.3,
+                    filename: 'Laporan_Iuran_2026.pdf',
                     image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2, useCORS: true },
+                    html2canvas: { scale: 2 },
                     jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-                };
-                html2pdf().set(opt).from(element).save();
+                }).from(wrapper).save().then(() => {
+                    showToast('PDF Berhasil Diunduh! ✅');
+                }).catch(() => {
+                    showToast('Gagal memproses PDF ❌');
+                });
             }, 300);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             loadStorage();
-            if (window.innerWidth >= 768) switchView('table'); else switchView('table'); // Default to table for compactness
+            if (window.innerWidth >= 768) switchView('table'); else switchView('table');
         });
     </script>
 </body>
