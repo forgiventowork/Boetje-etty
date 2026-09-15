@@ -468,9 +468,19 @@
                 const delayStr = index < 10 ? `style="animation-delay: ${index * 50}ms;"` : '';
                 
                 html += `<tr class="table-row-hover group border-b border-slate-100 hover:bg-slate-50 transition-colors opacity-0 animate-fade-in-up" ${delayStr}>`;
+                
+                let paidMonthsCount = 0;
+                for (let m = 1; m <= 11; m++) {
+                    if (member.payments && member.payments[m] && member.payments[m].paid && member.payments[m].amount >= STANDARD_MONTHLY_FEE) {
+                        paidMonthsCount++;
+                    }
+                }
+                const isComplete = paidMonthsCount === 11;
+
                 html += `
                     <td class="py-2.5 px-3 sticky-col text-left font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
                         <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
+                        ${isComplete ? '<span class="ml-1 px-1.5 py-0.5 bg-yellow-100 text-yellow-700 border border-yellow-300 rounded text-[7px] font-black tracking-wider shadow-sm align-middle">COMPLETE</span>' : ''}
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -482,12 +492,10 @@
                     let pillHTML = '<span class="text-slate-300 font-bold text-[10px]">—</span>';
                     
                     if (isPaid) {
-                        let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : 
-                            (member.id === '9' || member.id === '11') ? "bg-orange-50 text-orange-700 border-orange-200" : 
-                            (member.id === '6') ? "bg-slate-100 text-slate-700 border-slate-300" : 
-                            "bg-emerald-50 text-emerald-700 border-emerald-200";
+                        let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
                             
-                        let displayText = isPartial ? 'Parsial' : (dateText || 'Lunas');
+                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
+                        let displayText = isPartial ? amtStr : (dateText || 'Lunas');
                         
                         pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105">${displayText}</span>`;
                     }
@@ -519,11 +527,22 @@
                 const totalText = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '0';
                 const delayStr = index < 10 ? `style="animation-delay: ${index * 50}ms;"` : '';
                 
+                let paidMonthsCount = 0;
+                for (let m = 1; m <= 11; m++) {
+                    if (member.payments && member.payments[m] && member.payments[m].paid && member.payments[m].amount >= STANDARD_MONTHLY_FEE) {
+                        paidMonthsCount++;
+                    }
+                }
+                const isComplete = paidMonthsCount === 11;
+
                 html += `
                     <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
-                        <div class="flex justify-between mb-3">
-                            <h4 class="font-black text-slate-900 text-[11px] truncate pr-2">${member.name}</h4>
-                            <span class="text-[10px] font-black ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center gap-1.5 truncate pr-2">
+                                <h4 class="font-black text-slate-900 text-[11px] truncate">${member.name}</h4>
+                                ${isComplete ? '<span class="px-1.5 py-0.5 bg-yellow-100 text-yellow-700 border border-yellow-300 rounded text-[7px] font-black tracking-wider shadow-sm flex-shrink-0">COMPLETE</span>' : ''}
+                            </div>
+                            <span class="text-[10px] font-black flex-shrink-0 ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
                         </div>
                         <div class="grid grid-cols-4 gap-1.5 mb-3">
                 `;
@@ -531,8 +550,11 @@
                     const p = member.payments && member.payments[m];
                     let isPaid = p && p.paid;
                     const dateText = p?.date || '';
-                    let btnClass = isPaid ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-50 text-slate-400 border border-slate-100';
-                    let displayText = isPaid ? (dateText || 'Lunas') : MONTH_NAMES[m-1];
+                    const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
+
+                    let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200') : 'bg-slate-50 text-slate-400 border border-slate-100';
+                    let amtStr = isPartial && p.amount >= 1000 ? (p.amount/1000) + 'k' : (isPartial ? p.amount : null);
+                    let displayText = isPaid ? (isPartial ? amtStr : (dateText || 'Lunas')) : MONTH_NAMES[m-1];
                     html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[8px] font-bold">${displayText}</span></button>`;
                 }
                 html += `
@@ -822,13 +844,25 @@
             `;
 
             appData.members.forEach(member => {
+                let paidMonthsCount = 0;
+                for (let m = 1; m <= 11; m++) {
+                    if (member.payments && member.payments[m] && member.payments[m].paid && member.payments[m].amount >= STANDARD_MONTHLY_FEE) {
+                        paidMonthsCount++;
+                    }
+                }
+                const isComplete = paidMonthsCount === 11;
+
                 htmlStr += `<tr style="border-bottom: 1px solid #f1f5f9;">`;
-                htmlStr += `<td style="padding: 10px; font-weight: bold; border-right: 1px solid #f1f5f9;">${member.name}</td>`;
+                htmlStr += `<td style="padding: 10px; font-weight: bold; border-right: 1px solid #f1f5f9;">
+                    ${member.name}
+                    ${isComplete ? '<span style="margin-left: 5px; padding: 2px 4px; background-color: #fef08a; color: #a16207; font-size: 8px; border-radius: 4px; font-weight: bold;">COMPLETE</span>' : ''}
+                </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
                     if (p && p.paid) {
                         const isPartial = p.amount < STANDARD_MONTHLY_FEE;
-                        const text = isPartial ? 'Parsial' : (p.date || 'Lunas');
+                        let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
+                        const text = isPartial ? amtStr : (p.date || 'Lunas');
                         htmlStr += `<td style="padding: 10px; text-align: center; font-weight: bold; border-right: 1px solid #f1f5f9; color: ${isPartial ? '#d97706' : '#059669'};">${text}</td>`;
                     } else {
                         htmlStr += `<td style="padding: 10px; text-align: center; color: #cbd5e1; border-right: 1px solid #f1f5f9;">-</td>`;
