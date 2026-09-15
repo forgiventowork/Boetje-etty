@@ -183,7 +183,7 @@
                 <table class="w-full text-left border-collapse whitespace-nowrap" id="exportTableEl">
                     <thead>
                         <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-widest font-bold border-b border-slate-200 text-center">
-                            <th class="py-3 px-3 sticky-col bg-white text-center font-black text-slate-900 border-b-2 border-slate-200 border-r z-30 shadow-[1px_0_0_0_#e2e8f0] min-w-[130px]">Keluarga</th>
+                            <th class="py-3 px-3 sticky-col bg-white text-left font-black text-slate-900 border-b-2 border-slate-200 border-r z-30 shadow-[1px_0_0_0_#e2e8f0] min-w-[130px]">Keluarga</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">JAN</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">FEB</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">MAR</th>
@@ -195,7 +195,7 @@
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">SEP</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">OKT</th>
                             <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[50px]">NOV</th>
-                            <th class="py-3 px-3 text-center font-black text-slate-900 border-b-2 border-slate-200 border-l-2 min-w-[90px]">TOTAL</th>
+                            <th class="py-3 px-3 text-right font-black text-slate-900 border-b-2 border-slate-200 border-l-2 min-w-[90px]">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-100">
@@ -546,9 +546,9 @@
                 const isComplete = paidMonthsCount === 11;
 
                 html += `
-                    <td class="py-2.5 px-3 sticky-col text-center align-middle font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
-                        <span class="truncate cursor-pointer hover:text-blue-600 transition-colors block" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
-                        ${isComplete ? '<span class="inline-block mt-1 px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide">✓ COMPLETE</span>' : ''}
+                    <td class="py-2.5 px-3 sticky-col text-left align-middle font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
+                        <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
+                        ${isComplete ? '<span class="ml-1.5 px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide align-middle">✓ COMPLETE</span>' : ''}
                     </td>
                 `;
                 for (let m = 1; m <= 11; m++) {
@@ -570,7 +570,7 @@
                     html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center align-middle cursor-pointer border-l border-slate-100">${pillHTML}</td>`;
                 }
                 const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                html += `<td class="py-2.5 px-3 text-center align-middle font-black text-[11px] border-l border-slate-200 ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
+                html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-300'}">${totalDisplay}</td></tr>`;
             });
 
             const stats = calculateTotals();
@@ -982,7 +982,7 @@
                 const isComplete = paidMonthsCount === 11;
 
                 htmlStr += `<tr style="background-color: ${rowBg};">`;
-                htmlStr += `<td style="padding: 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: center; vertical-align: middle;">
+                htmlStr += `<td style="padding: 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: left; vertical-align: middle;">
                     ${member.name}
                     ${isComplete ? '<span style="display:inline-block; margin-left: 6px; padding: 2px 4px; background-color: #ecfdf5; color: #059669; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">✓ COMPLETE</span>' : ''}
                 </td>`;
@@ -1000,7 +1000,7 @@
                     }
                 }
                 const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '-';
-                htmlStr += `<td style="padding: 6px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
+                htmlStr += `<td style="padding: 6px; text-align: right; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
             });
 
             const dateStr = new Date().toLocaleDateString('id-ID', { month: 'short', year: 'numeric' }).replace(' ', '_');
