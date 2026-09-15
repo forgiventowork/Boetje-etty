@@ -597,15 +597,15 @@
                 const isComplete = paidMonthsCount === 11;
 
                 html += `
-                    <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
-                        <div class="flex justify-between items-center mb-3">
-                            <div class="flex items-center gap-1.5 truncate pr-2">
-                                <h4 class="font-black text-slate-900 text-[11px] truncate">${member.name}</h4>
-                                ${isComplete ? '<span class="px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[7.5px] font-bold tracking-wide flex-shrink-0">✓ COMPLETE</span>' : ''}
+                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center gap-2 truncate pr-2">
+                                <h4 class="font-black text-slate-900 text-[13px] md:text-[14px] truncate">${member.name}</h4>
+                                ${isComplete ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md text-[8px] font-bold tracking-wide flex-shrink-0 border border-emerald-100">✓ COMPLETE</span>' : ''}
                             </div>
-                            <span class="text-[10px] font-black flex-shrink-0 ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2 py-1 rounded' : 'text-slate-400'}">${totalText}</span>
+                            <span class="text-[11px] md:text-[12px] font-black flex-shrink-0 ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2.5 py-1.5 rounded-lg' : 'text-slate-400'}">${totalText}</span>
                         </div>
-                        <div class="grid grid-cols-4 gap-1.5 mb-3">
+                        <div class="grid grid-cols-4 gap-2 mb-4">
                 `;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
@@ -613,16 +613,16 @@
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
 
-                    let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200') : 'bg-slate-50 text-slate-400 border border-slate-100';
+                    let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-sm' : 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm') : 'bg-slate-50 text-slate-400 border border-slate-100';
                     let amtStr = isPartial && p.amount >= 1000 ? (p.amount/1000) + 'k' : (isPartial ? p.amount : null);
                     let displayText = isPaid ? (isPartial ? amtStr : formatShortDate(dateText || 'Lunas')) : MONTH_NAMES[m-1];
-                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="p-1 rounded flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[8px] font-bold">${displayText}</span></button>`;
+                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 rounded-lg flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[9px] md:text-[10px] font-bold whitespace-nowrap">${displayText}</span></button>`;
                 }
                 html += `
                         </div>
-                        <div class="mt-auto pt-2 border-t border-slate-100 flex justify-between">
-                            <button onclick="quickMarkAllMonths('${member.id}')" class="text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-[9px] font-bold transition-colors">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-400 hover:text-slate-900 p-1.5 rounded-lg bg-white border border-slate-200 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                        <div class="mt-auto pt-3 border-t border-slate-100 flex justify-between gap-3">
+                            <button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-bold transition-colors shadow-sm active:scale-95">Lunas Semua</button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-200 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                         </div>
                     </div>
                 `;
