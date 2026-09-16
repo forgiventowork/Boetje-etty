@@ -894,19 +894,18 @@
             
             const stats = calculateTotals();
             
-            // Build a completely isolated, clean HTML table for the PDF to ensure it never fails or goes blank
             let htmlStr = `
-                <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 20px 30px; background-color: #ffffff; color: #334155; width: 1050px; box-sizing: border-box; margin: 0; position: relative;">
+                <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 40px; background-color: #ffffff; color: #334155; width: 1122px; box-sizing: border-box; margin: 0; position: relative;">
                     
                     <!-- Header Section -->
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #334155; padding-bottom: 10px; margin-bottom: 15px;">
                         <div>
-                            <h1 style="margin: 0; font-size: 22px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px;">LAPORAN KAS KELUARGA</h1>
-                            <p style="margin: 4px 0 0 0; font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Boetje Etty Salhuteru &bull; Periode 2026</p>
+                            <h1 style="margin: 0; font-size: 24px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px;">LAPORAN KAS KELUARGA</h1>
+                            <p style="margin: 4px 0 0 0; font-size: 13px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Boetje Etty Salhuteru &bull; Periode 2026</p>
                         </div>
                         <div style="text-align: right;">
-                            <p style="margin: 0 0 4px 0; font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Tanggal Cetak</p>
-                            <p style="margin: 0; font-size: 13px; color: #334155; font-weight: 700;">${new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year:'numeric'})}</p>
+                            <p style="margin: 0 0 4px 0; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Tanggal Cetak</p>
+                            <p style="margin: 0; font-size: 14px; color: #334155; font-weight: 700;">${new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year:'numeric'})}</p>
                         </div>
                     </div>
 
@@ -1006,7 +1005,7 @@
 
             setTimeout(() => {
                 html2pdf().set({
-                    margin: 0.2,
+                    margin: 0,
                     filename: pdfFileName,
                     image: { type: 'jpeg', quality: 1.0 },
                     html2canvas: { scale: 3, useCORS: true },
@@ -1032,25 +1031,19 @@
                     document.getElementById('btnDownloadJpg').onclick = () => {
                         showToast('Memproses JPG High-Res... ⏳');
 
-                        const jpgHider = document.createElement('div');
-                        jpgHider.style.width = '0px';
-                        jpgHider.style.height = '0px';
-                        jpgHider.style.overflow = 'hidden';
-                        jpgHider.style.position = 'fixed';
-                        jpgHider.style.left = '0';
-                        jpgHider.style.top = '0';
-
                         const jpgWrapper = document.createElement('div');
                         jpgWrapper.id = 'jpgGeneratorWrapper';
-                        jpgWrapper.style.width = '1050px';
+                        jpgWrapper.style.width = '1122px';
                         jpgWrapper.style.backgroundColor = '#ffffff';
+                        jpgWrapper.style.position = 'fixed';
+                        jpgWrapper.style.top = '200vh';
+                        jpgWrapper.style.left = '0';
+                        jpgWrapper.style.zIndex = '-9999';
                         jpgWrapper.innerHTML = htmlStr;
-                        
-                        jpgHider.appendChild(jpgWrapper);
-                        document.body.appendChild(jpgHider);
+                        document.body.appendChild(jpgWrapper);
 
                         html2canvas(jpgWrapper, { scale: 3, useCORS: true }).then(canvas => {
-                            document.body.removeChild(jpgHider);
+                            document.body.removeChild(jpgWrapper);
                             const link = document.createElement('a');
                             link.download = pdfFileName.replace('.pdf', '.jpg');
                             link.href = canvas.toDataURL('image/jpeg', 1.0);
@@ -1058,7 +1051,7 @@
                             showToast('JPG Berhasil Diunduh! ✅');
                         }).catch((e) => {
                             console.error(e);
-                            if (document.body.contains(jpgHider)) document.body.removeChild(jpgHider);
+                            if (document.body.contains(jpgWrapper)) document.body.removeChild(jpgWrapper);
                             showToast('Gagal memproses JPG ❌');
                         });
                     };
