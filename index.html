@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js --><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- HTML2PDF JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -95,7 +96,12 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                        <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <select id="sortSelector" onchange="renderApp()" class="bg-white border border-slate-200 text-slate-700 text-[10px] md:text-xs font-bold py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all">
+                    <option value="name_asc">A - Z</option>
+                    <option value="unpaid_desc">Tunggakan Terbanyak</option>
+                    <option value="paid_asc">Lunas Terbanyak</option>
+                </select>
                 <select id="yearSelector" onchange="changeYear(this.value)" class="bg-white border border-slate-200 text-slate-700 text-[10px] md:text-xs font-bold py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all">
                     <option value="2026">Tahun 2026</option>
                     <option value="2027">Tahun 2027</option>
@@ -175,6 +181,14 @@
                         <span>Tambah</span>
                     </button>
                 </div>
+            </div>
+                </div>
+
+        <!-- Chart Section -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 mb-4 opacity-0 animate-fade-in-up delay-200">
+            <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>Grafik Arus Kas</h2>
+            <div class="relative h-48 md:h-64 w-full">
+                <canvas id="cashFlowChart"></canvas>
             </div>
         </div>
 
@@ -629,7 +643,7 @@
         // ==========================================
         // AUTHENTICATION (ADMIN MODE)
         // ==========================================
-        const ADMIN_PIN = '123456';
+        const ADMIN_PIN_HASH = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
         let isAdmin = localStorage.getItem('boetje_admin') === 'true';
 
         function toggleAdmin() {
@@ -654,9 +668,17 @@
             }
         }
 
-        function submitLogin() {
+                async function hashPIN(pin) {
+            const msgBuffer = new TextEncoder().encode(pin);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function submitLogin() {
             const pin = document.getElementById('adminPinInput').value;
-            if (pin === ADMIN_PIN) {
+            const hashed = await hashPIN(pin);
+            if (hashed === ADMIN_PIN_HASH) {
                 localStorage.setItem('boetje_admin', 'true');
                 isAdmin = true;
                 closeModal('loginModal');
@@ -737,6 +759,8 @@
             
             showToast(`Memuat data ${appData.year}...`);
             await loadStorage();
+            isLoading = false;
+            renderApp();
         }
 
         async function loadStorage() {
@@ -826,17 +850,39 @@
             document.getElementById('statTotalAnggota').textContent = stats.totalMembers;
         }
 
-        function getFilteredMembers() {
+                function getFilteredMembers() {
             const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
             const filterStatus = document.getElementById('filterStatus')?.value || 'all';
+            const sortMode = document.getElementById('sortSelector')?.value || 'name_asc';
 
-            return appData.members.filter(m => {
+            let result = appData.members.filter(m => {
                 const matchesSearch = m.name.toLowerCase().includes(query);
                 if (!matchesSearch) return false;
                 if (filterStatus === 'paid') return (m.computedTotal || 0) > 0;
                 if (filterStatus === 'unpaid') return (m.computedTotal || 0) === 0;
                 return true;
             });
+
+            result.forEach(m => {
+                m.unpaidCount = 0;
+                for(let i=1; i<=11; i++) {
+                    if(!m.payments || !m.payments[i] || !m.payments[i].paid || m.payments[i].amount < STANDARD_MONTHLY_FEE) m.unpaidCount++;
+                }
+            });
+
+            result.sort((a, b) => {
+                if (sortMode === 'unpaid_desc') {
+                    if(b.unpaidCount !== a.unpaidCount) return b.unpaidCount - a.unpaidCount;
+                    return a.name.localeCompare(b.name);
+                } else if (sortMode === 'paid_asc') {
+                    if(a.unpaidCount !== b.unpaidCount) return a.unpaidCount - b.unpaidCount;
+                    return a.name.localeCompare(b.name);
+                } else {
+                    return a.name.localeCompare(b.name);
+                }
+            });
+
+            return result;
         }
         
         function parseToHTMLDate(val) {
@@ -995,7 +1041,115 @@
             list.innerHTML = html;
         }
 
-        function renderApp() { renderStats(); renderTable(); renderCards(); renderExpenses(); }
+                let isLoading = true;
+
+        function renderSkeleton() {
+            const skeletonValue = '<div class="h-6 md:h-8 w-24 bg-slate-200 dark:bg-slate-700 animate-pulse rounded-md"></div>';
+            const skeletonShort = '<div class="h-6 md:h-8 w-12 bg-slate-200 dark:bg-slate-700 animate-pulse rounded-md"></div>';
+            
+            document.getElementById('statIuranTerkumpul').innerHTML = skeletonValue;
+            document.getElementById('statPengeluaran').innerHTML = skeletonValue;
+            document.getElementById('statSubTotal').innerHTML = skeletonValue;
+            document.getElementById('statTotalAnggota').innerHTML = skeletonShort;
+
+            // Desktop Table Skeleton
+            document.getElementById('tableBody').innerHTML = Array(5).fill('<tr><td class="py-4 px-3 sticky-col bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700/50"><div class="h-4 w-24 bg-slate-200 dark:bg-slate-700 animate-pulse rounded"></div></td>' + 
+            Array(11).fill('<td class="py-4 px-2 border-b border-slate-100 dark:border-slate-700/50"><div class="h-6 w-12 bg-slate-200 dark:bg-slate-700 animate-pulse rounded-md mx-auto"></div></td>').join('') +
+            '<td class="py-4 px-3 text-right border-b border-slate-100 dark:border-slate-700/50"><div class="h-4 w-16 bg-slate-200 dark:bg-slate-700 animate-pulse rounded ml-auto"></div></td></tr>').join('');
+
+            // Mobile Cards Skeleton
+            document.getElementById('cardsContainer').innerHTML = Array(3).fill('<div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 mb-4 animate-pulse"><div class="flex justify-between items-center mb-4"><div class="h-5 w-32 bg-slate-200 dark:bg-slate-700 rounded"></div><div class="h-5 w-16 bg-slate-200 dark:bg-slate-700 rounded"></div></div><div class="grid grid-cols-4 gap-2 mb-4">' + 
+            Array(11).fill('<div class="h-10 bg-slate-200 dark:bg-slate-700 rounded-lg"></div>').join('') + 
+            '</div></div>').join('');
+            
+            document.getElementById('expensesList').innerHTML = '<div class="animate-pulse flex space-x-4 p-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div><div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div></div></div>';
+        }
+
+                function renderChart() {
+            const canvas = document.getElementById('cashFlowChart');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            const labels = MONTH_NAMES;
+            const incomeData = Array(11).fill(0);
+            const expenseData = Array(11).fill(0);
+            
+            appData.members.forEach(m => {
+                if(m.payments) {
+                    for(let i=1; i<=11; i++) {
+                        if(m.payments[i] && m.payments[i].paid) {
+                            incomeData[i-1] += Number(m.payments[i].amount) || 0;
+                        }
+                    }
+                }
+            });
+            
+            appData.expenses.forEach(e => {
+                const parts = (e.date_text || '').split('/');
+                if(parts.length >= 2) {
+                    const m = parseInt(parts[1]);
+                    if(m >= 1 && m <= 11) {
+                        expenseData[m-1] += Number(e.amount) || 0;
+                    }
+                }
+            });
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+            if(window.myChart) {
+                window.myChart.destroy();
+            }
+            
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Pemasukan',
+                            data: incomeData,
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Pengeluaran',
+                            data: expenseData,
+                            backgroundColor: '#f43f5e',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return 'Rp ' + (value/1000) + 'k'; },
+                                color: textColor
+                            },
+                            grid: { color: gridColor }
+                        },
+                        x: {
+                            ticks: { color: textColor },
+                            grid: { color: gridColor, display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: textColor } }
+                    }
+                }
+            });
+        }
+
+        function renderApp() {
+            if (isLoading) {
+                renderSkeleton();
+                return;
+            } renderStats(); renderTable(); renderCards(); renderExpenses(); renderChart(); }
 
         function renderExpenses() {
             const tbody = document.getElementById('expensesTableBody');
@@ -1629,5 +1783,10 @@
     </script>
 </body>
 </html>
+
+
+
+
+
 
 
