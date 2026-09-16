@@ -80,11 +80,15 @@
             </div>
 
             <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <button id="btnAuth" onclick="toggleAdmin()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
+                    <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span class="hidden md:inline" id="btnAuthText">Login Admin</span>
+                </button>
                 <button onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                 </button>
-                <button onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 md:px-3.5 py-2 rounded-xl text-[10px] md:text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">
+                <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 md:px-3.5 py-2 rounded-xl text-[10px] md:text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">
                     <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                     <span class="hidden md:inline">Tambah Data</span>
                     <span class="md:hidden">Tambah</span>
@@ -333,6 +337,22 @@
             </div>
         </div>
     </div>
+    <!-- Modal: Login Admin -->
+    <div id="loginModal" class="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="loginModalContent">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-black text-lg text-slate-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Login Bendahara
+                </h3>
+                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">Masukkan PIN untuk membuka fitur Edit, Hapus, dan Tambah pembayaran kas.</p>
+            <input type="password" id="adminPinInput" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-center tracking-[0.5em] font-black text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all mb-5 outline-none" placeholder="••••••">
+            <button onclick="submitLogin()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors text-sm shadow-md active:scale-95">Masuk Mode Admin</button>
+        </div>
+    </div>
+
     <!-- Modal: Share WA -->
     <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
         <div class="bg-white w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-all duration-300" id="shareModalContent">
@@ -398,6 +418,87 @@
             }
         }
 
+        // ==========================================
+        // AUTHENTICATION (ADMIN MODE)
+        // ==========================================
+        const ADMIN_PIN = '123456';
+        let isAdmin = localStorage.getItem('boetje_admin') === 'true';
+
+        function toggleAdmin() {
+            if (isAdmin) {
+                if (confirm('Keluar dari Mode Bendahara?')) {
+                    localStorage.removeItem('boetje_admin');
+                    isAdmin = false;
+                    updateAdminUI();
+                    showToast('Berhasil Logout 🔒');
+                }
+            } else {
+                document.getElementById('adminPinInput').value = '';
+                openModal('loginModal');
+                setTimeout(() => document.getElementById('adminPinInput').focus(), 300);
+            }
+        }
+
+        function submitLogin() {
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === ADMIN_PIN) {
+                localStorage.setItem('boetje_admin', 'true');
+                isAdmin = true;
+                closeModal('loginModal');
+                updateAdminUI();
+                showToast('Login Berhasil 🔓');
+            } else {
+                showToast('PIN Salah! ❌');
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('adminPinInput').focus();
+            }
+        }
+
+        document.getElementById('adminPinInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') submitLogin();
+        });
+
+        function updateAdminUI() {
+            const btnAuth = document.getElementById('btnAuth');
+            const btnAuthText = document.getElementById('btnAuthText');
+            if (btnAuth) {
+                if (isAdmin) {
+                    btnAuthText.innerText = 'Logout Admin';
+                    btnAuth.classList.add('border-emerald-200', 'text-emerald-700', 'bg-emerald-50');
+                    btnAuth.classList.remove('border-slate-200', 'text-slate-600', 'bg-white');
+                } else {
+                    btnAuthText.innerText = 'Login Admin';
+                    btnAuth.classList.remove('border-emerald-200', 'text-emerald-700', 'bg-emerald-50');
+                    btnAuth.classList.add('border-slate-200', 'text-slate-600', 'bg-white');
+                }
+            }
+            
+            const btnAddFamily = document.getElementById('btnAddFamily');
+            if (btnAddFamily) btnAddFamily.style.display = isAdmin ? 'flex' : 'none';
+
+            const saldoInput = document.getElementById('saldoAwalInput');
+            const btnSaveSaldo = document.getElementById('btnSaveSaldo');
+            if (saldoInput && btnSaveSaldo) {
+                if (isAdmin) {
+                    saldoInput.disabled = false;
+                    saldoInput.classList.add('border-slate-300', 'bg-white', 'cursor-text', 'hover:border-indigo-400');
+                    saldoInput.classList.remove('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800');
+                    btnSaveSaldo.style.display = 'block';
+                } else {
+                    saldoInput.disabled = true;
+                    saldoInput.classList.remove('border-slate-300', 'bg-white', 'cursor-text', 'hover:border-indigo-400');
+                    saldoInput.classList.add('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800');
+                    btnSaveSaldo.style.display = 'none';
+                }
+            }
+            
+            renderTable();
+            renderCards();
+        }
+
+        // ==========================================
+        // DATA LOADING & SUPABASE
+        // ==========================================
         // Supabase Configuration
         const SUPABASE_URL = 'https://jjqqgtdptqjwydqbgdqb.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqcXFndGRwdHFqd3lkcWJnZHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0MDE2MjksImV4cCI6MjEwNDk3NzYyOX0.TwhCQqip_t0tWSQP43WE3eJgyjPhq3eVToMALWcFH1U';
@@ -428,8 +529,12 @@
                     mPayments.forEach(p => { paymentsMap[p.month] = { paid: true, date: p.date_text, amount: p.amount }; });
                     return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap };
                 });
-                renderApp();
-            } catch (e) { console.error(e); showToast("Gagal memuat data"); }
+                // Initial calc is done by updateAdminUI calling renderTable
+                updateAdminUI();
+            } catch (e) {
+                console.error(e);
+                alert("Gagal memuat data dari cloud.");
+            }
         }
 
         function formatRupiah(num) {
@@ -548,7 +653,7 @@
 
                 html += `
                     <td class="py-2.5 px-3 sticky-col text-left align-middle font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
-                        <span class="truncate cursor-pointer hover:text-blue-600 transition-colors" onclick="openEditFamilyModal('${member.id}')">${member.name}</span>
+                        <span class="truncate transition-colors ${isAdmin ? 'cursor-pointer hover:text-blue-600' : ''}" ${isAdmin ? `onclick="openEditFamilyModal('${member.id}')"` : ''}>${member.name}</span>
                         ${isComplete ? '<span class="ml-1.5 px-1.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded text-[7.5px] font-bold tracking-wide align-middle shadow-sm relative top-[2px]">✓ COMPLETE</span>' : ''}
                     </td>
                 `;
@@ -568,7 +673,7 @@
                         
                         pillHTML = `<span class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105 shadow-sm">${displayText}</span>`;
                     }
-                    html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center align-middle cursor-pointer border-l border-slate-100">${pillHTML}</td>`;
+                    html += `<td ${isAdmin ? `onclick="openPaymentModal('${member.id}', ${m})"` : ''} class="py-2.5 px-1 text-center align-middle ${isAdmin ? 'cursor-pointer' : ''} border-l border-slate-100">${pillHTML}</td>`;
                 }
                 const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 font-bold text-[10px]">&bull;</span>';
                 html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 bg-slate-50/50 group-hover:bg-slate-100 transition-colors ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-400'}">${totalDisplay}</td></tr>`;
@@ -624,13 +729,13 @@
                     let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-sm' : 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm') : 'bg-slate-50 text-slate-400 border border-slate-100';
                     let amtStr = isPartial && p.amount >= 1000 ? (p.amount/1000) + 'k' : (isPartial ? p.amount : null);
                     let displayText = isPaid ? (isPartial ? amtStr : formatShortDate(dateText || 'Lunas')) : MONTH_NAMES[m-1];
-                    html += `<button onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 rounded-lg flex flex-col items-center justify-center ${btnClass} transition-transform hover:scale-105 active:scale-95"><span class="text-[9px] md:text-[10px] font-bold whitespace-nowrap">${displayText}</span></button>`;
+                    html += `<button ${isAdmin ? `onclick="openPaymentModal('${member.id}', ${m})"` : ''} class="py-2.5 px-1 rounded-lg flex flex-col items-center justify-center ${btnClass} ${isAdmin ? 'transition-transform hover:scale-105 active:scale-95' : 'cursor-default'}"><span class="text-[9px] md:text-[10px] font-bold whitespace-nowrap">${displayText}</span></button>`;
                 }
                 html += `
                         </div>
                         <div class="mt-auto pt-3 border-t border-slate-100 flex justify-between gap-3">
-                            <button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-bold transition-colors shadow-sm active:scale-95">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-200 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                            ${isAdmin ? `<button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-bold transition-colors shadow-sm active:scale-95">Lunas Semua</button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-200 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>` : `<span class="flex-1 text-slate-300 text-center text-[10px] py-1">🔒 Mode Read-Only</span>`}
                         </div>
                     </div>
                 `;
