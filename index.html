@@ -433,6 +433,54 @@
         </div>
     </div>
 
+    <!-- Modal: Install App Instructions -->
+    <div id="installModal" class="fixed inset-0 z-[80] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 hidden">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300" id="installModalContent">
+            
+            <div class="text-center mb-6 mt-2">
+                <div class="w-16 h-16 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner border border-indigo-100/50">
+                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </div>
+                <h3 class="font-black text-xl text-slate-900 tracking-tight">Install Aplikasi</h3>
+                <p class="text-[13px] text-slate-500 mt-1.5 font-medium px-2">Tambahkan ke Layar Utama agar lebih cepat diakses tanpa browser.</p>
+            </div>
+            
+            <!-- iOS Instructions -->
+            <div id="installIOS" class="hidden space-y-2.5 mb-6">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-blue-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    </div>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">1. Tekan tombol <b class="text-slate-900">Share</b> (Bagikan) di menu bawah browser Safari.</p>
+                </div>
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-slate-700">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">2. Geser ke bawah lalu pilih <b class="text-slate-900">Add to Home Screen</b>.</p>
+                </div>
+            </div>
+
+            <!-- Android/Desktop Instructions -->
+            <div id="installAndroid" class="hidden space-y-2.5 mb-6">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-slate-700">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                    </div>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">1. Tekan tombol <b class="text-slate-900">Menu</b> (titik tiga) di pojok kanan atas browser Chrome.</p>
+                </div>
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-indigo-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </div>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">2. Pilih <b class="text-slate-900">Install App</b> atau Tambahkan ke Layar Utama.</p>
+                </div>
+            </div>
+
+            <button onclick="closeModal('installModal')" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all text-[13px] shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">Mengerti, Tutup</button>
+        </div>
+    </div>
+
     <!-- Modal: Confirm Dialog -->
     <div id="confirmModal" class="fixed inset-0 z-[80] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
         <div class="bg-white w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="confirmModalContent">
@@ -513,25 +561,16 @@
                 });
             } else {
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                document.getElementById('installIOS').classList.add('hidden');
+                document.getElementById('installAndroid').classList.add('hidden');
+                
                 if (isIOS) {
-                    showConfirm(
-                        "Install di iPhone/iPad",
-                        "1. Buka web ini di browser <b>Safari</b><br>2. Tekan icon <b>Share</b> (Bagikan) di menu bawah<br>3. Pilih <b>'Add to Home Screen'</b> (Tambah ke Layar Utama)",
-                        "Mengerti",
-                        null,
-                        () => {},
-                        "info"
-                    );
+                    document.getElementById('installIOS').classList.remove('hidden');
                 } else {
-                    showConfirm(
-                        "Install Aplikasi",
-                        "Aplikasi sudah ter-install, atau tekan menu browser (titik tiga) lalu pilih <b>'Install App'</b> / <b>'Tambahkan ke Layar Utama'</b>.",
-                        "Mengerti",
-                        null,
-                        () => {},
-                        "info"
-                    );
+                    document.getElementById('installAndroid').classList.remove('hidden');
                 }
+                
+                openModal('installModal');
             }
         }
 
