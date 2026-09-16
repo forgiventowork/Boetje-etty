@@ -557,7 +557,7 @@
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
                     
-                    let pillHTML = '<span class="text-slate-300 font-bold text-[14px]">&bull;</span>';
+                    let pillHTML = '<span class="text-slate-300 font-bold text-[10px]">&bull;</span>';
                     
                     if (isPaid) {
                         let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
@@ -569,7 +569,7 @@
                     }
                     html += `<td onclick="openPaymentModal('${member.id}', ${m})" class="py-2.5 px-1 text-center align-middle cursor-pointer border-l border-slate-100">${pillHTML}</td>`;
                 }
-                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 font-bold text-[14px]">&bull;</span>';
+                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 font-bold text-[10px]">&bull;</span>';
                 html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 bg-slate-50/50 group-hover:bg-slate-100 transition-colors ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-400'}">${totalDisplay}</td></tr>`;
             });
 
@@ -929,19 +929,19 @@
                     <table style="width: 100%; border-collapse: collapse; font-size: 11px; line-height: 1;">
                         <thead>
                             <tr style="page-break-inside: avoid; break-inside: avoid;">
-                                <th style="padding: 6px 6px 10px 6px; text-align: left; vertical-align: middle; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">Keluarga</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JAN</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">FEB</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MAR</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">APR</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MEI</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUN</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUL</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">AUG</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
-                                <th style="padding: 6px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
-                                <th style="padding: 6px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #cbd5e1; background-color: #f8fafc; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
+                                <th style="padding: 8px 6px; text-align: left; vertical-align: middle; border-bottom: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">Keluarga</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JAN</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">FEB</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MAR</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">APR</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">MEI</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUN</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">JUL</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">AUG</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">SEP</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">OKT</th>
+                                <th style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #e2e8f0; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">NOV</th>
+                                <th style="padding: 8px 6px; text-align: right; vertical-align: middle; border-bottom: 2px solid #cbd5e1; border-left: 1px solid #cbd5e1; background-color: #f8fafc; color: #475569; font-weight: 800; font-size: 10px; text-transform: uppercase;">TOTAL</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -960,9 +960,9 @@
                 const isComplete = paidMonthsCount === 11;
 
                 htmlStr += `<tr style="background-color: ${rowBg}; page-break-inside: avoid; break-inside: avoid;">`;
-                htmlStr += `<td style="padding: 4px 6px 10px 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: left; vertical-align: middle;">
+                htmlStr += `<td style="padding: 8px 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: left; vertical-align: middle;">
                     ${member.name}
-                    ${isComplete ? '<span style="display:inline-block; vertical-align: middle; margin-left: 6px; padding: 2px 4px; background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px;">✓ COMPLETE</span>' : ''}
+                    ${isComplete ? '<span style="display:inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 4px; background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px; line-height: 1;">✓ COMPLETE</span>' : ''}
                 </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
@@ -972,13 +972,13 @@
                         const text = isPartial ? amtStr : formatShortDate(p.date || 'Lunas');
                         
                         let textColor = isPartial ? '#d97706' : '#059669';
-                        htmlStr += `<td style="padding: 4px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
+                        htmlStr += `<td style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; font-size: 9px; font-weight: 700; color: ${textColor};">${text}</td>`;
                     } else {
-                        htmlStr += `<td style="padding: 4px 2px 10px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; color: #cbd5e1; font-weight: 400; font-size: 14px;">&bull;</td>`;
+                        htmlStr += `<td style="padding: 8px 2px; text-align: center; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f8fafc; color: #cbd5e1; font-weight: 400; font-size: 10px;">&bull;</td>`;
                     }
                 }
-                const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span style="color: #cbd5e1; font-size: 14px;">&bull;</span>';
-                htmlStr += `<td style="padding: 4px 6px 10px 6px; text-align: right; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; background-color: #f8fafc; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
+                const total = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span style="color: #cbd5e1; font-size: 10px;">&bull;</span>';
+                htmlStr += `<td style="padding: 8px 6px; text-align: right; vertical-align: middle; border-bottom: 1px solid #f1f5f9; border-left: 1px solid #f1f5f9; background-color: #f8fafc; font-weight: 800; color: #0f172a; font-size: 11px;">${total}</td></tr>`;
             });
 
             const dateStr = new Date().toLocaleDateString('id-ID', { month: 'short', year: 'numeric' }).replace(' ', '_');
