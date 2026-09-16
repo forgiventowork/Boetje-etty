@@ -1493,8 +1493,10 @@
 
                 htmlStr += `<tr style="background-color: ${rowBg}; page-break-inside: avoid; break-inside: avoid;">`;
                 htmlStr += `<td style="padding: 8px 6px; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #0f172a; font-size: 11px; text-align: left; vertical-align: middle;">
-                    ${member.name}
-                    ${isComplete ? '<span style="display:inline-block; vertical-align: middle; margin-left: 6px; padding: 1px 4px; background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px; line-height: 1;">✓ LUNAS</span>' : ''}
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${member.name}</span>
+                        ${isComplete ? '<span style="flex-shrink: 0; padding: 1px 4px; background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 7.5px; border-radius: 4px; font-weight: 800; letter-spacing: 0.5px; line-height: 1;">✓ LUNAS</span>' : ''}
+                    </div>
                 </td>`;
                 for (let m = 1; m <= 11; m++) {
                     const p = member.payments && member.payments[m];
