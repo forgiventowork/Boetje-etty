@@ -131,7 +131,7 @@
             <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 relative transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="flex justify-between items-start mb-1">
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saldo Awal</div>
-                    <button onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                    <button id="btnEditSaldo" onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900 transition-colors hidden"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                 </div>
                 <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statSaldoAwal">Rp 0</div>
             </div>
@@ -619,6 +619,9 @@
             
             const btnAddFamily = document.getElementById('btnAddFamily');
             if (btnAddFamily) btnAddFamily.style.display = isAdmin ? 'flex' : 'none';
+
+            const btnEditSaldo = document.getElementById('btnEditSaldo');
+            if (btnEditSaldo) btnEditSaldo.style.display = isAdmin ? 'block' : 'none';
 
             const saldoInput = document.getElementById('saldoAwalInput');
             const btnSaveSaldo = document.getElementById('btnSaveSaldo');
@@ -1176,12 +1179,18 @@
             );
         }
 
-        function openEditSaldoAwalModal() { document.getElementById('inputSaldoAwal').value = appData.saldoAwal || 0; openModal('saldoModal'); }
+        function openEditSaldoAwalModal() { 
+            if (!isAdmin) return;
+            document.getElementById('inputSaldoAwal').value = appData.saldoAwal || 0; 
+            openModal('saldoModal'); 
+        }
+        
         async function saveSaldoAwal() {
+            if (!isAdmin) return;
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
             try {
                 const { error } = await supa.from('settings').upsert({ id: 1, saldo_awal: val }); if(error) throw error;
-                appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan ✅');
+                appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan 💾');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
 
