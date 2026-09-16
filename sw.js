@@ -1,10 +1,9 @@
-const CACHE_NAME = 'kas-keluarga-v5';
+const CACHE_NAME = 'kas-keluarga-v6';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  '/ICONapp.png'
 ];
 
 self.addEventListener('install', (event) => {
