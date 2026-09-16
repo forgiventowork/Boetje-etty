@@ -323,12 +323,12 @@
             </div>
             <!-- Iframe Container -->
             <div class="flex-1 bg-slate-200 w-full relative overflow-hidden rounded-b-2xl">
-                <div class="relative bg-slate-50/50 rounded-xl p-2 md:p-4 border border-slate-100 min-h-[300px] max-h-[70vh] overflow-auto flex flex-col items-center justify-center h-full">
+                <div class="relative bg-slate-50/50 rounded-xl p-2 md:p-4 border border-slate-100 min-h-[300px] max-h-[70vh] overflow-auto block h-full">
                     <div id="pdfLoadingIndicator" class="flex flex-col items-center justify-center space-y-3 w-full h-full absolute inset-0 bg-white/80 z-10">
                         <div class="w-8 h-8 md:w-10 md:h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
                         <p class="text-sm md:text-base text-slate-500 font-medium animate-pulse">Memproses Preview...</p>
                     </div>
-                    <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in" onclick="toggleZoom(event, this)" alt="Preview Laporan" />
+                    <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in mx-auto" onclick="toggleZoom(event, this)" alt="Preview Laporan" />
                 </div>
             </div>
         </div>
