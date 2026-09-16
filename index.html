@@ -1030,13 +1030,15 @@
                     document.getElementById('btnDownloadPng').onclick = () => {
                         showToast('Memproses PNG High-Res... ⏳');
 
-                        html2pdf().set({
+                        const worker = html2pdf().set({
                             margin: 0,
                             image: { type: 'jpeg', quality: 1.0 },
                             html2canvas: { scale: 3, useCORS: true },
                             jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' }
-                        }).from(htmlStr).toCanvas().then(function(worker) {
-                            if (worker && worker.prop && worker.prop.canvas) {
+                        }).from(htmlStr);
+                        
+                        worker.toCanvas().then(() => {
+                            if (worker.prop && worker.prop.canvas) {
                                 const canvas = worker.prop.canvas;
                                 const link = document.createElement('a');
                                 link.download = pdfFileName.replace('.pdf', '.png');
