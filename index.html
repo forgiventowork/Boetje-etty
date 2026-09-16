@@ -1024,7 +1024,24 @@
                     margin: 0.2,
                     filename: pdfFileName,
                     image: { type: 'jpeg', quality: 1.0 },
-                    html2canvas: { scale: 3, scrollX: 0, scrollY: 0, useCORS: true, width: wrapper.scrollWidth, windowWidth: wrapper.scrollWidth, height: wrapper.scrollHeight, windowHeight: wrapper.scrollHeight },
+                    html2canvas: { 
+                        scale: 3, 
+                        scrollX: 0, 
+                        scrollY: 0, 
+                        useCORS: true, 
+                        width: wrapper.scrollWidth, 
+                        windowWidth: wrapper.scrollWidth, 
+                        height: wrapper.scrollHeight, 
+                        windowHeight: wrapper.scrollHeight,
+                        onclone: (clonedDoc) => {
+                            const clonedWrapper = clonedDoc.getElementById('pdfGeneratorWrapper');
+                            if (clonedWrapper) {
+                                clonedWrapper.style.position = 'absolute';
+                                clonedWrapper.style.left = '0px';
+                                clonedWrapper.style.top = '0px';
+                            }
+                        }
+                    },
                     jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' },
                     pagebreak: { mode: ['css', 'avoid-all'] }
                 }).from(wrapper).output('bloburl').then((blobUrl) => {
@@ -1048,6 +1065,7 @@
                         showToast('Memproses JPG High-Res... ⏳');
 
                         const jpgWrapper = document.createElement('div');
+                        jpgWrapper.id = 'jpgGeneratorWrapper';
                         jpgWrapper.style.width = '1050px';
                         jpgWrapper.style.backgroundColor = '#ffffff';
                         jpgWrapper.style.position = 'absolute';
@@ -1056,7 +1074,20 @@
                         jpgWrapper.innerHTML = htmlStr;
                         document.body.appendChild(jpgWrapper);
 
-                        html2canvas(jpgWrapper, { scale: 3, scrollX: 0, scrollY: 0, useCORS: true }).then(canvas => {
+                        html2canvas(jpgWrapper, { 
+                            scale: 3, 
+                            scrollX: 0, 
+                            scrollY: 0, 
+                            useCORS: true,
+                            onclone: (clonedDoc) => {
+                                const clonedJpg = clonedDoc.getElementById('jpgGeneratorWrapper');
+                                if (clonedJpg) {
+                                    clonedJpg.style.position = 'absolute';
+                                    clonedJpg.style.left = '0px';
+                                    clonedJpg.style.top = '0px';
+                                }
+                            }
+                        }).then(canvas => {
                             document.body.removeChild(jpgWrapper);
                             const link = document.createElement('a');
                             link.download = pdfFileName.replace('.pdf', '.jpg');
