@@ -91,7 +91,7 @@
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     <span class="hidden md:inline" id="btnAuthText">Login Admin</span>
                 </button>
-                <button onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
+                <button id="btnInstallApp" onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                 </button>
@@ -505,6 +505,10 @@
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        const btn = document.getElementById('btnInstallApp');
+                        if (btn) btn.style.display = 'none';
+                    }
                     deferredPrompt = null;
                 });
             } else {
@@ -1563,6 +1567,11 @@
             document.getElementById('yearSelector').value = appData.year;
             loadStorage();
             if (window.innerWidth >= 768) switchView('table'); else switchView('cards');
+            
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+                const btn = document.getElementById('btnInstallApp');
+                if (btn) btn.style.display = 'none';
+            }
         });
 
         // Auto-switch when device orientation changes or window resizes
