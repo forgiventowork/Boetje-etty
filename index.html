@@ -80,6 +80,13 @@
             </div>
 
             <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+                <select id="yearSelector" onchange="changeYear(this.value)" class="bg-white border border-slate-200 text-slate-700 text-[10px] md:text-xs font-bold py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all">
+                    <option value="2026">Tahun 2026</option>
+                    <option value="2027">Tahun 2027</option>
+                    <option value="2028">Tahun 2028</option>
+                    <option value="2029">Tahun 2029</option>
+                    <option value="2030">Tahun 2030</option>
+                </select>
                 <button id="btnAuth" onclick="toggleAdmin()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     <span class="hidden md:inline" id="btnAuthText">Login Admin</span>
@@ -136,7 +143,7 @@
                 <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statSaldoAwal">Rp 0</div>
             </div>
             <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Iuran Masuk</div>
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Iuran Kas</div>
                 <div class="text-base md:text-xl font-bold text-emerald-600 transition-all" id="statIuranMasuk">Rp 0</div>
             </div>
             <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
@@ -658,27 +665,41 @@
         let currentModalMemberId = null;
         let currentModalMonthIndex = null;
 
+        async function changeYear(newYear) {
+            appData.year = parseInt(newYear);
+            appData.saldoAwal = 0;
+            appData.expenses = [];
+            appData.members.forEach(m => m.payments = {});
+            
+            showToast(`Memuat data ${appData.year}...`);
+            await loadStorage();
+        }
+
         async function loadStorage() {
             try {
-                const { data: settings } = await supa.from('settings').select('*').eq('id', 1).single();
-                if (settings) appData.saldoAwal = settings.saldo_awal;
+                const { data: settings } = await supa.from('settings').select('*').eq('id', appData.year).single();
+                if (settings) {
+                    appData.saldoAwal = settings.saldo_awal;
+                } else {
+                    appData.saldoAwal = 0;
+                }
 
                 const { data: members, error: errM } = await supa.from('members').select('*').order('created_at', { ascending: true });
                 if (errM) throw errM;
 
-                const { data: payments, error: errP } = await supa.from('payments').select('*');
+                const { data: payments, error: errP } = await supa.from('payments').select('*').eq('year', appData.year);
                 if (errP) throw errP;
 
                 try {
-                    const { data: expenses } = await supa.from('expenses').select('*').order('date_text', { ascending: true });
+                    const { data: expenses } = await supa.from('expenses').select('*').eq('year', appData.year).order('date_text', { ascending: true });
                     if (expenses) appData.expenses = expenses;
-                } catch (errE) { console.warn("Table expenses mungkin belum ada", errE); }
+                } catch (errE) { console.warn("Table expenses mungkin belum ada", errE); appData.expenses = []; }
 
                 appData.members = members.map(m => {
                     const mPayments = payments.filter(p => p.member_id === m.id);
                     const paymentsMap = {};
                     mPayments.forEach(p => { paymentsMap[p.month] = { paid: true, date: p.date_text, amount: p.amount }; });
-                    return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap };
+                    return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap, computedTotal: 0 };
                 });
                 
                 updateAdminUI();
@@ -979,7 +1000,8 @@
                 const { data, error } = await supa.from('expenses').insert({
                     amount: amtVal,
                     description: descVal,
-                    date_text: formattedDate
+                    date_text: formattedDate,
+                    year: appData.year
                 }).select();
                 
                 if (error) throw error;
@@ -1052,7 +1074,7 @@
             const member = appData.members.find(m => m.id === memberId);
             if (!member) return;
             document.getElementById('modalFamilyName').textContent = member.name;
-            document.getElementById('modalMonthName').textContent = `Bulan ${MONTH_NAMES[monthIndex-1]} 2026`;
+            document.getElementById('modalMonthName').textContent = `Bulan ${MONTH_NAMES[monthIndex-1]} ${appData.year}`;
             const current = member.payments && member.payments[monthIndex];
             modalIsPaid = !!(current && current.paid);
             const dateInput = document.getElementById('modalDateInput');
@@ -1099,14 +1121,14 @@
                         dateVal = 'Lunas';
                     }
                     const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
-                    const { error } = await supa.from('payments').upsert({ member_id: member.id, month: currentModalMonthIndex, amount: amtVal, date_text: dateVal }, { onConflict: 'member_id, month' });
+                    const { error } = await supa.from('payments').upsert({ member_id: member.id, month: currentModalMonthIndex, year: appData.year, amount: amtVal, date_text: dateVal }, { onConflict: 'member_id, month, year' });
                     if(error) throw error;
                     member.payments[currentModalMonthIndex] = { paid: true, date: dateVal, amount: amtVal };
                 } else {
-                    const { error } = await supa.from('payments').delete().match({ member_id: member.id, month: currentModalMonthIndex });
+                    const { error } = await supa.from('payments').delete().match({ member_id: member.id, month: currentModalMonthIndex, year: appData.year });
                     if(error) throw error; delete member.payments[currentModalMonthIndex];
                 }
-                renderApp(); closeModal('paymentModal'); showToast('Tersimpan ✅');
+                renderApp(); closeModal('paymentModal'); showToast('Tersimpan 💾');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
 
@@ -1114,9 +1136,9 @@
             const member = appData.members.find(m => m.id === memberId);
             if (!member) return; const now = new Date(); const dateStr = `${now.getDate()}/${now.getMonth()+1}`;
             if (!member.payments) member.payments = {}; const records = [];
-            for (let m = 1; m <= 11; m++) records.push({ member_id: member.id, month: m, amount: STANDARD_MONTHLY_FEE, date_text: dateStr });
+            for (let m = 1; m <= 11; m++) records.push({ member_id: member.id, month: m, year: appData.year, amount: STANDARD_MONTHLY_FEE, date_text: dateStr });
             try {
-                const { error } = await supa.from('payments').upsert(records, { onConflict: 'member_id, month' });
+                const { error } = await supa.from('payments').upsert(records, { onConflict: 'member_id, month, year' });
                 if (error) throw error;
                 for (let m = 1; m <= 11; m++) member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
                 renderApp(); showToast('11 Bulan dilunasi ✅');
@@ -1236,7 +1258,7 @@
             if (!isAdmin) return;
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
             try {
-                const { error } = await supa.from('settings').upsert({ id: 1, saldo_awal: val }); if(error) throw error;
+                const { error } = await supa.from('settings').upsert({ id: appData.year, saldo_awal: val }); if(error) throw error;
                 appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan 💾');
             } catch (e) { console.error(e); showToast('Gagal'); }
         }
@@ -1533,6 +1555,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('yearSelector').value = appData.year;
             loadStorage();
             if (window.innerWidth >= 768) switchView('table'); else switchView('cards');
         });
