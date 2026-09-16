@@ -97,11 +97,7 @@
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                 </button>
-                <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 md:px-3.5 py-2 rounded-xl text-[10px] md:text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">
-                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
-                    <span class="hidden md:inline">Tambah Data</span>
-                    <span class="md:hidden">Tambah</span>
-                </button>
+                
             </div>
         </div>
     </header>
@@ -156,9 +152,15 @@
                 <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total</div>
                 <div class="text-lg md:text-2xl font-black text-slate-900 tracking-tight transition-all whitespace-nowrap" id="statSubTotal">Rp 0</div>
             </div>
-            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md col-span-2 lg:col-span-1">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md col-span-2 lg:col-span-1 flex flex-col justify-between">
                 <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Jumlah Keluarga</div>
-                <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statTotalAnggota">0</div>
+                <div class="flex justify-between items-end">
+                    <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statTotalAnggota">0</div>
+                    <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95 hidden">
+                        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+                        <span>Tambah</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -1611,4 +1613,5 @@
     </script>
 </body>
 </html>
+
 
