@@ -328,7 +328,7 @@
                         <div class="w-8 h-8 md:w-10 md:h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
                         <p class="text-sm md:text-base text-slate-500 font-medium animate-pulse">Memproses Preview...</p>
                     </div>
-                    <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in transition-all duration-300 origin-top" onclick="toggleZoom(this)" alt="Preview Laporan" />
+                    <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in" onclick="toggleZoom(event, this)" alt="Preview Laporan" />
                 </div>
             </div>
         </div>
@@ -884,13 +884,34 @@
         let currentPdfBlobUrl = null;
         let isPreviewZoomed = false;
 
-        function toggleZoom(img) {
-            isPreviewZoomed = !isPreviewZoomed;
-            if (isPreviewZoomed) {
-                img.style.width = window.innerWidth < 768 ? '250%' : '150%';
+        function toggleZoom(event, img) {
+            const container = img.parentElement;
+            
+            if (!isPreviewZoomed) {
+                // Hitung posisi klik relatif terhadap gambar (0.0 s/d 1.0)
+                const rect = img.getBoundingClientRect();
+                const relX = (event.clientX - rect.left) / rect.width;
+                const relY = (event.clientY - rect.top) / rect.height;
+
+                isPreviewZoomed = true;
+                const zoomFactor = window.innerWidth < 768 ? 2.5 : 1.8;
+                
+                // Matikan animasi sementara agar scroll tidak jitter/loncat
+                img.style.transition = 'none';
+                img.style.width = (zoomFactor * 100) + '%';
                 img.style.maxWidth = 'none';
                 img.style.cursor = 'zoom-out';
+
+                // Kalkulasi dan atur posisi scroll agar mengarah ke titik yang diklik
+                const newWidth = rect.width * zoomFactor;
+                const newHeight = rect.height * zoomFactor;
+                const containerRect = container.getBoundingClientRect();
+
+                container.scrollLeft = (relX * newWidth) - (event.clientX - containerRect.left);
+                container.scrollTop = (relY * newHeight) - (event.clientY - containerRect.top);
             } else {
+                isPreviewZoomed = false;
+                img.style.transition = 'width 0.3s ease-out'; // Animasi kembali normal
                 img.style.width = '100%';
                 img.style.maxWidth = '100%';
                 img.style.cursor = 'zoom-in';
