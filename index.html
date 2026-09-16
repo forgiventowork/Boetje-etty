@@ -319,15 +319,15 @@
                     <button onclick="closeModal('pdfPreviewModal')" class="text-slate-400 hover:text-slate-900 bg-white border border-slate-200 p-1.5 md:p-2 rounded-lg transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
-                </div>
-            </div>
             <!-- Iframe Container -->
             <div class="flex-1 bg-slate-200 w-full relative overflow-hidden rounded-b-2xl">
-                <div id="pdfLoadingIndicator" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 z-10">
-                    <svg class="w-8 h-8 text-rose-500 animate-spin mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    <p class="text-xs font-bold text-slate-500 animate-pulse">Membuat Dokumen...</p>
+                <div class="relative bg-slate-50/50 rounded-xl p-2 md:p-4 border border-slate-100 min-h-[300px] max-h-[70vh] overflow-auto flex flex-col items-center justify-center h-full">
+                    <div id="pdfLoadingIndicator" class="flex flex-col items-center justify-center space-y-3 w-full h-full absolute inset-0 bg-white/80 z-10">
+                        <div class="w-8 h-8 md:w-10 md:h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                        <p class="text-sm md:text-base text-slate-500 font-medium animate-pulse">Memproses Preview...</p>
+                    </div>
+                    <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in transition-all duration-300 origin-top" onclick="toggleZoom(this)" alt="Preview Laporan" />
                 </div>
-                <iframe id="pdfPreviewFrame" class="w-full h-full border-0 hidden"></iframe>
             </div>
         </div>
     </div>
@@ -880,14 +880,36 @@
         }
 
         let currentPdfBlobUrl = null;
+        let isPreviewZoomed = false;
+
+        function toggleZoom(img) {
+            isPreviewZoomed = !isPreviewZoomed;
+            if (isPreviewZoomed) {
+                img.style.width = window.innerWidth < 768 ? '250%' : '150%';
+                img.style.maxWidth = 'none';
+                img.style.cursor = 'zoom-out';
+            } else {
+                img.style.width = '100%';
+                img.style.maxWidth = '100%';
+                img.style.cursor = 'zoom-in';
+            }
+        }
 
         function openPdfPreview() {
-            showToast('Menyiapkan Preview PDF... ⏳');
+            showToast('Menyiapkan Preview... ⏳');
 
             // reset UI
             document.getElementById('pdfLoadingIndicator').classList.remove('hidden');
-            document.getElementById('pdfPreviewFrame').classList.add('hidden');
-            document.getElementById('pdfPreviewFrame').src = '';
+            const imgEl = document.getElementById('pdfPreviewImage');
+            if (imgEl) {
+                imgEl.classList.add('hidden');
+                imgEl.src = '';
+                // Reset zoom state
+                isPreviewZoomed = false;
+                imgEl.style.width = '100%';
+                imgEl.style.maxWidth = '100%';
+                imgEl.style.cursor = 'zoom-in';
+            }
 
             openModal('pdfPreviewModal');
             
@@ -1003,61 +1025,58 @@
             `;
 
             setTimeout(() => {
-                html2pdf().set({
+                const worker = html2pdf().set({
                     margin: 0,
-                    filename: pdfFileName,
                     image: { type: 'jpeg', quality: 1.0 },
                     html2canvas: { scale: 3, useCORS: true },
-                    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' },
-                    pagebreak: { mode: ['css', 'avoid-all'] }
-                }).from(htmlStr).output('bloburl').then((blobUrl) => {
-                    currentPdfBlobUrl = blobUrl;
-                    const iframe = document.getElementById('pdfPreviewFrame');
-                    iframe.src = blobUrl;
-                    iframe.onload = () => {
-                        document.getElementById('pdfLoadingIndicator').classList.add('hidden');
-                        iframe.classList.remove('hidden');
-                    };
-
-                    document.getElementById('btnDownloadPdf').onclick = () => {
-                        const link = document.createElement('a');
-                        link.href = blobUrl;
-                        link.download = pdfFileName;
-                        link.click();
-                        showToast('PDF Berhasil Diunduh! ✅');
-                    };
-
-                    document.getElementById('btnDownloadPng').onclick = () => {
-                        showToast('Memproses PNG High-Res... ⏳');
-
-                        const worker = html2pdf().set({
-                            margin: 0,
-                            image: { type: 'jpeg', quality: 1.0 },
-                            html2canvas: { scale: 3, useCORS: true },
-                            jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' }
-                        }).from(htmlStr);
+                    jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' }
+                }).from(htmlStr);
+                
+                worker.toCanvas().then(() => {
+                    if (worker.prop && worker.prop.canvas) {
+                        const canvas = worker.prop.canvas;
                         
-                        worker.toCanvas().then(() => {
-                            if (worker.prop && worker.prop.canvas) {
-                                const canvas = worker.prop.canvas;
-                                const link = document.createElement('a');
-                                link.download = pdfFileName.replace('.pdf', '.png');
-                                link.href = canvas.toDataURL('image/png');
-                                link.click();
-                                showToast('PNG Berhasil Diunduh! ✅');
-                            } else {
-                                throw new Error("Canvas not generated");
-                            }
-                        }).catch((e) => {
-                            console.error(e);
-                            showToast('Gagal memproses PNG ❌');
-                        });
-                    };
-                }).catch(() => {
-                    showToast('Gagal memproses PDF ❌');
+                        // Set preview image in modal
+                        if (imgEl) {
+                            imgEl.src = canvas.toDataURL('image/jpeg', 0.95);
+                            imgEl.onload = () => {
+                                document.getElementById('pdfLoadingIndicator').classList.add('hidden');
+                                imgEl.classList.remove('hidden');
+                                setTimeout(() => showToast('Tap gambar untuk Zoom 🔍'), 500);
+                            };
+                        }
+
+                        document.getElementById('btnDownloadPng').onclick = () => {
+                            showToast('Memproses PNG High-Res... ⏳');
+                            const link = document.createElement('a');
+                            link.download = pdfFileName.replace('.pdf', '.png');
+                            link.href = canvas.toDataURL('image/png');
+                            link.click();
+                            showToast('PNG Berhasil Diunduh! ✅');
+                        };
+
+                        document.getElementById('btnDownloadPdf').onclick = () => {
+                            showToast('Menyimpan PDF... ⏳');
+                            html2pdf().set({
+                                margin: 0,
+                                filename: pdfFileName,
+                                image: { type: 'jpeg', quality: 1.0 },
+                                html2canvas: { scale: 3, useCORS: true },
+                                jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' }
+                            }).from(htmlStr).save().then(() => {
+                                showToast('PDF Berhasil Diunduh! ✅');
+                            });
+                        };
+
+                    } else {
+                        throw new Error("Canvas not generated");
+                    }
+                }).catch((e) => {
+                    console.error(e);
+                    showToast('Gagal memproses Preview ❌');
                     closeModal('pdfPreviewModal');
                 });
-            }, 600);
+            }, 100);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
