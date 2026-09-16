@@ -1,7 +1,7 @@
 {
-  "name": "Iuran Kas Keluarga",
-  "short_name": "Kas Keluarga",
-  "description": "Aplikasi Pencatatan Iuran Kas Keluarga Boetje Etty Salhuteru 2026",
+  "name": "Boetje Etty",
+  "short_name": "Boetje Etty",
+  "description": "Aplikasi Pencatatan Iuran Kas Keluarga Boetje Etty Salhuteru",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F8F9FA",
