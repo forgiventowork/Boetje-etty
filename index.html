@@ -1004,47 +1004,15 @@
                 </div>
             `;
 
-            // Clean up any old wrapper if it exists
-            let oldWrapper = document.getElementById('pdfGeneratorWrapper');
-            if (oldWrapper) document.body.removeChild(oldWrapper);
-
-            const wrapper = document.createElement('div');
-            wrapper.id = 'pdfGeneratorWrapper';
-            wrapper.style.width = '1050px';
-            wrapper.style.backgroundColor = '#ffffff';
-            wrapper.style.position = 'absolute';
-            wrapper.style.left = '-9999px';
-            wrapper.style.top = '0';
-            wrapper.innerHTML = htmlStr;
-            document.body.appendChild(wrapper);
-
             setTimeout(() => {
-                wrapper.style.height = wrapper.scrollHeight + 'px';
                 html2pdf().set({
                     margin: 0.2,
                     filename: pdfFileName,
                     image: { type: 'jpeg', quality: 1.0 },
-                    html2canvas: { 
-                        scale: 3, 
-                        scrollX: 0, 
-                        scrollY: 0, 
-                        useCORS: true, 
-                        width: wrapper.scrollWidth, 
-                        windowWidth: wrapper.scrollWidth, 
-                        height: wrapper.scrollHeight, 
-                        windowHeight: wrapper.scrollHeight,
-                        onclone: (clonedDoc) => {
-                            const clonedWrapper = clonedDoc.getElementById('pdfGeneratorWrapper');
-                            if (clonedWrapper) {
-                                clonedWrapper.style.position = 'absolute';
-                                clonedWrapper.style.left = '0px';
-                                clonedWrapper.style.top = '0px';
-                            }
-                        }
-                    },
+                    html2canvas: { scale: 3, useCORS: true },
                     jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' },
                     pagebreak: { mode: ['css', 'avoid-all'] }
-                }).from(wrapper).output('bloburl').then((blobUrl) => {
+                }).from(htmlStr).output('bloburl').then((blobUrl) => {
                     currentPdfBlobUrl = blobUrl;
                     const iframe = document.getElementById('pdfPreviewFrame');
                     iframe.src = blobUrl;
@@ -1064,31 +1032,25 @@
                     document.getElementById('btnDownloadJpg').onclick = () => {
                         showToast('Memproses JPG High-Res... ⏳');
 
+                        const jpgHider = document.createElement('div');
+                        jpgHider.style.width = '0px';
+                        jpgHider.style.height = '0px';
+                        jpgHider.style.overflow = 'hidden';
+                        jpgHider.style.position = 'fixed';
+                        jpgHider.style.left = '0';
+                        jpgHider.style.top = '0';
+
                         const jpgWrapper = document.createElement('div');
                         jpgWrapper.id = 'jpgGeneratorWrapper';
                         jpgWrapper.style.width = '1050px';
                         jpgWrapper.style.backgroundColor = '#ffffff';
-                        jpgWrapper.style.position = 'absolute';
-                        jpgWrapper.style.left = '-9999px';
-                        jpgWrapper.style.top = '0';
                         jpgWrapper.innerHTML = htmlStr;
-                        document.body.appendChild(jpgWrapper);
+                        
+                        jpgHider.appendChild(jpgWrapper);
+                        document.body.appendChild(jpgHider);
 
-                        html2canvas(jpgWrapper, { 
-                            scale: 3, 
-                            scrollX: 0, 
-                            scrollY: 0, 
-                            useCORS: true,
-                            onclone: (clonedDoc) => {
-                                const clonedJpg = clonedDoc.getElementById('jpgGeneratorWrapper');
-                                if (clonedJpg) {
-                                    clonedJpg.style.position = 'absolute';
-                                    clonedJpg.style.left = '0px';
-                                    clonedJpg.style.top = '0px';
-                                }
-                            }
-                        }).then(canvas => {
-                            document.body.removeChild(jpgWrapper);
+                        html2canvas(jpgWrapper, { scale: 3, useCORS: true }).then(canvas => {
+                            document.body.removeChild(jpgHider);
                             const link = document.createElement('a');
                             link.download = pdfFileName.replace('.pdf', '.jpg');
                             link.href = canvas.toDataURL('image/jpeg', 1.0);
@@ -1096,7 +1058,7 @@
                             showToast('JPG Berhasil Diunduh! ✅');
                         }).catch((e) => {
                             console.error(e);
-                            if (document.body.contains(jpgWrapper)) document.body.removeChild(jpgWrapper);
+                            if (document.body.contains(jpgHider)) document.body.removeChild(jpgHider);
                             showToast('Gagal memproses JPG ❌');
                         });
                     };
