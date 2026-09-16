@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
-        tailwind.config = { darkMode: 'class',
+        tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
@@ -77,48 +77,37 @@
             img.src = '/ICONapp.png';
         });
     </script>
-    <script>
-        if (localStorage.getItem('boetje_theme') === 'dark' || (!('boetje_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
 </head>
-<body class="text-slate-800 dark:text-slate-200 font-sans min-h-screen flex flex-col pb-10">
+<body class="text-slate-800 font-sans min-h-screen flex flex-col pb-10">
 
     <!-- Professional Glassmorphism Header -->
-    <header class="glass-header border-b border-slate-200 dark:border-slate-700/50 sticky top-0 z-40 opacity-0 animate-fade-in-up">
+    <header class="glass-header border-b border-slate-200/50 sticky top-0 z-40 opacity-0 animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-3.5 flex items-center justify-between">
             <div class="flex items-center gap-2 md:gap-4 flex-shrink-0 min-w-0">
                 <!-- Premium Logo -->
-                <img src="ICONapp.png" alt="Logo Boetje Etty" class="w-9 h-9 md:w-11 md:h-11 rounded-full shadow-[0_4px_12px_rgba(15,23,42,0.15)] border border-slate-200 dark:border-slate-700 transition-transform hover:scale-105 cursor-pointer flex-shrink-0 object-cover">
+                <img src="ICONapp.png" alt="Logo Boetje Etty" class="w-9 h-9 md:w-11 md:h-11 rounded-full shadow-[0_4px_12px_rgba(15,23,42,0.15)] border border-slate-200 transition-transform hover:scale-105 cursor-pointer flex-shrink-0 object-cover">
                 <div class="min-w-0">
-                    <h1 class="text-[13px] md:text-base font-black tracking-tight text-slate-900 dark:text-slate-100 leading-none flex items-center gap-1.5 md:gap-2 whitespace-nowrap">
+                    <h1 class="text-[13px] md:text-base font-black tracking-tight text-slate-900 leading-none flex items-center gap-1.5 md:gap-2 whitespace-nowrap">
                         Iuran Keluarga
-                        <span class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 px-1 md:px-1.5 py-0.5 rounded md:rounded-md text-[8.5px] md:text-[10px] font-extrabold border border-slate-200 dark:border-slate-700/80 shadow-sm flex-shrink-0">2026</span>
+                        <span class="bg-slate-100 text-slate-600 px-1 md:px-1.5 py-0.5 rounded md:rounded-md text-[8.5px] md:text-[10px] font-extrabold border border-slate-200/80 shadow-sm flex-shrink-0">2026</span>
                     </h1>
-                    <p class="text-[8px] md:text-[9.5px] font-bold text-slate-400 dark:text-slate-400 mt-1 md:mt-1.5 uppercase tracking-wider md:tracking-[0.25em] truncate">Boetje Etty Salhuteru</p>
+                    <p class="text-[8px] md:text-[9.5px] font-bold text-slate-400 mt-1 md:mt-1.5 uppercase tracking-wider md:tracking-[0.25em] truncate">Boetje Etty Salhuteru</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                <select id="yearSelector" onchange="changeYear(this.value)" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-[10px] md:text-xs font-bold py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all">
+                <select id="yearSelector" onchange="changeYear(this.value)" class="bg-white border border-slate-200 text-slate-700 text-[10px] md:text-xs font-bold py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all">
                     <option value="2026">Tahun 2026</option>
                     <option value="2027">Tahun 2027</option>
                     <option value="2028">Tahun 2028</option>
                     <option value="2029">Tahun 2029</option>
                     <option value="2030">Tahun 2030</option>
                 </select>
-                <button id="btnAuth" onclick="toggleAdmin()" class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 dark:border-slate-700 shadow-sm active:scale-95">
+                <button id="btnAuth" onclick="toggleAdmin()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     <span class="hidden md:inline" id="btnAuthText">Login Admin</span>
                 </button>
-                                <button onclick="toggleDarkMode()" class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 p-2 md:px-3 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 dark:border-slate-700 shadow-sm active:scale-95" title="Toggle Tema">
-                    <svg id="icon-sun" class="w-4 h-4 md:w-3.5 md:h-3.5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg id="icon-moon" class="w-4 h-4 md:w-3.5 md:h-3.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-                <button id="btnInstallApp" onclick="handleManualInstall()" class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 dark:border-slate-700 shadow-sm active:scale-95">
+                <button id="btnInstallApp" onclick="handleManualInstall()" class="bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 p-2 md:px-3.5 md:py-2 rounded-xl text-[11px] font-bold flex items-center justify-center transition-all border border-slate-200 shadow-sm active:scale-95">
                     <svg class="w-4 h-4 md:w-3.5 md:h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span class="hidden md:inline">Install App</span>
                 </button>
@@ -131,25 +120,25 @@
     <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full space-y-4">
 
         <!-- Elegant Light Bank Info Banner -->
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-1 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row md:items-center justify-between opacity-0 animate-fade-in-up delay-100 transition-all hover:shadow-md">
+        <div class="bg-white rounded-2xl p-1 shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between opacity-0 animate-fade-in-up delay-100 transition-all hover:shadow-md">
             <div class="flex items-center gap-4 p-3">
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 flex items-center justify-center flex-shrink-0 shadow-inner">
                     <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                 </div>
                 <div>
                     <div class="flex items-center gap-2 mb-0.5">
-                        <span class="text-[10px] text-slate-400 dark:text-slate-400 font-bold uppercase tracking-widest">Pembayaran BCA</span>
-                        <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800/30">Iuran Rp. 20.000 / Bulan</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Pembayaran BCA</span>
+                        <span class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">Iuran Rp. 20.000 / Bulan</span>
                     </div>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-sm md:text-base font-black text-slate-900 dark:text-slate-100 tracking-tight">0440 876 757</span>
-                        <span class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 font-medium">a.n Pricilia Linda Salhuteru</span>
+                        <span class="text-sm md:text-base font-black text-slate-900 tracking-tight">0440 876 757</span>
+                        <span class="text-[10px] md:text-xs text-slate-500 font-medium">a.n Pricilia Linda Salhuteru</span>
                     </div>
                 </div>
             </div>
             
             <div class="p-2 md:p-3 w-full md:w-auto">
-                <button id="btnCopyRek" onclick="copyBcaNumber()" class="w-full md:w-auto flex items-center justify-center gap-2 text-[11px] font-bold text-white bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 px-5 py-2.5 rounded-xl active:scale-95 transition-all shadow-md">
+                <button id="btnCopyRek" onclick="copyBcaNumber()" class="w-full md:w-auto flex items-center justify-center gap-2 text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 px-5 py-2.5 rounded-xl active:scale-95 transition-all shadow-md">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     <span>Salin Rekening</span>
                 </button>
@@ -158,30 +147,30 @@
 
         <!-- Structured Stats Section (Professional) -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 opacity-0 animate-fade-in-up delay-200">
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 relative transition-transform hover:-translate-y-1 hover:shadow-md">
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 relative transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="flex justify-between items-start mb-1">
-                    <div class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider">Saldo 2025</div>
-                    <button id="btnEditSaldo" onclick="openEditSaldoAwalModal()" class="text-slate-300 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 transition-colors hidden"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Saldo 2025</div>
+                    <button id="btnEditSaldo" onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900 transition-colors hidden"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                 </div>
-                <div class="text-base md:text-xl font-bold text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap" id="statSaldoAwal">Rp 0</div>
+                <div class="text-base md:text-xl font-bold text-slate-700 transition-all whitespace-nowrap" id="statSaldoAwal">Rp 0</div>
             </div>
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 transition-transform hover:-translate-y-1 hover:shadow-md">
-                <div class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1">Iuran Kas</div>
-                <div class="text-base md:text-xl font-bold text-emerald-600 dark:text-emerald-400 transition-all whitespace-nowrap" id="statIuranMasuk">Rp 0</div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Iuran Kas</div>
+                <div class="text-base md:text-xl font-bold text-emerald-600 transition-all whitespace-nowrap" id="statIuranMasuk">Rp 0</div>
             </div>
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 transition-transform hover:-translate-y-1 hover:shadow-md">
-                <div class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1">Pengeluaran</div>
-                <div class="text-base md:text-xl font-bold text-rose-600 dark:text-rose-400 transition-all whitespace-nowrap" id="statPengeluaran">Rp 0</div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Pengeluaran</div>
+                <div class="text-base md:text-xl font-bold text-rose-600 transition-all whitespace-nowrap" id="statPengeluaran">Rp 0</div>
             </div>
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 transition-transform hover:-translate-y-1 hover:shadow-md">
-                <div class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1">Total</div>
-                <div class="text-lg md:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight transition-all whitespace-nowrap" id="statSubTotal">Rp 0</div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total</div>
+                <div class="text-lg md:text-2xl font-black text-slate-900 tracking-tight transition-all whitespace-nowrap" id="statSubTotal">Rp 0</div>
             </div>
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-3 shadow-sm border border-slate-200 dark:border-slate-700 transition-transform hover:-translate-y-1 hover:shadow-md col-span-2 lg:col-span-1 flex flex-col justify-between">
-                <div class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider mb-1">Jumlah Keluarga</div>
+            <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 transition-transform hover:-translate-y-1 hover:shadow-md col-span-2 lg:col-span-1 flex flex-col justify-between">
+                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Jumlah Keluarga</div>
                 <div class="flex justify-between items-end">
-                    <div class="text-base md:text-xl font-bold text-slate-700 dark:text-slate-300 transition-all" id="statTotalAnggota">0</div>
-                    <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95 hidden">
+                    <div class="text-base md:text-xl font-bold text-slate-700 transition-all" id="statTotalAnggota">0</div>
+                    <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95 hidden">
                         <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                         <span>Tambah</span>
                     </button>
@@ -192,8 +181,8 @@
         <!-- Toolbar (Search, Filter, Export) -->
         <div class="flex items-center justify-between gap-3 py-1 opacity-0 animate-fade-in-up delay-300">
             <div class="flex flex-1 space-x-2">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama..." class="w-full md:max-w-xs px-3 py-2 text-[11px] md:text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-all">
-                <select id="filterStatus" onchange="renderApp()" class="w-28 text-[11px] md:text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-2 rounded-lg shadow-sm font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-all cursor-pointer">
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari nama..." class="w-full md:max-w-xs px-3 py-2 text-[11px] md:text-xs bg-white border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all">
+                <select id="filterStatus" onchange="renderApp()" class="w-28 text-[11px] md:text-xs bg-white border border-slate-200 px-2 py-2 rounded-lg shadow-sm font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-all cursor-pointer">
                     <option value="all">Semua</option>
                     <option value="paid">Lunas</option>
                     <option value="unpaid">Belum</option>
@@ -201,17 +190,17 @@
             </div>
 
             <div class="flex space-x-2">
-                <div class="hidden md:inline-flex bg-slate-100 dark:bg-slate-700 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm flex items-center space-x-1">Tabel</button>
-                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center space-x-1">Kartu</button>
+                <div class="hidden md:inline-flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                    <button onclick="switchView('table')" id="btnViewTable" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all bg-white text-slate-900 shadow-sm flex items-center space-x-1">Tabel</button>
+                    <button onclick="switchView('cards')" id="btnViewCards" class="px-3 py-1.5 rounded-md text-[11px] font-bold transition-all text-slate-500 hover:text-slate-900 flex items-center space-x-1">Kartu</button>
                 </div>
                 
 
-                <button onclick="openShareWhatsAppModal()" class="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 border border-emerald-200 dark:border-emerald-800/50 rounded-lg shadow-sm text-[11px] font-bold flex items-center transition-all active:scale-95">
+                <button onclick="openShareWhatsAppModal()" class="px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-lg shadow-sm text-[11px] font-bold flex items-center transition-all active:scale-95">
                     <svg class="w-3.5 h-3.5 md:mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                     <span class="hidden md:inline">WhatsApp</span>
                 </button>
-                <button onclick="openPdfPreview()" class="px-3 py-1.5 bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 hover:bg-rose-100 border border-rose-200 dark:border-rose-800/50 rounded-lg shadow-sm text-[11px] font-bold flex items-center transition-all active:scale-95">
+                <button onclick="openPdfPreview()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg shadow-sm text-[11px] font-bold flex items-center transition-all active:scale-95">
                     <svg class="w-3.5 h-3.5 md:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     <span class="hidden md:inline">Cetak</span>
                 </button>
@@ -219,24 +208,24 @@
         </div>
 
         <!-- PROFESSIONAL TABLE VIEW -->
-        <div id="tableViewContainer" class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden opacity-0 animate-fade-in-up delay-300">
+        <div id="tableViewContainer" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden opacity-0 animate-fade-in-up delay-300">
             <div class="overflow-x-auto print-table">
                 <table class="w-full text-left border-collapse whitespace-nowrap" id="exportTableEl">
                     <thead>
-                        <tr class="bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 text-[10px] uppercase tracking-widest font-bold border-b border-slate-200 dark:border-slate-700 text-center">
-                            <th class="py-3 px-3 sticky-col bg-white dark:bg-slate-800 text-left font-black text-slate-900 dark:text-slate-100 border-b-2 border-slate-200 dark:border-slate-700 border-r z-30 shadow-[1px_0_0_0_#e2e8f0] min-w-[130px]">Keluarga</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">JAN</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">FEB</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">MAR</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">APR</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">MEI</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">JUN</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">JUL</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">AUG</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">SEP</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">OKT</th>
-                            <th class="py-3 px-2 text-center font-bold text-slate-500 dark:text-slate-400 border-b-2 border-slate-200 dark:border-slate-700 border-l border-slate-100 dark:border-slate-700/50 min-w-[60px]">NOV</th>
-                            <th class="py-3 px-3 text-right font-black text-slate-900 dark:text-slate-100 border-b-2 border-slate-200 dark:border-slate-700 border-l-2 bg-slate-50 dark:bg-slate-900 min-w-[90px]">TOTAL</th>
+                        <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-widest font-bold border-b border-slate-200 text-center">
+                            <th class="py-3 px-3 sticky-col bg-white text-left font-black text-slate-900 border-b-2 border-slate-200 border-r z-30 shadow-[1px_0_0_0_#e2e8f0] min-w-[130px]">Keluarga</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">JAN</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">FEB</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">MAR</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">APR</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">MEI</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">JUN</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">JUL</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">AUG</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">SEP</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">OKT</th>
+                            <th class="py-3 px-2 text-center font-bold text-slate-500 border-b-2 border-slate-200 border-l border-slate-100 min-w-[60px]">NOV</th>
+                            <th class="py-3 px-3 text-right font-black text-slate-900 border-b-2 border-slate-200 border-l-2 bg-slate-50 min-w-[90px]">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-100">
@@ -256,26 +245,26 @@
         <!-- PENGELUARAN SECTION -->
         <div class="mt-8 mb-4 flex justify-between items-end opacity-0 animate-fade-in-up delay-200">
             <div>
-                <h2 class="text-lg md:text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
+                <h2 class="text-lg md:text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
                     <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Buku Kas Keluar
                 </h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Riwayat pengeluaran dana kas.</p>
+                <p class="text-xs text-slate-500 mt-1">Riwayat pengeluaran dana kas.</p>
             </div>
             <button id="btnAddExpense" onclick="openExpenseModal()" class="hidden bg-rose-600 hover:bg-rose-700 text-white px-3 md:px-4 py-2 rounded-xl text-[11px] md:text-xs font-bold items-center gap-1.5 transition-all shadow-md active:scale-95">
                 <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                 <span>Catat Pengeluaran</span>
             </button>
         </div>
-        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden mb-6 opacity-0 animate-fade-in-up delay-300">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6 opacity-0 animate-fade-in-up delay-300">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse min-w-[400px]">
                     <thead>
-                        <tr class="bg-slate-50 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700">
-                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider w-28">Tanggal</th>
-                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider">Keterangan</th>
-                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right w-32">Nominal</th>
-                            <th class="expense-action-col py-3 px-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-wider text-center w-16 hidden">Aksi</th>
+                        <tr class="bg-slate-50/80 border-b border-slate-200">
+                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 uppercase tracking-wider w-28">Tanggal</th>
+                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 uppercase tracking-wider">Keterangan</th>
+                            <th class="py-3 px-4 text-[10px] font-black text-slate-500 uppercase tracking-wider text-right w-32">Nominal</th>
+                            <th class="expense-action-col py-3 px-4 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center w-16 hidden">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="expensesTableBody" class="divide-y divide-slate-100">
@@ -285,11 +274,11 @@
             </div>
         </div>
 
-        <div class="text-center text-[11px] text-slate-400 dark:text-slate-400 py-2 font-medium opacity-0 animate-fade-in-up delay-300">Ketuk bulan untuk mengubah status pembayaran.</div>
+        <div class="text-center text-[11px] text-slate-400 py-2 font-medium opacity-0 animate-fade-in-up delay-300">Ketuk bulan untuk mengubah status pembayaran.</div>
     </main>
 
-    <footer class="w-full text-center py-5 mt-auto border-t border-slate-200 dark:border-slate-700/60 bg-transparent">
-        <p class="text-[11px] md:text-xs font-medium text-slate-400 dark:text-slate-400 tracking-wide">
+    <footer class="w-full text-center py-5 mt-auto border-t border-slate-200/60 bg-transparent">
+        <p class="text-[11px] md:text-xs font-medium text-slate-400 tracking-wide">
             Designed & Developed by <span class="text-indigo-600 font-black">Forgivento</span>
         </p>
     </footer>
@@ -298,40 +287,40 @@
     
     <!-- Modal: Payment Editor -->
     <div id="paymentModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-xs rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700/50 overflow-hidden transform scale-95 transition-all duration-300" id="paymentModalContent">
+        <div class="bg-white w-full max-w-xs rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-300" id="paymentModalContent">
             <div class="p-5">
                 <div class="flex justify-between items-start mb-4">
                     <div>
-                        <p class="text-[10px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-widest mb-1" id="modalMonthName">Januari 2026</p>
-                        <h3 class="font-black text-base text-slate-900 dark:text-slate-100" id="modalFamilyName">Kel. D. Salhuteru</h3>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1" id="modalMonthName">Januari 2026</p>
+                        <h3 class="font-black text-base text-slate-900" id="modalFamilyName">Kel. D. Salhuteru</h3>
                     </div>
-                    <button onclick="closeModal('paymentModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-700 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Status</label>
-                        <div class="flex bg-slate-100 dark:bg-slate-700 p-1 rounded-xl">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Status</label>
+                        <div class="flex bg-slate-100 p-1 rounded-xl">
                             <button type="button" id="btnStatusPaid" onclick="setModalPaymentStatus(true)" class="flex-1 py-2 text-[11px] font-bold rounded-lg transition-all z-10">Lunas</button>
                             <button type="button" id="btnStatusUnpaid" onclick="setModalPaymentStatus(false)" class="flex-1 py-2 text-[11px] font-bold rounded-lg transition-all z-10">Belum</button>
                         </div>
                     </div>
                     <div id="paidFieldsContainer" class="space-y-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Tanggal Bayar</label>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Tanggal Bayar</label>
                             <div class="relative">
-                                <input type="date" id="modalDateInput" class="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-shadow">
+                                <input type="date" id="modalDateInput" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5">Nominal (Rp)</label>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Nominal (Rp)</label>
                             <div class="flex items-center space-x-2">
-                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-2 text-xs font-black bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-shadow">
-                                <button type="button" onclick="setModalAmount(20000)" class="px-3 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg text-[11px] font-bold transition-colors">20k</button>
+                                <input type="number" id="modalAmountInput" step="1000" class="w-full px-3 py-2 text-xs font-black bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
+                                <button type="button" onclick="setModalAmount(20000)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition-colors">20k</button>
                             </div>
                         </div>
                     </div>
-                    <button type="button" onclick="savePaymentModal()" class="w-full py-2.5 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md mt-2 transition-all active:scale-95">Simpan Perubahan</button>
+                    <button type="button" onclick="savePaymentModal()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md mt-2 transition-all active:scale-95">Simpan Perubahan</button>
                 </div>
             </div>
         </div>
@@ -339,27 +328,27 @@
 
     <!-- Modal: Expense Editor -->
     <div id="expenseModal" class="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700/50 overflow-hidden transform scale-95 transition-all duration-300" id="expenseModalContent">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-300" id="expenseModalContent">
             <div class="p-5">
                 <div class="flex justify-between items-center mb-5">
-                    <h3 class="font-black text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                    <h3 class="font-black text-base text-slate-900 flex items-center gap-2">
                         <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                         Catat Pengeluaran
                     </h3>
-                    <button onclick="closeModal('expenseModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-700 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="closeModal('expenseModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Tanggal Keluar</label>
-                        <input type="date" id="expenseDateInput" required class="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Tanggal Keluar</label>
+                        <input type="date" id="expenseDateInput" required class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Keterangan / Keperluan</label>
-                        <input type="text" id="expenseDescInput" placeholder="Contoh: Konsumsi rapat..." required class="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Keterangan / Keperluan</label>
+                        <input type="text" id="expenseDescInput" placeholder="Contoh: Konsumsi rapat..." required class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Nominal (Rp)</label>
-                        <input type="number" id="expenseAmountInput" placeholder="100000" required class="w-full px-3 py-2 text-sm font-black text-rose-600 dark:text-rose-400 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Nominal (Rp)</label>
+                        <input type="number" id="expenseAmountInput" placeholder="100000" required class="w-full px-3 py-2 text-sm font-black text-rose-600 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500 transition-shadow">
                     </div>
                     <button type="button" onclick="saveExpenseModal()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-[11px] font-bold shadow-md mt-2 transition-all active:scale-95">Simpan Pengeluaran</button>
                 </div>
@@ -369,29 +358,29 @@
 
     <!-- Modal: Add/Edit Family -->
     <div id="familyModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700/50 overflow-hidden transform scale-95 transition-all duration-300" id="familyModalContent">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-300" id="familyModalContent">
             <div class="p-5">
                 <div class="flex justify-between items-center mb-5">
-                    <h3 class="font-black text-base text-slate-900 dark:text-slate-100" id="familyModalTitle">Data Keluarga</h3>
-                    <button onclick="closeModal('familyModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-700 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <h3 class="font-black text-base text-slate-900" id="familyModalTitle">Data Keluarga</h3>
+                    <button onclick="closeModal('familyModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
                 <form onsubmit="handleSaveFamily(event)" class="space-y-4">
                     <input type="hidden" id="editFamilyId">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">Nama</label>
-                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-shadow">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Nama</label>
+                        <input type="text" id="inputFamilyName" required placeholder="Kel. John Doe" class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase mb-1.5">Telepon</label>
-                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2.5 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-shadow">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5">Telepon</label>
+                        <input type="tel" id="inputFamilyPhone" placeholder="0812..." class="w-full px-3 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
                     </div>
                     <div id="quickMonthsBlock">
-                        <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">Tandai Lunas Bulan:</label>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-2">Tandai Lunas Bulan:</label>
                         <div class="grid grid-cols-4 md:grid-cols-6 gap-1.5" id="familyMonthCheckboxes"></div>
                     </div>
-                    <div class="pt-4 mt-2 border-t border-slate-100 dark:border-slate-700/50 flex items-center justify-between">
-                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[11px] text-rose-500 hover:text-rose-700 dark:text-rose-400 font-bold hidden px-3 py-2 bg-rose-50 dark:bg-rose-900/30 hover:bg-rose-100 rounded-lg transition-colors">Hapus</button>
-                        <button type="submit" class="ml-auto px-5 py-2.5 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan Data</button>
+                    <div class="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between">
+                        <button type="button" id="btnDeleteFamily" onclick="handleDeleteFamily()" class="text-[11px] text-rose-500 hover:text-rose-700 font-bold hidden px-3 py-2 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors">Hapus</button>
+                        <button type="submit" class="ml-auto px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan Data</button>
                     </div>
                 </form>
             </div>
@@ -400,23 +389,23 @@
 
     <!-- Modal: Saldo Awal -->
     <div id="saldoModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-xs rounded-2xl p-5 transform scale-95 transition-all duration-300" id="saldoModalContent">
-            <h3 class="font-black text-base text-slate-900 dark:text-slate-100 mb-1">Saldo 2025</h3>
-            <p class="text-[10px] text-slate-500 dark:text-slate-400 mb-3">Sisa saldo periode sebelumnya.</p>
-            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2.5 text-base font-black bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-slate-900 dark:ring-indigo-500 transition-shadow">
+        <div class="bg-white w-full max-w-xs rounded-2xl p-5 transform scale-95 transition-all duration-300" id="saldoModalContent">
+            <h3 class="font-black text-base text-slate-900 mb-1">Saldo 2025</h3>
+            <p class="text-[10px] text-slate-500 mb-3">Sisa saldo periode sebelumnya.</p>
+            <input type="number" id="inputSaldoAwal" step="1000" class="w-full px-3 py-2.5 text-base font-black bg-slate-50 border border-slate-200 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-shadow">
             <div class="flex justify-end space-x-2">
-                <button onclick="closeModal('saldoModal')" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg text-[11px] font-bold transition-colors">Batal</button>
-                <button onclick="saveSaldoAwal()" class="px-4 py-2 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan</button>
+                <button onclick="closeModal('saldoModal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold transition-colors">Batal</button>
+                <button onclick="saveSaldoAwal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold shadow-md transition-all active:scale-95">Simpan</button>
             </div>
         </div>
     </div>
     <!-- Modal: PDF Preview -->
     <div id="pdfPreviewModal" class="fixed inset-0 z-[60] bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-4xl h-[90vh] md:h-[95vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 transition-all duration-300" id="pdfPreviewModalContent">
+        <div class="bg-white w-full max-w-4xl h-[90vh] md:h-[95vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 transition-all duration-300" id="pdfPreviewModalContent">
             <!-- Header -->
-            <div class="p-3 md:p-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900 rounded-t-2xl">
-                <h3 class="font-black text-sm md:text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                    <svg class="w-4 h-4 text-slate-700 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            <div class="p-3 md:p-4 border-b border-slate-200 flex justify-between items-center bg-slate-50 rounded-t-2xl">
+                <h3 class="font-black text-sm md:text-base text-slate-900 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     Preview Cetak
                 </h3>
                 <div class="flex items-center space-x-2">
@@ -428,17 +417,17 @@
                         <svg class="w-3.5 h-3.5 hidden md:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span>Simpan PDF</span>
                     </button>
-                    <button onclick="closeModal('pdfPreviewModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-1.5 md:p-2 rounded-lg transition-colors">
+                    <button onclick="closeModal('pdfPreviewModal')" class="text-slate-400 hover:text-slate-900 bg-white border border-slate-200 p-1.5 md:p-2 rounded-lg transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
             </div>
             <!-- Iframe Container -->
             <div class="flex-1 bg-slate-200 w-full relative overflow-hidden rounded-b-2xl">
-                <div class="relative bg-slate-50 dark:bg-slate-900/50 rounded-xl p-2 md:p-4 border border-slate-100 dark:border-slate-700/50 min-h-[300px] max-h-[70vh] overflow-auto block h-full">
-                    <div id="pdfLoadingIndicator" class="flex flex-col items-center justify-center space-y-3 w-full h-full absolute inset-0 bg-white dark:bg-slate-800/80 z-10">
+                <div class="relative bg-slate-50/50 rounded-xl p-2 md:p-4 border border-slate-100 min-h-[300px] max-h-[70vh] overflow-auto block h-full">
+                    <div id="pdfLoadingIndicator" class="flex flex-col items-center justify-center space-y-3 w-full h-full absolute inset-0 bg-white/80 z-10">
                         <div class="w-8 h-8 md:w-10 md:h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
-                        <p class="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium animate-pulse">Memproses Preview...</p>
+                        <p class="text-sm md:text-base text-slate-500 font-medium animate-pulse">Memproses Preview...</p>
                     </div>
                     <img id="pdfPreviewImage" class="w-full h-auto hidden rounded shadow-sm cursor-zoom-in mx-auto" onclick="toggleZoom(event, this)" alt="Preview Laporan" />
                 </div>
@@ -447,82 +436,82 @@
     </div>
     <!-- Modal: Login Admin -->
     <div id="loginModal" class="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="loginModalContent">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="loginModalContent">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="font-black text-lg text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <h3 class="font-black text-lg text-slate-900 flex items-center gap-2">
                     <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     Login Bendahara
                 </h3>
-                <button onclick="closeModal('loginModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-700 p-2 rounded-full transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Masukkan PIN untuk membuka fitur Edit, Hapus, dan Tambah pembayaran kas.</p>
-            <input type="password" id="adminPinInput" class="w-full p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-center tracking-[0.5em] font-black text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all mb-5 outline-none" placeholder="••••••">
+            <p class="text-xs text-slate-500 mb-4">Masukkan PIN untuk membuka fitur Edit, Hapus, dan Tambah pembayaran kas.</p>
+            <input type="password" id="adminPinInput" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-center tracking-[0.5em] font-black text-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all mb-5 outline-none" placeholder="••••••">
             <button onclick="submitLogin()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors text-sm shadow-md active:scale-95">Masuk Mode Admin</button>
         </div>
     </div>
 
     <!-- Modal: Install App Instructions -->
     <div id="installModal" class="fixed inset-0 z-[80] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300 hidden">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300" id="installModalContent">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl transform scale-95 transition-all duration-300" id="installModalContent">
             
             <div class="text-center mb-6 mt-2">
                 <div class="w-16 h-16 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner border border-indigo-100/50">
                     <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </div>
-                <h3 class="font-black text-xl text-slate-900 dark:text-slate-100 tracking-tight">Install Aplikasi</h3>
-                <p class="text-[13px] text-slate-500 dark:text-slate-400 mt-1.5 font-medium px-2">Tambahkan ke Layar Utama agar lebih cepat diakses tanpa browser.</p>
+                <h3 class="font-black text-xl text-slate-900 tracking-tight">Install Aplikasi</h3>
+                <p class="text-[13px] text-slate-500 mt-1.5 font-medium px-2">Tambahkan ke Layar Utama agar lebih cepat diakses tanpa browser.</p>
             </div>
             
             <!-- iOS Instructions -->
             <div id="installIOS" class="hidden space-y-2.5 mb-6">
-                <div class="flex items-center gap-3.5 bg-slate-50 dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
-                    <div class="w-9 h-9 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 text-blue-500">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-blue-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     </div>
-                    <p class="text-[12px] font-medium text-slate-700 dark:text-slate-300 leading-snug">1. Tekan tombol <b class="text-slate-900 dark:text-slate-100">Share</b> (Bagikan) di menu bawah browser Safari.</p>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">1. Tekan tombol <b class="text-slate-900">Share</b> (Bagikan) di menu bawah browser Safari.</p>
                 </div>
-                <div class="flex items-center gap-3.5 bg-slate-50 dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
-                    <div class="w-9 h-9 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 text-slate-700 dark:text-slate-300">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-slate-700">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <p class="text-[12px] font-medium text-slate-700 dark:text-slate-300 leading-snug">2. Geser ke bawah lalu pilih <b class="text-slate-900 dark:text-slate-100">Add to Home Screen</b>.</p>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">2. Geser ke bawah lalu pilih <b class="text-slate-900">Add to Home Screen</b>.</p>
                 </div>
             </div>
 
             <!-- Android/Desktop Instructions -->
             <div id="installAndroid" class="hidden space-y-2.5 mb-6">
-                <div class="flex items-center gap-3.5 bg-slate-50 dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
-                    <div class="w-9 h-9 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 text-slate-700 dark:text-slate-300">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-slate-700">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                     </div>
-                    <p class="text-[12px] font-medium text-slate-700 dark:text-slate-300 leading-snug">1. Tekan tombol <b class="text-slate-900 dark:text-slate-100">Menu</b> (titik tiga) di pojok kanan atas browser Chrome.</p>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">1. Tekan tombol <b class="text-slate-900">Menu</b> (titik tiga) di pojok kanan atas browser Chrome.</p>
                 </div>
-                <div class="flex items-center gap-3.5 bg-slate-50 dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-700/50">
-                    <div class="w-9 h-9 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center flex-shrink-0 text-indigo-500">
+                <div class="flex items-center gap-3.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <div class="w-9 h-9 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0 text-indigo-500">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </div>
-                    <p class="text-[12px] font-medium text-slate-700 dark:text-slate-300 leading-snug">2. Pilih <b class="text-slate-900 dark:text-slate-100">Install App</b> atau Tambahkan ke Layar Utama.</p>
+                    <p class="text-[12px] font-medium text-slate-700 leading-snug">2. Pilih <b class="text-slate-900">Install App</b> atau Tambahkan ke Layar Utama.</p>
                 </div>
             </div>
 
-            <button onclick="closeModal('installModal')" class="w-full py-3.5 bg-slate-900 dark:bg-indigo-600 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all text-[13px] shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">Mengerti, Tutup</button>
+            <button onclick="closeModal('installModal')" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all text-[13px] shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95">Mengerti, Tutup</button>
         </div>
     </div>
 
     <!-- Modal: Confirm Dialog -->
     <div id="confirmModal" class="fixed inset-0 z-[80] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="confirmModalContent">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="confirmModalContent">
             <div class="flex items-start gap-4 mb-5">
                 <div id="confirmModalIcon" class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                 </div>
                 <div>
-                    <h3 id="confirmModalTitle" class="font-black text-lg text-slate-900 dark:text-slate-100 mb-1">Konfirmasi</h3>
-                    <p id="confirmModalMessage" class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">Apakah Anda yakin?</p>
+                    <h3 id="confirmModalTitle" class="font-black text-lg text-slate-900 mb-1">Konfirmasi</h3>
+                    <p id="confirmModalMessage" class="text-sm text-slate-500 leading-relaxed">Apakah Anda yakin?</p>
                 </div>
             </div>
             <div class="flex space-x-3">
-                <button onclick="closeModal('confirmModal')" id="btnConfirmCancel" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 font-bold rounded-xl transition-colors text-sm">Batal</button>
+                <button onclick="closeModal('confirmModal')" id="btnConfirmCancel" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors text-sm">Batal</button>
                 <button id="btnConfirmAction" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95">Ya</button>
             </div>
         </div>
@@ -530,23 +519,23 @@
 
     <!-- Modal: Share WA -->
     <div id="shareModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-all duration-300" id="shareModalContent">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 transform scale-95 transition-all duration-300" id="shareModalContent">
             <div class="flex justify-between items-center mb-3">
-                <h3 class="font-black text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">Laporan WA</h3>
-                <button onclick="closeModal('shareModal')" class="text-slate-400 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-100 dark:bg-slate-700 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                <h3 class="font-black text-base text-slate-900 flex items-center gap-2">Laporan WA</h3>
+                <button onclick="closeModal('shareModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             </div>
-            <textarea id="waMessageText" rows="7" readonly class="w-full p-3 font-mono text-[10px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg mb-4 resize-none focus:outline-none transition-shadow"></textarea>
+            <textarea id="waMessageText" rows="7" readonly class="w-full p-3 font-mono text-[10px] bg-slate-50 border border-slate-200 rounded-lg mb-4 resize-none focus:outline-none transition-shadow"></textarea>
             <div class="flex items-center justify-end space-x-2">
-                <button onclick="copyWaMessage()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 text-[11px] font-bold rounded-lg transition-colors">Salin Teks</button>
-                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-50 dark:bg-emerald-900/300 hover:bg-emerald-600 text-white text-[11px] font-bold rounded-lg shadow-md transition-all active:scale-95">Kirim WA</a>
+                <button onclick="copyWaMessage()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-lg transition-colors">Salin Teks</button>
+                <a id="btnSendWaDirect" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-bold rounded-lg shadow-md transition-all active:scale-95">Kirim WA</a>
             </div>
         </div>
     </div>
 
     <!-- Toast -->
     <div id="toastNotification" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-10 opacity-0 transition-all duration-400 z-50 pointer-events-none">
-        <div class="bg-slate-900 dark:bg-indigo-600 text-white px-4 py-2 rounded-full shadow-glow flex items-center space-x-2 text-[11px] font-bold backdrop-blur-md whitespace-nowrap border border-slate-700">
-            <span class="bg-emerald-50 dark:bg-emerald-900/300 text-white rounded-full p-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
+        <div class="bg-slate-900 text-white px-4 py-2 rounded-full shadow-glow flex items-center space-x-2 text-[11px] font-bold backdrop-blur-md whitespace-nowrap border border-slate-700">
+            <span class="bg-emerald-500 text-white rounded-full p-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></span>
             <span id="toastMsg">Berhasil disimpan</span>
         </div>
     </div>
@@ -622,15 +611,15 @@
             
             if (type === 'danger') {
                 btnAction.className = "flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
-                iconContainer.className = "w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1 text-rose-600 dark:text-rose-400";
+                iconContainer.className = "w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1 text-rose-600";
                 iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
             } else if (type === 'info') {
                 btnAction.className = "flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
                 iconContainer.className = "w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-1 text-indigo-600";
                 iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             } else if (type === 'warning') {
-                btnAction.className = "flex-1 py-2.5 bg-amber-50 dark:bg-amber-900/300 hover:bg-amber-600 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
-                iconContainer.className = "w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-1 text-amber-600 dark:text-amber-400";
+                btnAction.className = "flex-1 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
+                iconContainer.className = "w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-1 text-amber-600";
                 iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
             }
             
@@ -690,12 +679,12 @@
             if (btnAuth) {
                 if (isAdmin) {
                     btnAuthText.innerText = 'Logout Admin';
-                    btnAuth.classList.add('border-emerald-200 dark:border-emerald-800/50', 'text-emerald-700 dark:text-emerald-400', 'bg-emerald-50 dark:bg-emerald-900/30');
-                    btnAuth.classList.remove('border-slate-200 dark:border-slate-700', 'text-slate-600 dark:text-slate-400', 'bg-white dark:bg-slate-800');
+                    btnAuth.classList.add('border-emerald-200', 'text-emerald-700', 'bg-emerald-50');
+                    btnAuth.classList.remove('border-slate-200', 'text-slate-600', 'bg-white');
                 } else {
                     btnAuthText.innerText = 'Login Admin';
-                    btnAuth.classList.remove('border-emerald-200 dark:border-emerald-800/50', 'text-emerald-700 dark:text-emerald-400', 'bg-emerald-50 dark:bg-emerald-900/30');
-                    btnAuth.classList.add('border-slate-200 dark:border-slate-700', 'text-slate-600 dark:text-slate-400', 'bg-white dark:bg-slate-800');
+                    btnAuth.classList.remove('border-emerald-200', 'text-emerald-700', 'bg-emerald-50');
+                    btnAuth.classList.add('border-slate-200', 'text-slate-600', 'bg-white');
                 }
             }
             
@@ -710,13 +699,13 @@
             if (saldoInput && btnSaveSaldo) {
                 if (isAdmin) {
                     saldoInput.disabled = false;
-                    saldoInput.classList.add('border-slate-300', 'bg-white dark:bg-slate-800', 'cursor-text', 'hover:border-indigo-400');
-                    saldoInput.classList.remove('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800 dark:text-slate-200');
+                    saldoInput.classList.add('border-slate-300', 'bg-white', 'cursor-text', 'hover:border-indigo-400');
+                    saldoInput.classList.remove('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800');
                     btnSaveSaldo.style.display = 'block';
                 } else {
                     saldoInput.disabled = true;
-                    saldoInput.classList.remove('border-slate-300', 'bg-white dark:bg-slate-800', 'cursor-text', 'hover:border-indigo-400');
-                    saldoInput.classList.add('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800 dark:text-slate-200');
+                    saldoInput.classList.remove('border-slate-300', 'bg-white', 'cursor-text', 'hover:border-indigo-400');
+                    saldoInput.classList.add('border-transparent', 'bg-transparent', 'cursor-not-allowed', 'text-slate-800');
                     btnSaveSaldo.style.display = 'none';
                 }
             }
@@ -735,18 +724,6 @@
         const STANDARD_MONTHLY_FEE = 20000;
         const MONTH_NAMES = ['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV'];
 
-                // Dark Mode Logic
-        function toggleDarkMode() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('boetje_theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('boetje_theme', 'dark');
-            }
-        }
-
-        // Keep current state sync if users clears cache
         let appData = { saldoAwal: 0, year: 2026, members: [], expenses: [] };
         let activeView = 'table'; 
         let currentModalMemberId = null;
@@ -901,7 +878,7 @@
             const tbody = document.getElementById('tableBody');
             const members = getFilteredMembers();
             if (members.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="13" class="py-6 text-center text-xs text-slate-400 dark:text-slate-400">Tidak ada data keluarga.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="13" class="py-6 text-center text-xs text-slate-400">Tidak ada data keluarga.</td></tr>`;
                 return;
             }
 
@@ -910,7 +887,7 @@
                 // Staggered animation delay
                 const delayStr = index < 10 ? `style="animation-delay: ${index * 50}ms;"` : '';
                 
-                html += `<tr class="table-row-hover group border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors opacity-0 animate-fade-in-up" ${delayStr}>`;
+                html += `<tr class="table-row-hover group border-b border-slate-100 hover:bg-slate-50 transition-colors opacity-0 animate-fade-in-up" ${delayStr}>`;
                 
                 let paidMonthsCount = 0;
                 for (let m = 1; m <= 11; m++) {
@@ -921,12 +898,12 @@
                 const isComplete = paidMonthsCount === 11;
 
                 html += `
-                    <td class="py-2.5 px-3 sticky-col text-left align-middle font-bold text-slate-800 dark:text-slate-200 border-r border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group-hover:bg-slate-50 dark:hover:bg-slate-700 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
+                    <td class="py-2.5 px-3 sticky-col text-left align-middle font-bold text-slate-800 border-r border-slate-200 bg-white group-hover:bg-slate-50 text-[11px] z-20 shadow-[1px_0_0_0_#e2e8f0] transition-colors">
                         <div class="flex items-center justify-between gap-1 w-full">
                             <span class="truncate transition-colors ${isAdmin ? 'cursor-pointer hover:text-blue-600' : ''}" ${isAdmin ? `onclick="openEditFamilyModal('${member.id}')"` : ''}>${member.name}</span>
                             <div class="flex items-center gap-1.5 flex-shrink-0">
-                                ${isComplete ? '<span class="inline-flex items-center justify-center flex-shrink-0 px-1.5 py-0.5 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400 rounded text-[7.5px] font-bold tracking-wide shadow-sm">✓ LUNAS</span>' : ''}
-                                ${!isComplete && isAdmin ? `<button onclick="sendWhatsAppReminder('${member.id}')" title="Kirim Tagihan WA" class="flex-shrink-0 text-emerald-500 dark:text-emerald-400 hover:text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:bg-emerald-900/30 p-1 rounded transition-colors opacity-0 group-hover:opacity-100"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></button>` : ''}
+                                ${isComplete ? '<span class="inline-flex items-center justify-center flex-shrink-0 px-1.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded text-[7.5px] font-bold tracking-wide shadow-sm">✓ LUNAS</span>' : ''}
+                                ${!isComplete && isAdmin ? `<button onclick="sendWhatsAppReminder('${member.id}')" title="Kirim Tagihan WA" class="flex-shrink-0 text-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 p-1 rounded transition-colors opacity-0 group-hover:opacity-100"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></button>` : ''}
                             </div>
                         </div>
                     </td>
@@ -937,27 +914,27 @@
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
                     
-                    let pillHTML = '<span class="text-slate-300 dark:text-slate-300 font-bold text-[10px]">&bull;</span>';
+                    let pillHTML = '<span class="text-slate-300 font-bold text-[10px]">&bull;</span>';
                     
                     if (isPaid) {
-                        let pillClass = isPartial ? "bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800/50" : "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/50";
+                        let pillClass = isPartial ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
                             
                         let amtStr = p.amount >= 1000 ? (p.amount/1000) + 'k' : p.amount;
                         let displayText = isPartial ? amtStr : formatShortDate(dateText || 'Lunas');
                         
                         pillHTML = `<span class="inline-flex items-center justify-center whitespace-nowrap px-2 py-0.5 text-[9px] font-bold rounded border ${pillClass} transition-transform hover:scale-105 shadow-sm min-w-max">${displayText}</span>`;
                     }
-                    html += `<td ${isAdmin ? `onclick="openPaymentModal('${member.id}', ${m})"` : ''} class="py-2.5 px-1 text-center align-middle ${isAdmin ? 'cursor-pointer' : ''} border-l border-slate-100 dark:border-slate-700/50">${pillHTML}</td>`;
+                    html += `<td ${isAdmin ? `onclick="openPaymentModal('${member.id}', ${m})"` : ''} class="py-2.5 px-1 text-center align-middle ${isAdmin ? 'cursor-pointer' : ''} border-l border-slate-100">${pillHTML}</td>`;
                 }
-                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 dark:text-slate-300 font-bold text-[10px]">&bull;</span>';
-                html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 group-hover:bg-slate-100 dark:group-hover:bg-slate-700 transition-colors ${member.computedTotal > 0 ? 'text-slate-900 dark:text-slate-100' : 'text-slate-400 dark:text-slate-400'}">${totalDisplay}</td></tr>`;
+                const totalDisplay = member.computedTotal > 0 ? formatRupiah(member.computedTotal) : '<span class="text-slate-300 font-bold text-[10px]">&bull;</span>';
+                html += `<td class="py-2.5 px-3 text-right align-middle font-black text-[11px] border-l border-slate-200 bg-slate-50/50 group-hover:bg-slate-100 transition-colors ${member.computedTotal > 0 ? 'text-slate-900' : 'text-slate-400'}">${totalDisplay}</td></tr>`;
             });
 
             const stats = calculateTotals();
-            html += `<tr class="bg-slate-50 dark:bg-slate-900 opacity-0 animate-fade-in-up" style="animation-delay: ${(members.length * 50 > 500 ? 500 : members.length * 50)}ms;">
-                <td class="py-3 px-3 sticky-col bg-slate-50 dark:bg-slate-900 font-bold text-slate-500 dark:text-slate-400 text-right uppercase text-[10px] border-r border-slate-200 dark:border-slate-700 z-20 shadow-[1px_0_0_0_#e2e8f0]">Sub Total</td>
+            html += `<tr class="bg-slate-50 opacity-0 animate-fade-in-up" style="animation-delay: ${(members.length * 50 > 500 ? 500 : members.length * 50)}ms;">
+                <td class="py-3 px-3 sticky-col bg-slate-50 font-bold text-slate-500 text-right uppercase text-[10px] border-r border-slate-200 z-20 shadow-[1px_0_0_0_#e2e8f0]">Sub Total</td>
                 <td colspan="11" class="py-3"></td>
-                <td class="py-3 px-3 text-right font-black text-slate-900 dark:text-slate-100 text-[12px]">${formatRupiah(stats.grandTotalKas)}</td>
+                <td class="py-3 px-3 text-right font-black text-slate-900 text-[12px]">${formatRupiah(stats.grandTotalKas)}</td>
             </tr>`;
             tbody.innerHTML = html;
         }
@@ -966,7 +943,7 @@
             const list = document.getElementById('cardsList');
             const members = getFilteredMembers();
             if (members.length === 0) {
-                list.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-400 dark:text-slate-400">Tidak ada data.</div>`;
+                list.innerHTML = `<div class="col-span-full py-8 text-center text-xs text-slate-400">Tidak ada data.</div>`;
                 return;
             }
 
@@ -984,14 +961,14 @@
                 const isComplete = paidMonthsCount === 11;
 
                 html += `
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
+                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-col h-full opacity-0 animate-fade-in-up transition-transform hover:-translate-y-1 hover:shadow-md" ${delayStr}>
                         <div class="flex justify-between items-start mb-4 gap-2">
                             <div class="flex items-center gap-2 flex-wrap flex-1">
-                                <h4 class="font-black text-slate-900 dark:text-slate-100 text-[13px] md:text-[14px] truncate">${member.name}</h4>
-                                ${isComplete ? '<span class="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-md text-[8px] font-bold tracking-wide flex-shrink-0 border border-emerald-100 dark:border-emerald-800/30">✓ LUNAS</span>' : ''}
-                                ${!isComplete && isAdmin ? `<button onclick="sendWhatsAppReminder('${member.id}')" title="Kirim Tagihan WA" class="text-emerald-500 dark:text-emerald-400 hover:text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:bg-emerald-900/30 p-1 rounded transition-colors"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></button>` : ''}
+                                <h4 class="font-black text-slate-900 text-[13px] md:text-[14px] truncate">${member.name}</h4>
+                                ${isComplete ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md text-[8px] font-bold tracking-wide flex-shrink-0 border border-emerald-100">✓ LUNAS</span>' : ''}
+                                ${!isComplete && isAdmin ? `<button onclick="sendWhatsAppReminder('${member.id}')" title="Kirim Tagihan WA" class="text-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 p-1 rounded transition-colors"><svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></button>` : ''}
                             </div>
-                            <span class="text-[11px] md:text-[12px] font-black flex-shrink-0 mt-0.5 ${member.computedTotal > 0 ? 'text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-700 px-2.5 py-1.5 rounded-lg' : 'text-slate-400 dark:text-slate-400'}">${totalText}</span>
+                            <span class="text-[11px] md:text-[12px] font-black flex-shrink-0 mt-0.5 ${member.computedTotal > 0 ? 'text-slate-900 bg-slate-100 px-2.5 py-1.5 rounded-lg' : 'text-slate-400'}">${totalText}</span>
                         </div>
                         <div class="grid grid-cols-4 gap-2 mb-4">
                 `;
@@ -1001,16 +978,16 @@
                     const dateText = p?.date || '';
                     const isPartial = p && p.amount && p.amount < STANDARD_MONTHLY_FEE;
 
-                    let btnClass = isPaid ? (isPartial ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50 shadow-sm' : 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 shadow-sm') : 'bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-400 border border-slate-100 dark:border-slate-700/50';
+                    let btnClass = isPaid ? (isPartial ? 'bg-amber-50 text-amber-700 border border-amber-200 shadow-sm' : 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm') : 'bg-slate-50 text-slate-400 border border-slate-100';
                     let amtStr = isPartial && p.amount >= 1000 ? (p.amount/1000) + 'k' : (isPartial ? p.amount : null);
                     let displayText = isPaid ? (isPartial ? amtStr : formatShortDate(dateText || 'Lunas')) : MONTH_NAMES[m-1];
                     html += `<button ${isAdmin ? `onclick="openPaymentModal('${member.id}', ${m})"` : ''} class="py-2.5 px-1 rounded-lg flex flex-col items-center justify-center ${btnClass} ${isAdmin ? 'transition-transform hover:scale-105 active:scale-95' : 'cursor-default'}"><span class="text-[9px] md:text-[10px] font-bold whitespace-nowrap">${displayText}</span></button>`;
                 }
                 html += `
                         </div>
-                        <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-700/50 flex justify-between gap-3">
-                            ${isAdmin ? `<button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-4 py-2.5 rounded-xl text-[11px] font-bold transition-colors shadow-sm active:scale-95">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>` : `<span class="flex-1 text-slate-300 dark:text-slate-300 text-center text-[10px] py-1">🔒 Mode Read-Only</span>`}
+                        <div class="mt-auto pt-3 border-t border-slate-100 flex justify-between gap-3">
+                            ${isAdmin ? `<button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-bold transition-colors shadow-sm active:scale-95">Lunas Semua</button>
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-200 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>` : `<span class="flex-1 text-slate-300 text-center text-[10px] py-1">🔒 Mode Read-Only</span>`}
                         </div>
                     </div>
                 `;
@@ -1036,19 +1013,19 @@
             }
 
             if (!appData.expenses || appData.expenses.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="${isAdmin ? 4 : 3}" class="text-center py-6 text-xs text-slate-400 dark:text-slate-400 font-medium italic">Belum ada catatan pengeluaran.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="${isAdmin ? 4 : 3}" class="text-center py-6 text-xs text-slate-400 font-medium italic">Belum ada catatan pengeluaran.</td></tr>`;
                 return;
             }
 
             let html = '';
             appData.expenses.forEach(exp => {
                 html += `
-                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-                        <td class="py-3 px-4 text-[11px] font-bold text-slate-700 dark:text-slate-300">${formatShortDate(exp.date_text)}</td>
-                        <td class="py-3 px-4 text-[11px] font-medium text-slate-800 dark:text-slate-200">${exp.description}</td>
-                        <td class="py-3 px-4 text-[11px] font-black text-rose-600 dark:text-rose-400 text-right">Rp ${formatRupiah(exp.amount)}</td>
+                    <tr class="hover:bg-slate-50 transition-colors group">
+                        <td class="py-3 px-4 text-[11px] font-bold text-slate-700">${formatShortDate(exp.date_text)}</td>
+                        <td class="py-3 px-4 text-[11px] font-medium text-slate-800">${exp.description}</td>
+                        <td class="py-3 px-4 text-[11px] font-black text-rose-600 text-right">Rp ${formatRupiah(exp.amount)}</td>
                         ${isAdmin ? `<td class="expense-action-col py-3 px-4 text-center">
-                            <button onclick="deleteExpense('${exp.id}')" class="text-slate-300 dark:text-slate-300 hover:text-rose-600 dark:text-rose-400 p-1.5 rounded-lg hover:bg-rose-50 dark:bg-rose-900/30 transition-colors opacity-0 group-hover:opacity-100" title="Hapus Pengeluaran">
+                            <button onclick="deleteExpense('${exp.id}')" class="text-slate-300 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-colors opacity-0 group-hover:opacity-100" title="Hapus Pengeluaran">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </td>` : ''}
@@ -1135,12 +1112,12 @@
 
             if (mode === 'table') {
                 tableView.classList.remove('hidden'); cardsView.classList.add('hidden');
-                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm flex items-center space-x-1";
-                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             } else {
                 tableView.classList.add('hidden'); cardsView.classList.remove('hidden');
-                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm flex items-center space-x-1";
-                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 flex items-center space-x-1";
+                btnCards.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors bg-white text-slate-900 shadow-sm flex items-center space-x-1";
+                btnTable.className = "px-3 py-1.5 rounded-md text-[11px] font-bold transition-colors text-slate-500 hover:text-slate-900 flex items-center space-x-1";
             }
         }
 
@@ -1186,12 +1163,12 @@
         function updateModalStatusUI() {
             const btnPaid = document.getElementById('btnStatusPaid'); const btnUnpaid = document.getElementById('btnStatusUnpaid'); const fields = document.getElementById('paidFieldsContainer');
             if (modalIsPaid) {
-                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm border border-slate-200 dark:border-slate-700 transition-colors';
-                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200 transition-colors';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 hover:bg-slate-200 transition-colors';
                 fields.classList.remove('hidden');
             } else {
-                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-sm border border-slate-200 dark:border-slate-700 transition-colors';
-                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors';
+                btnUnpaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg bg-white text-slate-900 shadow-sm border border-slate-200 transition-colors';
+                btnPaid.className = 'flex-1 py-2 text-[11px] font-bold rounded-lg text-slate-500 hover:bg-slate-200 transition-colors';
                 fields.classList.add('hidden');
             }
         }
@@ -1239,8 +1216,8 @@
             document.getElementById('btnDeleteFamily').classList.add('hidden'); document.getElementById('quickMonthsBlock').classList.remove('hidden');
             const boxContainer = document.getElementById('familyMonthCheckboxes');
             boxContainer.innerHTML = MONTH_NAMES.map((mName, idx) => `
-                <label class="flex items-center justify-center p-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 cursor-pointer hover:bg-slate-100 dark:bg-slate-700 transition-colors">
-                    <input type="checkbox" name="quickMonth" value="${idx+1}" class="hidden peer"><span class="text-[9px] font-bold text-slate-400 dark:text-slate-400 peer-checked:text-slate-900 dark:peer-checked:text-slate-100">${mName}</span>
+                <label class="flex items-center justify-center p-1.5 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
+                    <input type="checkbox" name="quickMonth" value="${idx+1}" class="hidden peer"><span class="text-[9px] font-bold text-slate-400 peer-checked:text-slate-900">${mName}</span>
                 </label>
             `).join('');
             openModal('familyModal');
@@ -1359,13 +1336,13 @@
                 if(!btn) return;
                 const oriText = btn.innerHTML;
                 btn.innerHTML = 'Tersalin! ✅';
-                btn.classList.add('bg-emerald-50 dark:bg-emerald-900/300', 'scale-105');
-                btn.classList.remove('bg-slate-900 dark:bg-indigo-600');
+                btn.classList.add('bg-emerald-500', 'scale-105');
+                btn.classList.remove('bg-slate-900');
                 
                 setTimeout(() => {
                     btn.innerHTML = oriText;
-                    btn.classList.remove('bg-emerald-50 dark:bg-emerald-900/300', 'scale-105');
-                    btn.classList.add('bg-slate-900 dark:bg-indigo-600');
+                    btn.classList.remove('bg-emerald-500', 'scale-105');
+                    btn.classList.add('bg-slate-900');
                 }, 2000);
             };
 
@@ -1444,8 +1421,8 @@
             }
         }
 
-                function openPdfPreview() {
-showToast('Menyiapkan Preview... ⏳');
+        function openPdfPreview() {
+            showToast('Menyiapkan Preview... ⏳');
 
             // reset UI
             document.getElementById('pdfLoadingIndicator').classList.remove('hidden');
@@ -1652,9 +1629,5 @@ showToast('Menyiapkan Preview... ⏳');
     </script>
 </body>
 </html>
-
-
-
-
 
 
