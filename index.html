@@ -16,7 +16,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- HTML2PDF JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
@@ -1031,27 +1030,24 @@
                     document.getElementById('btnDownloadPng').onclick = () => {
                         showToast('Memproses PNG High-Res... ⏳');
 
-                        const pngWrapper = document.createElement('div');
-                        pngWrapper.id = 'pngGeneratorWrapper';
-                        pngWrapper.style.width = '1122px';
-                        pngWrapper.style.backgroundColor = '#ffffff';
-                        pngWrapper.style.position = 'fixed';
-                        pngWrapper.style.top = '200vh';
-                        pngWrapper.style.left = '0';
-                        pngWrapper.style.zIndex = '-9999';
-                        pngWrapper.innerHTML = htmlStr;
-                        document.body.appendChild(pngWrapper);
-
-                        html2canvas(pngWrapper, { scale: 3, useCORS: true }).then(canvas => {
-                            document.body.removeChild(pngWrapper);
-                            const link = document.createElement('a');
-                            link.download = pdfFileName.replace('.pdf', '.png');
-                            link.href = canvas.toDataURL('image/png');
-                            link.click();
-                            showToast('PNG Berhasil Diunduh! ✅');
+                        html2pdf().set({
+                            margin: 0,
+                            image: { type: 'jpeg', quality: 1.0 },
+                            html2canvas: { scale: 3, useCORS: true },
+                            jsPDF: { unit: 'px', format: [1122, 793], orientation: 'landscape' }
+                        }).from(htmlStr).toCanvas().then(function(worker) {
+                            if (worker && worker.prop && worker.prop.canvas) {
+                                const canvas = worker.prop.canvas;
+                                const link = document.createElement('a');
+                                link.download = pdfFileName.replace('.pdf', '.png');
+                                link.href = canvas.toDataURL('image/png');
+                                link.click();
+                                showToast('PNG Berhasil Diunduh! ✅');
+                            } else {
+                                throw new Error("Canvas not generated");
+                            }
                         }).catch((e) => {
                             console.error(e);
-                            if (document.body.contains(pngWrapper)) document.body.removeChild(pngWrapper);
                             showToast('Gagal memproses PNG ❌');
                         });
                     };
