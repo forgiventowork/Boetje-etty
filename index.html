@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -1110,9 +1110,7 @@
             const wrapper = document.getElementById('chartWrapper');
             const chevron = document.getElementById('chartChevron');
             if (wrapper.classList.contains('hidden')) {
-                wrapper.classList.remove('hidden');
-                chevron.classList.add('rotate-180');
-                renderChart();
+                wrapper.classList.remove('hidden'); chevron.classList.add('rotate-180'); setTimeout(() => { renderChart(); }, 150);
             } else {
                 wrapper.classList.add('hidden');
                 chevron.classList.remove('rotate-180');
@@ -1940,6 +1938,7 @@
     </script>
 </body>
 </html>
+
 
 
 
