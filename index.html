@@ -451,17 +451,31 @@
     </div>
     <!-- Modal: Login Admin -->
     <div id="loginModal" class="fixed inset-0 z-[70] bg-slate-900/20 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white w-full max-w-sm rounded-3xl p-7 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="loginModalContent">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-black text-lg text-slate-900 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    Login Bendahara
-                </h3>
-                <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-slate-900 bg-slate-100 p-2 rounded-full transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                <div class="bg-white w-full max-w-sm rounded-[32px] p-8 shadow-[0_24px_60px_rgba(0,0,0,0.12)] border border-slate-100/50 transform scale-95 transition-all duration-300 relative overflow-hidden" id="loginModalContent">
+            <!-- Decorative background glow -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col items-center text-center">
+                <!-- Close Button (Absolute) -->
+                <button onclick="closeModal('loginModal')" class="absolute -top-2 -right-2 text-slate-400 hover:text-slate-800 bg-slate-50 hover:bg-slate-100 p-2.5 rounded-full transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+
+                <!-- Icon -->
+                <div class="w-16 h-16 bg-gradient-to-tr from-indigo-50 to-white rounded-2xl flex items-center justify-center mb-5 shadow-[0_8px_16px_rgba(79,70,229,0.06)] border border-indigo-100/50 text-indigo-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+
+                <h3 class="font-[900] text-2xl text-slate-800 mb-2 tracking-tight">Login Bendahara</h3>
+                <p class="text-[12.5px] text-slate-500 mb-8 leading-relaxed font-medium px-2">Masukkan PIN otoritas untuk membuka akses kelola kas (Edit, Hapus, Tambah).</p>
+                
+                <div class="w-full relative mb-8">
+                    <input type="password" id="adminPinInput" class="w-full py-4 bg-slate-50/80 border border-slate-200/60 rounded-2xl text-center tracking-[0.8em] font-black text-3xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all text-slate-800 shadow-inner outline-none placeholder-slate-300" placeholder="••••••">
+                </div>
+                
+                <button onclick="submitLogin()" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-[800] rounded-2xl transition-all text-[14px] shadow-[0_8px_20px_rgba(79,70,229,0.3)] hover:shadow-[0_12px_25px_rgba(79,70,229,0.4)] hover:-translate-y-0.5 active:scale-95 active:translate-y-0">Buka Akses Admin</button>
             </div>
-            <p class="text-xs text-slate-500 mb-4">Masukkan PIN untuk membuka fitur Edit, Hapus, dan Tambah pembayaran kas.</p>
-            <input type="password" id="adminPinInput" class="w-full p-3 bg-slate-50/50 border-2 border-slate-100/80 rounded-xl text-center tracking-[0.75em] font-black text-2xl focus:ring-0 focus:border-indigo-500 transition-all mb-6 text-slate-700 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] outline-none" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢">
-            <button onclick="submitLogin()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all text-[13.5px] shadow-[0_8px_20px_rgba(79,70,229,0.25)] hover:shadow-[0_10px_25px_rgba(79,70,229,0.35)] active:scale-95">Masuk Mode Admin</button>
         </div>
     </div>
 
@@ -1855,6 +1869,7 @@
     </script>
 </body>
 </html>
+
 
 
 
