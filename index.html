@@ -759,8 +759,6 @@
             
             showToast(`Memuat data ${appData.year}...`);
             await loadStorage();
-            isLoading = false;
-            renderApp();
         }
 
         async function loadStorage() {
@@ -791,9 +789,13 @@
                 });
                 
                 updateAdminUI();
+                isLoading = false;
+                renderApp();
             } catch (e) {
                 console.error(e);
-                showToast("Gagal memuat data dari cloud. ❌");
+                showToast("Gagal memuat data dari cloud");
+                isLoading = false;
+                renderApp();
             }
         }
 
@@ -1783,6 +1785,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
