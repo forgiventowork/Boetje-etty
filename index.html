@@ -530,21 +530,18 @@
         </div>
     </div>
 
-    <!-- Modal: Confirm Dialog -->
+        <!-- Modal: Confirm Dialog -->
     <div id="confirmModal" class="fixed inset-0 z-[80] bg-slate-900/20 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white w-full max-w-sm rounded-3xl p-7 md:p-6 shadow-2xl transform scale-95 transition-all duration-300" id="confirmModalContent">
-            <div class="flex items-start gap-4 mb-5">
-                <div id="confirmModalIcon" class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                </div>
-                <div>
-                    <h3 id="confirmModalTitle" class="font-black text-lg text-slate-900 mb-1">Konfirmasi</h3>
-                    <p id="confirmModalMessage" class="text-sm text-slate-500 leading-relaxed">Apakah Anda yakin?</p>
-                </div>
+        <div class="bg-white w-full max-w-sm rounded-[28px] p-8 shadow-[0_24px_60px_rgba(0,0,0,0.08)] border border-slate-100 transform scale-95 transition-all duration-300 relative text-center flex flex-col items-center" id="confirmModalContent">
+            <div id="confirmModalIcon" class="w-14 h-14 rounded-full flex items-center justify-center mb-5 ring-8">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
-            <div class="flex space-x-3">
-                <button onclick="closeModal('confirmModal')" id="btnConfirmCancel" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors text-sm">Batal</button>
-                <button id="btnConfirmAction" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95">Ya</button>
+            <h3 id="confirmModalTitle" class="font-[800] text-xl text-slate-900 mb-2 tracking-tight">Konfirmasi</h3>
+            <p id="confirmModalMessage" class="text-[13px] text-slate-500 font-medium leading-relaxed px-2 mb-8">Apakah Anda yakin?</p>
+            
+            <div class="flex w-full space-x-3">
+                <button onclick="closeModal('confirmModal')" id="btnConfirmCancel" class="flex-1 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-[700] rounded-2xl transition-all text-[14px]">Batal</button>
+                <button id="btnConfirmAction" class="flex-1 py-3.5 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] active:scale-[0.98]">Ya</button>
             </div>
         </div>
     </div>
@@ -641,18 +638,18 @@
                 btnCancel.style.display = 'none';
             }
             
-            if (type === 'danger') {
-                btnAction.className = "flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
-                iconContainer.className = "w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1 text-rose-600";
-                iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+                        if (type === 'danger') {
+                btnAction.className = "flex-1 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgba(225,29,72,0.2)] hover:shadow-[0_6px_20px_rgba(225,29,72,0.3)] active:scale-[0.98]";
+                iconContainer.className = "w-14 h-14 rounded-full bg-rose-50/50 flex items-center justify-center mb-5 ring-8 ring-rose-50/50 text-rose-600";
+                iconContainer.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
             } else if (type === 'info') {
-                btnAction.className = "flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
-                iconContainer.className = "w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-1 text-indigo-600";
-                iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                btnAction.className = "flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgba(15,23,42,0.2)] hover:shadow-[0_6px_20px_rgba(15,23,42,0.3)] active:scale-[0.98]";
+                iconContainer.className = "w-14 h-14 rounded-full bg-indigo-50/50 flex items-center justify-center mb-5 ring-8 ring-indigo-50/50 text-indigo-600";
+                iconContainer.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             } else if (type === 'warning') {
-                btnAction.className = "flex-1 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl transition-colors text-sm shadow-md active:scale-95";
-                iconContainer.className = "w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-1 text-amber-600";
-                iconContainer.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+                btnAction.className = "flex-1 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgba(245,158,11,0.2)] hover:shadow-[0_6px_20px_rgba(245,158,11,0.3)] active:scale-[0.98]";
+                iconContainer.className = "w-14 h-14 rounded-full bg-amber-50/50 flex items-center justify-center mb-5 ring-8 ring-amber-50/50 text-amber-500";
+                iconContainer.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
             }
             
             openModal('confirmModal');
@@ -1895,6 +1892,7 @@
     </script>
 </body>
 </html>
+
 
 
 
