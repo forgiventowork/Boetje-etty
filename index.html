@@ -466,8 +466,15 @@
                 <h3 class="font-[800] text-xl text-slate-900 mb-2">Login Bendahara</h3>
                 <p class="text-[13px] text-slate-500 mb-8 font-medium px-4 leading-relaxed">Masukkan PIN otoritas untuk mengelola pembayaran kas.</p>
                 
-                <div class="w-full relative mb-8">
-                    <input type="password" id="adminPinInput" maxlength="6" inputmode="numeric" class="w-full py-4 bg-[#F8FAFC] border border-slate-200/80 rounded-2xl text-center tracking-[1em] font-black text-2xl focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-500 transition-all text-slate-800 outline-none" placeholder="******">
+                                <div class="w-full relative mb-8 flex justify-center gap-2.5 md:gap-3" id="pinUIContainer">
+                    <div id="pinBox0" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    <div id="pinBox1" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    <div id="pinBox2" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    <div id="pinBox3" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    <div id="pinBox4" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    <div id="pinBox5" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
+                    
+                    <input type="tel" id="adminPinInput" maxlength="6" inputmode="numeric" autocomplete="off" class="absolute inset-0 w-full h-full opacity-0 cursor-text z-10" oninput="updatePinUI(this.value)" onfocus="updatePinUI(this.value, true)" onblur="updatePinUI(this.value, false)">
                 </div>
                 
                 <button onclick="submitLogin()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] active:scale-[0.98]">Buka Akses</button>
@@ -697,8 +704,7 @@
                 showToast('Login Berhasil 🔓');
             } else {
                 showToast('PIN Salah! ❌');
-                document.getElementById('adminPinInput').value = '';
-                document.getElementById('adminPinInput').focus();
+                document.getElementById('adminPinInput').value = ''; updatePinUI('', true); document.getElementById('adminPinInput').focus();
             }
         }
 
@@ -1865,6 +1871,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
