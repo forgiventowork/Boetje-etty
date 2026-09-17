@@ -147,30 +147,30 @@
         </div>
 
         <!-- Structured Stats Section (Professional) -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 opacity-0 animate-fade-in-up delay-200">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 opacity-0 animate-fade-in-up delay-200">
             <div class="bg-white rounded-3xl p-5 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80 relative transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="flex justify-between items-start mb-1">
                     <div class="text-[11px] font-[800] text-slate-400/80 uppercase tracking-[0.15em]">Saldo 2025</div>
                     <button id="btnEditSaldo" onclick="openEditSaldoAwalModal()" class="text-slate-300 hover:text-slate-900 transition-colors hidden"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>
                 </div>
-                <div class="text-2xl md:text-3xl font-[900] tracking-tight mt-1 text-slate-700 transition-all whitespace-nowrap" id="statSaldoAwal">Rp 0</div>
+                <div class="text-xl lg:text-2xl font-[900] tracking-tight mt-1 text-slate-700 transition-all truncate" id="statSaldoAwal">Rp 0</div>
             </div>
             <div class="bg-white rounded-3xl p-5 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[11px] font-[800] text-slate-400/80 uppercase tracking-[0.15em] mb-1">Iuran Kas</div>
-                <div class="text-2xl md:text-3xl font-[900] tracking-tight mt-1 text-emerald-600 transition-all whitespace-nowrap" id="statIuranMasuk">Rp 0</div>
+                <div class="text-xl lg:text-2xl font-[900] tracking-tight mt-1 text-emerald-600 transition-all truncate" id="statIuranMasuk">Rp 0</div>
             </div>
             <div class="bg-white rounded-3xl p-5 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[11px] font-[800] text-slate-400/80 uppercase tracking-[0.15em] mb-1">Pengeluaran</div>
-                <div class="text-2xl md:text-3xl font-[900] tracking-tight mt-1 text-rose-600 transition-all whitespace-nowrap" id="statPengeluaran">Rp 0</div>
+                <div class="text-xl lg:text-2xl font-[900] tracking-tight mt-1 text-rose-600 transition-all truncate" id="statPengeluaran">Rp 0</div>
             </div>
             <div class="bg-white rounded-3xl p-5 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80 transition-transform hover:-translate-y-1 hover:shadow-md">
                 <div class="text-[11px] font-[800] text-slate-400/80 uppercase tracking-[0.15em] mb-1">Total</div>
-                <div class="text-3xl md:text-4xl font-[900] text-slate-800 tracking-tight transition-all whitespace-nowrap mt-1" id="statSubTotal">Rp 0</div>
+                <div class="text-2xl lg:text-3xl font-[900] text-slate-800 tracking-tight transition-all truncate mt-1" id="statSubTotal">Rp 0</div>
             </div>
             <div class="bg-white rounded-3xl p-5 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80 transition-transform hover:-translate-y-1 hover:shadow-md col-span-2 lg:col-span-1 flex flex-col justify-between">
                 <div class="text-[11px] font-[800] text-slate-400/80 uppercase tracking-[0.15em] mb-1">Jumlah Keluarga</div>
                 <div class="flex justify-between items-end">
-                    <div class="text-2xl md:text-3xl font-[900] tracking-tight mt-1 text-slate-700 transition-all" id="statTotalAnggota">0</div>
+                    <div class="text-xl lg:text-2xl font-[900] tracking-tight mt-1 text-slate-700 transition-all" class="truncate" id="statTotalAnggota">0</div>
                     <button id="btnAddFamily" onclick="openAddFamilyModal()" class="bg-slate-900 hover:bg-slate-800 text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold flex items-center gap-1.5 transition-all shadow-[0_4px_10px_rgba(15,23,42,0.2)] active:scale-95 hidden">
                         <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
                         <span>Tambah</span>
@@ -1855,6 +1855,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
