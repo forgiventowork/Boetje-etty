@@ -1060,7 +1060,7 @@
             }
         }
 
-                function renderChart() {
+                        function renderChart() {
             const wrapper = document.getElementById('chartWrapper');
             if (wrapper && wrapper.classList.contains('hidden')) return;
 
@@ -1208,69 +1208,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            });
-        }
-                }
-            });
-            
-            appData.expenses.forEach(e => {
-                const parts = (e.date_text || '').split('/');
-                if(parts.length >= 2) {
-                    const m = parseInt(parts[1]);
-                    if(m >= 1 && m <= 11) {
-                        expenseData[m-1] += Number(e.amount) || 0;
-                    }
-                }
-            });
-
-            const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? '#334155' : '#e2e8f0';
-
-            if(window.myChart) {
-                window.myChart.destroy();
-            }
-            
-            window.myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Pemasukan',
-                            data: incomeData,
-                            backgroundColor: '#10b981',
-                            borderRadius: 4
-                        },
-                        {
-                            label: 'Pengeluaran',
-                            data: expenseData,
-                            backgroundColor: '#f43f5e',
-                            borderRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) { return 'Rp ' + (value/1000) + 'k'; },
-                                color: textColor
-                            },
-                            grid: { color: gridColor }
-                        },
-                        x: {
-                            ticks: { color: textColor },
-                            grid: { color: gridColor, display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: { labels: { color: textColor } }
                     }
                 }
             });
@@ -1914,6 +1851,7 @@
     </script>
 </body>
 </html>
+
 
 
 
