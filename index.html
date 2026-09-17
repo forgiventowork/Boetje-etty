@@ -1096,13 +1096,13 @@
             const textColor = isDark ? '#94a3b8' : '#64748b';
             const gridColor = isDark ? '#334155' : '#f1f5f9';
 
-            // Create beautiful gradients
+                        // Create beautiful gradients (Lighter, airier look)
             const gradientIncome = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientIncome.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
+            gradientIncome.addColorStop(0, 'rgba(16, 185, 129, 0.15)');
             gradientIncome.addColorStop(1, 'rgba(16, 185, 129, 0)');
 
             const gradientExpense = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientExpense.addColorStop(0, 'rgba(244, 63, 94, 0.4)');
+            gradientExpense.addColorStop(0, 'rgba(244, 63, 94, 0.15)');
             gradientExpense.addColorStop(1, 'rgba(244, 63, 94, 0)');
 
             if(window.myChart) {
@@ -1117,30 +1117,30 @@
                         {
                             label: 'Pemasukan',
                             data: incomeData,
-                            borderColor: '#10b981',
+                            borderColor: '#34d399', // Lighter emerald
                             backgroundColor: gradientIncome,
                             borderWidth: 3,
                             pointBackgroundColor: '#ffffff',
-                            pointBorderColor: '#10b981',
+                            pointBorderColor: '#34d399',
                             pointBorderWidth: 2,
                             pointRadius: 4,
                             pointHoverRadius: 6,
                             fill: true,
-                            tension: 0.4 // Smooth curves
+                            tension: 0.4
                         },
                         {
                             label: 'Pengeluaran',
                             data: expenseData,
-                            borderColor: '#f43f5e',
+                            borderColor: '#fb7185', // Lighter rose
                             backgroundColor: gradientExpense,
                             borderWidth: 3,
                             pointBackgroundColor: '#ffffff',
-                            pointBorderColor: '#f43f5e',
+                            pointBorderColor: '#fb7185',
                             pointBorderWidth: 2,
                             pointRadius: 4,
                             pointHoverRadius: 6,
                             fill: true,
-                            tension: 0.4 // Smooth curves
+                            tension: 0.4
                         }
                     ]
                 },
@@ -1190,7 +1190,11 @@
                             } 
                         },
                         tooltip: {
-                            backgroundColor: isDark ? 'rgba(30, 41, 59, 0.95)' : 'rgba(15, 23, 42, 0.95)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#0f172a',
+                            bodyColor: '#334155',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
                             titleFont: { size: 13, weight: 'bold' },
                             bodyFont: { size: 12 },
                             padding: 12,
@@ -1851,6 +1855,7 @@
     </script>
 </body>
 </html>
+
 
 
 
