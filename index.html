@@ -841,8 +841,8 @@
                     if (expenses) appData.expenses = expenses;
                 } catch (errE) { console.warn("Table expenses mungkin belum ada", errE); appData.expenses = []; }
 
-                appData.members = members.map(m => {
-                    const mPayments = payments.filter(p => p.member_id === m.id);
+                appData.members = (members || []).map(m => {
+                    const mPayments = (payments || []).filter(p => p.member_id === m.id);
                     const paymentsMap = {};
                     mPayments.forEach(p => { paymentsMap[p.month] = { paid: true, date: p.date_text, amount: p.amount }; });
                     return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap, computedTotal: 0 };
@@ -852,7 +852,7 @@
                 isLoading = false;
                 renderApp();
             } catch (e) {
-                console.error(e);
+                console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
                 showToast("Gagal memuat data dari cloud");
                 isLoading = false;
                 renderApp();
@@ -1367,7 +1367,7 @@
                 renderApp();
                 showToast('Pengeluaran tersimpan 💸');
             } catch (e) {
-                console.error(e);
+                console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
                 showToast('Gagal menyimpan');
             }
         }
@@ -1382,7 +1382,7 @@
                     renderApp();
                     showToast('Berhasil dihapus 🗑️');
                 } catch (e) {
-                    console.error(e);
+                    console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
                     showToast('Gagal menghapus');
                 }
             }, "danger");
@@ -1479,7 +1479,7 @@
                     if(error) throw error; delete member.payments[currentModalMonthIndex];
                 }
                 renderApp(); closeModal('paymentModal'); showToast('Tersimpan 💾');
-            } catch (e) { console.error(e); showToast('Gagal'); }
+            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
         }
 
         async function quickMarkAllMonths(memberId) {
@@ -1492,7 +1492,7 @@
                 if (error) throw error;
                 for (let m = 1; m <= 11; m++) member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
                 renderApp(); showToast('11 Bulan dilunasi ✅');
-            } catch (e) { console.error(e); showToast('Gagal'); }
+            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
         }
 
         function openAddFamilyModal() {
@@ -1577,7 +1577,7 @@
                     appData.members.push(newMember);
                 }
                 renderApp(); closeModal('familyModal'); showToast('Tersimpan ✅');
-            } catch (e) { console.error(e); showToast("Gagal"); }
+            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast("Gagal"); }
         }
 
         async function handleDeleteFamily() {
@@ -1592,7 +1592,7 @@
                         const { error } = await supa.from('members').delete().eq('id', id); if (error) throw error;
                         appData.members = appData.members.filter(m => m.id !== id);
                         updateAdminUI(); closeModal('familyModal'); showToast('Dihapus 🗑️');
-                    } catch (e) { console.error(e); showToast('Gagal'); }
+                    } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
                 },
                 "danger"
             );
@@ -1610,7 +1610,7 @@
             try {
                 const { error } = await supa.from('settings').upsert({ id: appData.year, saldo_awal: val }); if(error) throw error;
                 appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan 💾');
-            } catch (e) { console.error(e); showToast('Gagal'); }
+            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
         }
 
         function copyBcaNumber() { 
@@ -1885,7 +1885,7 @@
                         throw new Error("Canvas not generated");
                     }
                 }).catch((e) => {
-                    console.error(e);
+                    console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
                     showToast('Gagal memproses Preview ❌');
                     closeModal('pdfPreviewModal');
                 });
@@ -1940,6 +1940,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
