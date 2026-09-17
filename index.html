@@ -181,8 +181,14 @@
 
         <!-- Chart Section -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 mb-4 opacity-0 animate-fade-in-up delay-200">
-            <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2"><svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>Grafik Arus Kas</h2>
-            <div class="relative h-48 md:h-64 w-full">
+            <button onclick="toggleChart()" class="w-full flex items-center justify-between group outline-none">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 transition-colors">Grafik Arus Kas</h2>
+                </div>
+                <svg id="chartChevron" class="w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div id="chartWrapper" class="relative h-48 md:h-64 w-full mt-4 hidden">
                 <canvas id="cashFlowChart"></canvas>
             </div>
         </div>
@@ -1041,7 +1047,23 @@
             document.getElementById('expensesList').innerHTML = '<div class="animate-pulse flex space-x-4 p-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div><div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div></div></div>';
         }
 
-                function renderChart() {
+                        function toggleChart() {
+            const wrapper = document.getElementById('chartWrapper');
+            const chevron = document.getElementById('chartChevron');
+            if (wrapper.classList.contains('hidden')) {
+                wrapper.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+                renderChart();
+            } else {
+                wrapper.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        function renderChart() {
+            const wrapper = document.getElementById('chartWrapper');
+            if (wrapper && wrapper.classList.contains('hidden')) return;
+
             const canvas = document.getElementById('cashFlowChart');
             if(!canvas) return;
             const ctx = canvas.getContext('2d');
@@ -1759,6 +1781,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
