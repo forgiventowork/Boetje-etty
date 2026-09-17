@@ -30,15 +30,23 @@
                         'soft': '0 2px 12px -2px rgba(0, 0, 0, 0.05)',
                         'glow': '0 0 15px rgba(52, 211, 153, 0.4)',
                     },
-                    animation: {
+                                        animation: {
                         'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both',
                     },
                     keyframes: {
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(15px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-3px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(6px, 0, 0)' }
                         }
                     }
+                }
                 }
             }
         }
@@ -459,7 +467,7 @@
 
             <div class="flex flex-col items-center text-center mt-2">
                 <!-- Elegant Icon -->
-                <div class="w-14 h-14 bg-indigo-50/50 rounded-full flex items-center justify-center mb-6 text-indigo-600 ring-8 ring-indigo-50/30">
+                <div id="loginModalIconBox" class="w-14 h-14 bg-indigo-50/50 rounded-full flex items-center justify-center mb-6 text-indigo-600 ring-8 ring-indigo-50/30 transition-all duration-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                 </div>
 
@@ -692,18 +700,54 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        async function submitLogin() {
+                async function submitLogin() {
             const pin = document.getElementById('adminPinInput').value;
+            if (pin.length !== 6) return;
             const hashed = await hashPIN(pin);
+            
+            const iconBox = document.getElementById('loginModalIconBox');
+            const uiContainer = document.getElementById('pinUIContainer');
+            
             if (hashed === ADMIN_PIN_HASH) {
-                localStorage.setItem('boetje_admin', 'true');
-                isAdmin = true;
-                closeModal('loginModal');
-                updateAdminUI();
-                showToast('Login Berhasil 🔓');
+                // Success unlock animation
+                if (iconBox) {
+                    iconBox.className = "w-14 h-14 bg-emerald-50/50 rounded-full flex items-center justify-center mb-6 text-emerald-500 ring-8 ring-emerald-50/30 transition-all duration-300 transform scale-110";
+                    iconBox.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>';
+                }
+                
+                setTimeout(() => {
+                    localStorage.setItem('boetje_admin', 'true');
+                    isAdmin = true;
+                    closeModal('loginModal');
+                    updateAdminUI();
+                    showToast('Akses Diberikan ??');
+                    
+                    // Reset lock icon after modal hides
+                    setTimeout(() => {
+                        if (iconBox) {
+                            iconBox.className = "w-14 h-14 bg-indigo-50/50 rounded-full flex items-center justify-center mb-6 text-indigo-600 ring-8 ring-indigo-50/30 transition-all duration-300";
+                            iconBox.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>';
+                        }
+                    }, 500);
+                }, 600);
             } else {
-                showToast('PIN Salah! ❌');
-                document.getElementById('adminPinInput').value = ''; updatePinUI('', true); document.getElementById('adminPinInput').focus();
+                // Error shake animation
+                if (uiContainer) uiContainer.classList.add('animate-shake');
+                for (let i = 0; i < 6; i++) {
+                    const box = document.getElementById('pinBox' + i);
+                    if (box) {
+                        box.className = 'w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-rose-400 bg-rose-50 flex items-center justify-center transition-all';
+                        box.innerHTML = '<div class="w-3 h-3 bg-rose-500 rounded-full"></div>';
+                    }
+                }
+                showToast('PIN Salah! ?');
+                
+                setTimeout(() => {
+                    if (uiContainer) uiContainer.classList.remove('animate-shake');
+                    document.getElementById('adminPinInput').value = '';
+                    updatePinUI('', true);
+                    document.getElementById('adminPinInput').focus();
+                }, 500);
             }
         }
 
@@ -1868,7 +1912,7 @@
             }
         });
     
-        function updatePinUI(val, isFocused = document.activeElement === document.getElementById('adminPinInput')) {
+                function updatePinUI(val, isFocused = document.activeElement === document.getElementById('adminPinInput')) {
             val = val ? val.replace(/\D/g, '') : '';
             document.getElementById('adminPinInput').value = val;
             
@@ -1888,10 +1932,23 @@
                     }
                 }
             }
+            
+            if (val.length === 6 && isFocused) {
+                setTimeout(() => submitLogin(), 100);
+            }
+        } else {
+                        box.className = 'w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all';
+                    }
+                }
+            }
         }
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
