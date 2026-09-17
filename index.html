@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -1073,8 +1073,8 @@
                 html += `
                         </div>
                         <div class="mt-auto pt-3 border-t border-slate-100 flex justify-between gap-3">
-                            ${isAdmin ? `<button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-[800] transition-colors shadow-sm active:scale-95">Lunas Semua</button>
-                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-100/80 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>` : `<span class="flex-1 text-slate-300 text-center text-[10px] py-1">🔒 Mode Read-Only</span>`}
+                            ${isAdmin ? (isComplete ? `<div class="flex-1 text-emerald-700 bg-emerald-50/50 border border-emerald-100/50 px-4 py-2.5 rounded-xl text-[11px] font-[800] shadow-sm flex items-center justify-center gap-1.5"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>Telah Lunas</div>` : `<button onclick="quickMarkAllMonths('${member.id}')" class="flex-1 text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl text-[11px] font-[800] transition-colors shadow-sm active:scale-95">Lunas Semua</button>`) + `
+                            <button onclick="openEditFamilyModal('${member.id}')" class="text-slate-500 hover:text-slate-900 p-2.5 rounded-xl bg-white border border-slate-100/80 transition-colors shadow-sm active:scale-95"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg></button>` : `<span class="flex-1 text-slate-400/80 text-center text-[10px] py-1 font-[800] tracking-wider uppercase border border-slate-100/80 rounded-xl bg-slate-50/50">Mode Read-Only</span>`}
                         </div>
                     </div>
                 `;
