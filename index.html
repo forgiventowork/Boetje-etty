@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -1088,7 +1088,8 @@
             const skeletonValue = '<div class="h-6 md:h-8 w-24 bg-slate-200 animate-pulse rounded-md"></div>';
             const skeletonShort = '<div class="h-6 md:h-8 w-12 bg-slate-200 animate-pulse rounded-md"></div>';
             
-            document.getElementById('statIuranTerkumpul').innerHTML = skeletonValue;
+            document.getElementById('statSaldoAwal').innerHTML = skeletonValue;
+            document.getElementById('statIuranMasuk').innerHTML = skeletonValue;
             document.getElementById('statPengeluaran').innerHTML = skeletonValue;
             document.getElementById('statSubTotal').innerHTML = skeletonValue;
             document.getElementById('statTotalAnggota').innerHTML = skeletonShort;
@@ -1097,13 +1098,12 @@
             document.getElementById('tableBody').innerHTML = Array(5).fill('<tr><td class="py-4 px-3 sticky-col bg-white  border-b border-slate-100 /50"><div class="h-4 w-24 bg-slate-200 animate-pulse rounded"></div></td>' + 
             Array(11).fill('<td class="py-4 px-2 border-b border-slate-100 /50"><div class="h-6 w-12 bg-slate-200 animate-pulse rounded-md mx-auto"></div></td>').join('') +
             '<td class="py-4 px-3 text-right border-b border-slate-100 /50"><div class="h-4 w-16 bg-slate-200 animate-pulse rounded ml-auto"></div></td></tr>').join('');
-
-            // Mobile Cards Skeleton
-            document.getElementById('cardsContainer').innerHTML = Array(3).fill('<div class="bg-white  rounded-2xl p-4 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80  mb-4 animate-pulse"><div class="flex justify-between items-center mb-4"><div class="h-5 w-32 bg-slate-200 rounded"></div><div class="h-5 w-16 bg-slate-200 rounded"></div></div><div class="grid grid-cols-4 gap-2 mb-4">' + 
+            
+            document.getElementById('cardsList').innerHTML = Array(3).fill('<div class="bg-white  rounded-2xl p-4 shadow-[0_12px_40px_rgba(0,0,0,0.03)] border border-slate-100/80  mb-4 animate-pulse"><div class="flex justify-between items-center mb-4"><div class="h-5 w-32 bg-slate-200 rounded"></div><div class="h-5 w-16 bg-slate-200 rounded"></div></div><div class="grid grid-cols-4 gap-2 mb-4">' + 
             Array(11).fill('<div class="h-10 bg-slate-200 rounded-lg"></div>').join('') + 
             '</div></div>').join('');
             
-            document.getElementById('expensesList').innerHTML = '<div class="animate-pulse flex space-x-4 p-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-slate-200 rounded w-3/4"></div><div class="h-4 bg-slate-200 rounded w-1/2"></div></div></div>';
+            document.getElementById('expensesTableBody').innerHTML = '<tr><td colspan="4"><div class="animate-pulse flex space-x-4 p-4"><div class="flex-1 space-y-4 py-1"><div class="h-4 bg-slate-200 rounded w-3/4"></div><div class="h-4 bg-slate-200 rounded w-1/2"></div></div></div></td></tr>';
         }
 
                         function toggleChart() {
