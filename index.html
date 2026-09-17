@@ -47,8 +47,8 @@
                         }
                     }
                 }
-                }
             }
+
         }
     </script>
     <style>
@@ -1912,7 +1912,7 @@
             }
         });
     
-                function updatePinUI(val, isFocused = document.activeElement === document.getElementById('adminPinInput')) {
+                        function updatePinUI(val, isFocused = document.activeElement === document.getElementById('adminPinInput')) {
             val = val ? val.replace(/\D/g, '') : '';
             document.getElementById('adminPinInput').value = val;
             
@@ -1936,15 +1936,13 @@
             if (val.length === 6 && isFocused) {
                 setTimeout(() => submitLogin(), 100);
             }
-        } else {
-                        box.className = 'w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all';
-                    }
-                }
-            }
         }
     </script>
 </body>
 </html>
+
+
+
 
 
 
