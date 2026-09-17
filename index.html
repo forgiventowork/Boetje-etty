@@ -463,8 +463,8 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                 </div>
 
-                <h3 class="font-[800] text-xl text-slate-900 mb-2">Login Bendahara</h3>
-                <p class="text-[13px] text-slate-500 mb-8 font-medium px-4 leading-relaxed">Masukkan PIN otoritas untuk mengelola pembayaran kas.</p>
+                <h3 class="font-[800] text-xl text-slate-900 mb-2">Otorisasi Bendahara</h3>
+                <p class="text-[13px] text-slate-500 mb-8 font-medium px-4 leading-relaxed">Silakan masukkan 6 digit PIN keamanan untuk memverifikasi identitas Anda dan mengakses kelola kas.</p>
                 
                                 <div class="w-full relative mb-8 flex justify-center gap-2.5 md:gap-3" id="pinUIContainer">
                     <div id="pinBox0" class="w-10 h-12 md:w-12 md:h-14 rounded-xl border-2 border-slate-100 bg-slate-50/50 flex items-center justify-center transition-all"></div>
@@ -477,7 +477,7 @@
                     <input type="tel" id="adminPinInput" maxlength="6" inputmode="numeric" autocomplete="off" class="absolute inset-0 w-full h-full opacity-0 cursor-text z-10" oninput="updatePinUI(this.value)" onfocus="updatePinUI(this.value, true)" onblur="updatePinUI(this.value, false)">
                 </div>
                 
-                <button onclick="submitLogin()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] active:scale-[0.98]">Buka Akses</button>
+                <button onclick="submitLogin()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-[700] rounded-2xl transition-all text-[14px] shadow-[0_4px_14px_0_rgb(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] active:scale-[0.98]">Verifikasi Akses</button>
             </div>
         </div>
     </div>
@@ -1892,6 +1892,7 @@
     </script>
 </body>
 </html>
+
 
 
 
