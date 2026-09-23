@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -111,7 +111,7 @@
                         <span id="yearDropdownText">Tahun 2026</span>
                         <svg class="w-3 h-3 text-slate-400 transition-transform duration-200" id="yearDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div id="yearDropdownMenu" class="absolute right-0 mt-2 w-32 md:w-36 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-100/80 z-[100] opacity-0 pointer-events-none transform scale-95 origin-top-right transition-all duration-200">
+                    <div id="yearDropdownMenu" class="absolute left-0 mt-2 w-32 md:w-36 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-100/80 z-[100] opacity-0 pointer-events-none transform scale-95 origin-top-left transition-all duration-200">
                         <div class="p-1.5 flex flex-col gap-0.5" id="yearDropdownOptions">
                             <button onclick="selectYear('2026', event)" class="w-full text-left px-2.5 py-2 text-[10px] md:text-xs font-[700] rounded-lg transition-colors flex items-center justify-between text-slate-900 bg-slate-100">
                                 <span>Tahun 2026</span>
@@ -223,7 +223,7 @@
                         <span id="filterDropdownText">Semua</span>
                         <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" id="filterDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div id="filterDropdownMenu" class="absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-100/80 z-[100] opacity-0 pointer-events-none transform scale-95 origin-top-right transition-all duration-200">
+                    <div id="filterDropdownMenu" class="absolute left-0 mt-2 w-32 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-100/80 z-[100] opacity-0 pointer-events-none transform scale-95 origin-top-left transition-all duration-200">
                         <div class="p-1.5 flex flex-col gap-0.5" id="filterDropdownOptions">
                             <button onclick="selectFilter('all', 'Semua', event)" class="w-full text-left px-2.5 py-2 text-[11px] md:text-xs font-[700] rounded-lg transition-colors flex items-center justify-between text-slate-900 bg-slate-100">
                                 <span>Semua</span>
@@ -2083,6 +2083,7 @@
     </script>
 </body>
 </html>
+
 
 
 
