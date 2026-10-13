@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -107,9 +107,9 @@
                         <div class="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                 <div class="relative" id="customYearDropdownWrapper">
                     <input type="hidden" id="yearSelector" value="2026">
-                    <button id="yearDropdownBtn" onclick="toggleYearDropdown(event)" class="bg-white border border-slate-100/80 text-slate-700 text-[10px] md:text-xs font-[800] py-1.5 md:py-2 px-2 md:px-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all flex items-center justify-between gap-1 md:gap-2 w-[90px] md:w-[110px] hover:shadow-md">
-                        <span id="yearDropdownText">Tahun 2026</span>
-                        <svg class="w-3 h-3 text-slate-400 transition-transform duration-200" id="yearDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    <button id="yearDropdownBtn" onclick="toggleYearDropdown(event)" class="bg-white border border-slate-100/80 text-slate-700 text-[10px] md:text-[11px] font-[800] py-2 px-2.5 md:px-3.5 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer transition-all flex items-center justify-between gap-1.5 md:gap-2 whitespace-nowrap hover:shadow-md">
+                        <span id="yearDropdownText" class="whitespace-nowrap">Tahun 2026</span>
+                        <svg class="w-3 h-3 text-slate-400 flex-shrink-0 transition-transform duration-200" id="yearDropdownIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="yearDropdownMenu" class="absolute left-0 mt-2 w-32 md:w-36 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-100/80 z-[100] opacity-0 pointer-events-none transform scale-95 origin-top-left transition-all duration-200">
                         <div class="p-1.5 flex flex-col gap-0.5" id="yearDropdownOptions">
@@ -830,28 +830,196 @@
         const STANDARD_MONTHLY_FEE = 20000;
         const MONTH_NAMES = ['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV'];
 
-        let appData = { saldoAwal: 0, year: 2026, members: [], expenses: [] };
+        const DEFAULT_DATA_2026 = {
+            saldoAwal: 625000,
+            year: 2026,
+            expenses: [],
+            members: [
+                {
+                    id: '1', name: 'Kel. R. Salaka', phone: '',
+                    payments: {
+                        1: { paid: true, date: '14/4/26', amount: 20000 },
+                        2: { paid: true, date: '14/4/26', amount: 20000 },
+                        3: { paid: true, date: '14/4/26', amount: 20000 },
+                        4: { paid: true, date: '14/4/26', amount: 20000 },
+                        5: { paid: true, date: '14/4/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '2', name: 'Kel. T. Latuheru', phone: '',
+                    payments: {
+                        1: { paid: true, date: '10/4/2026', amount: 20000 },
+                        2: { paid: true, date: '10/4/2026', amount: 20000 },
+                        3: { paid: true, date: '10rb', amount: 10000 }
+                    }
+                },
+                {
+                    id: '3', name: 'Kel. D. Salhuteru', phone: '',
+                    payments: {
+                        1: { paid: true, date: '15/4/26', amount: 20000 },
+                        2: { paid: true, date: '15/4/26', amount: 20000 },
+                        3: { paid: true, date: '15/4/26', amount: 20000 },
+                        4: { paid: true, date: '15/4/26', amount: 20000 },
+                        5: { paid: true, date: '15/4/26', amount: 20000 },
+                        6: { paid: true, date: '15/4/26', amount: 20000 },
+                        7: { paid: true, date: '15/4/26', amount: 20000 },
+                        8: { paid: true, date: '15/4/26', amount: 20000 },
+                        9: { paid: true, date: '15/4/26', amount: 20000 },
+                        10: { paid: true, date: '15/4/26', amount: 20000 },
+                        11: { paid: true, date: '15/4/26', amount: 20000 }
+                    }
+                },
+                { id: '4', name: 'Kel. V. Salhuteru', phone: '', payments: {} },
+                { id: '5', name: 'Kel. Nan Salhuteru', phone: '', payments: {} },
+                {
+                    id: '6', name: 'Kel. Rlx. deFretes', phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/4/2026', amount: 20000 },
+                        2: { paid: true, date: '12/4/2026', amount: 20000 },
+                        3: { paid: true, date: '12/4/2026', amount: 20000 },
+                        4: { paid: true, date: '12/4/2026', amount: 20000 },
+                        5: { paid: true, date: '12/4/2026', amount: 20000 },
+                        6: { paid: true, date: '12/4/2026', amount: 20000 },
+                        7: { paid: true, date: '12/4/2026', amount: 20000 },
+                        8: { paid: true, date: '12/4/2026', amount: 20000 },
+                        9: { paid: true, date: '12/4/2026', amount: 20000 },
+                        10: { paid: true, date: '12/4/2026', amount: 20000 },
+                        11: { paid: true, date: '12/4/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '7', name: 'Kel. U. Ririassa', phone: '',
+                    payments: {
+                        1: { paid: true, date: '15/4/26', amount: 20000 },
+                        2: { paid: true, date: '15/4/26', amount: 20000 },
+                        3: { paid: true, date: '15/4/26', amount: 20000 },
+                        4: { paid: true, date: '15/4/26', amount: 20000 },
+                        5: { paid: true, date: '15/4/26', amount: 20000 },
+                        6: { paid: true, date: '15/4/26', amount: 20000 },
+                        7: { paid: true, date: '15/4/26', amount: 20000 },
+                        8: { paid: true, date: '15/4/26', amount: 20000 },
+                        9: { paid: true, date: '15/4/26', amount: 20000 },
+                        10: { paid: true, date: '15/4/26', amount: 20000 },
+                        11: { paid: true, date: '15/4/26', amount: 20000 }
+                    }
+                },
+                { id: '8', name: 'Kel. M. Salhuteru', phone: '', payments: {} },
+                {
+                    id: '9', name: 'Kel. Rlv. Defretes', phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/7/2026', amount: 20000 },
+                        2: { paid: true, date: '12/7/2026', amount: 20000 },
+                        3: { paid: true, date: '12/7/2026', amount: 20000 },
+                        4: { paid: true, date: '12/7/2026', amount: 20000 },
+                        5: { paid: true, date: '12/7/2026', amount: 20000 },
+                        6: { paid: true, date: '12/7/2026', amount: 20000 },
+                        7: { paid: true, date: '12/7/2026', amount: 20000 }
+                    }
+                },
+                {
+                    id: '10', name: 'Kel. A. Nussy', phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/4/2026', amount: 20000 },
+                        2: { paid: true, date: '12/4/2026', amount: 20000 },
+                        3: { paid: true, date: '12/4/2026', amount: 20000 },
+                        4: { paid: true, date: '12/4/2026', amount: 20000 },
+                        5: { paid: true, date: '13/09/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '11', name: 'Kel. Venter Salhuteru', phone: '',
+                    payments: {
+                        1: { paid: true, date: '12/7/2026', amount: 20000 },
+                        2: { paid: true, date: '12/7/2026', amount: 20000 },
+                        3: { paid: true, date: '12/7/2026', amount: 20000 },
+                        4: { paid: true, date: '12/7/2026', amount: 20000 },
+                        5: { paid: true, date: '12/7/2026', amount: 20000 },
+                        6: { paid: true, date: '13/09/26', amount: 20000 }
+                    }
+                },
+                {
+                    id: '12', name: 'Kel. I. Luturmas', phone: '',
+                    payments: {
+                        1: { paid: true, date: '10/4/2026', amount: 20000 },
+                        2: { paid: true, date: '10/4/2026', amount: 20000 },
+                        3: { paid: true, date: '10/4/2026', amount: 20000 },
+                        4: { paid: true, date: '15rb', amount: 15000 }
+                    }
+                },
+                {
+                    id: '13', name: 'Kel. R. Lokolo', phone: '',
+                    payments: {
+                        1: { paid: true, date: '14/4/26', amount: 20000 },
+                        2: { paid: true, date: '14/4/26', amount: 20000 },
+                        3: { paid: true, date: '14/4/26', amount: 20000 },
+                        4: { paid: true, date: '14/4/26', amount: 20000 },
+                        5: { paid: true, date: '14/4/26', amount: 20000 }
+                    }
+                }
+            ]
+        };
+
+        function getLocalCache(year) {
+            try {
+                const raw = localStorage.getItem('boetje_cache_' + year);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && Array.isArray(parsed.members) && parsed.members.length > 0) {
+                        return parsed;
+                    }
+                }
+            } catch (e) { console.warn('Local cache read error:', e); }
+            if (Number(year) === 2026) {
+                return JSON.parse(JSON.stringify(DEFAULT_DATA_2026));
+            }
+            const base2026 = getLocalCache(2026);
+            return {
+                saldoAwal: 0,
+                year: Number(year),
+                expenses: [],
+                members: base2026.members.map(m => ({ id: m.id, name: m.name, phone: m.phone || '', payments: {}, computedTotal: 0 }))
+            };
+        }
+
+        function saveLocalCache() {
+            try {
+                localStorage.setItem('boetje_cache_' + appData.year, JSON.stringify(appData));
+            } catch (e) { console.warn('Local cache write error:', e); }
+        }
+
+        let appData = getLocalCache(2026);
+        let isLoading = false;
         let activeView = 'table'; 
         let currentModalMemberId = null;
         let currentModalMonthIndex = null;
 
         async function changeYear(newYear) {
             appData.year = parseInt(newYear);
-            appData.saldoAwal = 0;
-            appData.expenses = [];
-            appData.members.forEach(m => m.payments = {});
+            const cached = getLocalCache(appData.year);
+            appData.saldoAwal = cached.saldoAwal;
+            appData.expenses = cached.expenses || [];
+            appData.members = cached.members || [];
+            renderApp();
             
             showToast(`Memuat data ${appData.year}...`);
             await loadStorage();
         }
 
         async function loadStorage() {
+            // Render cached/default data immediately so UI is never blank
+            const cached = getLocalCache(appData.year);
+            appData.saldoAwal = cached.saldoAwal;
+            appData.expenses = cached.expenses || [];
+            appData.members = cached.members || [];
+            isLoading = false;
+            updateAdminUI();
+
             try {
-                const { data: settings } = await supa.from('settings').select('*').eq('id', appData.year).single();
-                if (settings) {
-                    appData.saldoAwal = settings.saldo_awal;
-                } else {
-                    appData.saldoAwal = 0;
+                const settingsIds = appData.year === 2026 ? [2026, 1] : [appData.year];
+                const { data: settingsRows } = await supa.from('settings').select('*').in('id', settingsIds);
+                if (settingsRows && settingsRows.length > 0) {
+                    const exact = settingsRows.find(r => r.id === appData.year) || settingsRows[0];
+                    appData.saldoAwal = exact.saldo_awal;
                 }
 
                 const { data: members, error: errM } = await supa.from('members').select('*').order('created_at', { ascending: true });
@@ -863,21 +1031,23 @@
                 try {
                     const { data: expenses } = await supa.from('expenses').select('*').eq('year', appData.year).order('date_text', { ascending: true });
                     if (expenses) appData.expenses = expenses;
-                } catch (errE) { console.warn("Table expenses mungkin belum ada", errE); appData.expenses = []; }
+                } catch (errE) { console.warn("Table expenses mungkin belum ada", errE); }
 
-                appData.members = (members || []).map(m => {
-                    const mPayments = (payments || []).filter(p => p.member_id === m.id);
-                    const paymentsMap = {};
-                    mPayments.forEach(p => { paymentsMap[p.month] = { paid: true, date: p.date_text, amount: p.amount }; });
-                    return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap, computedTotal: 0 };
-                });
+                if (members && members.length > 0) {
+                    appData.members = members.map(m => {
+                        const mPayments = (payments || []).filter(p => p.member_id === m.id);
+                        const paymentsMap = {};
+                        mPayments.forEach(p => { paymentsMap[p.month] = { paid: true, date: p.date_text, amount: p.amount }; });
+                        return { id: m.id, name: m.name, phone: m.phone, payments: paymentsMap, computedTotal: 0 };
+                    });
+                    saveLocalCache();
+                }
                 
-                updateAdminUI();
                 isLoading = false;
                 renderApp();
             } catch (e) {
-                console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
-                showToast("Gagal memuat data dari cloud");
+                console.warn("Cloud sync unreachable, using local storage cache:", e.message || e);
+                saveLocalCache();
                 isLoading = false;
                 renderApp();
             }
@@ -930,7 +1100,11 @@
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if (!obj) return;
-            // Prevent multiple animations on the same element
+            const prevTarget = obj.dataset.targetValue !== undefined ? Number(obj.dataset.targetValue) : null;
+            if (prevTarget === end && obj.textContent.startsWith('Rp ')) return;
+            const actualStart = prevTarget !== null ? prevTarget : start;
+            obj.dataset.targetValue = String(end);
+
             if (obj.animationFrame) cancelAnimationFrame(obj.animationFrame);
             
             let startTimestamp = null;
@@ -938,7 +1112,7 @@
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const easeOut = 1 - Math.pow(1 - progress, 4); // easeOutQuart
-                const current = Math.floor(easeOut * (end - start) + start);
+                const current = Math.floor(easeOut * (end - actualStart) + actualStart);
                 
                 obj.textContent = 'Rp ' + formatRupiah(current);
                 
@@ -1385,12 +1559,20 @@
             const amtVal = document.getElementById('expenseAmountInput').value;
 
             if (!dateVal || !descVal || !amtVal) {
-                showToast('Mohon lengkapi data ⚠️');
+                showToast('Mohon lengkapi data');
                 return;
             }
 
             const [y, m, d] = dateVal.split('-');
             const formattedDate = `${d}/${m}/${y.slice(-2)}`;
+            const localExpense = {
+                id: Date.now().toString(),
+                amount: Number(amtVal),
+                description: descVal,
+                date_text: formattedDate,
+                year: appData.year,
+                created_at: new Date().toISOString()
+            };
 
             try {
                 const { data, error } = await supa.from('expenses').insert({
@@ -1403,33 +1585,33 @@
                 if (error) throw error;
                 if (data && data.length > 0) {
                     appData.expenses.push(data[0]);
-                    appData.expenses.sort((a,b) => {
-                        // simple sort by id or created_at (since date_text format is dd/mm/yy it's tricky to sort strings)
-                        return new Date(a.created_at) - new Date(b.created_at);
-                    });
+                } else {
+                    appData.expenses.push(localExpense);
                 }
-                
-                closeModal('expenseModal');
-                renderApp();
-                showToast('Pengeluaran tersimpan 💸');
             } catch (e) {
-                console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
-                showToast('Gagal menyimpan');
+                console.warn("Expense cloud sync failed, saved locally:", e);
+                appData.expenses.push(localExpense);
             }
+
+            appData.expenses.sort((a,b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+            saveLocalCache();
+            closeModal('expenseModal');
+            renderApp();
+            showToast('Pengeluaran tersimpan');
         }
 
         function deleteExpense(id) {
             if (!isAdmin) return;
             showConfirm("Hapus Pengeluaran", "Apakah Anda yakin ingin menghapus data pengeluaran ini?", "Hapus", "Batal", async () => {
+                appData.expenses = appData.expenses.filter(e => String(e.id) !== String(id));
+                saveLocalCache();
+                renderApp();
+                showToast('Berhasil dihapus');
                 try {
                     const { error } = await supa.from('expenses').delete().eq('id', id);
                     if (error) throw error;
-                    appData.expenses = appData.expenses.filter(e => String(e.id) !== String(id));
-                    renderApp();
-                    showToast('Berhasil dihapus 🗑️');
                 } catch (e) {
-                    console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message);
-                    showToast('Gagal menghapus');
+                    console.warn("Delete expense cloud sync failed:", e);
                 }
             }, "danger");
         }
@@ -1604,38 +1786,47 @@
         async function savePaymentModal() {
             const member = appData.members.find(m => m.id === currentModalMemberId);
             if (!member) return; if (!member.payments) member.payments = {};
-            try {
-                if (modalIsPaid) {
-                    let dateVal = document.getElementById('modalDateInput').value.trim();
-                    if (dateVal && dateVal.includes('-')) {
-                        const [y, m, d] = dateVal.split('-');
-                        dateVal = `${d}/${m}/${y.slice(-2)}`;
-                    } else if (!dateVal) {
-                        dateVal = 'Lunas';
-                    }
-                    const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
-                    const { error } = await supa.from('payments').upsert({ member_id: member.id, month: currentModalMonthIndex, year: appData.year, amount: amtVal, date_text: dateVal }, { onConflict: 'member_id, month, year' });
-                    if(error) throw error;
-                    member.payments[currentModalMonthIndex] = { paid: true, date: dateVal, amount: amtVal };
-                } else {
-                    const { error } = await supa.from('payments').delete().match({ member_id: member.id, month: currentModalMonthIndex, year: appData.year });
-                    if(error) throw error; delete member.payments[currentModalMonthIndex];
+            if (modalIsPaid) {
+                let dateVal = document.getElementById('modalDateInput').value.trim();
+                if (dateVal && dateVal.includes('-')) {
+                    const [y, m, d] = dateVal.split('-');
+                    dateVal = `${d}/${m}/${y.slice(-2)}`;
+                } else if (!dateVal) {
+                    dateVal = 'Lunas';
                 }
-                renderApp(); closeModal('paymentModal'); showToast('Tersimpan 💾');
-            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
+                const amtVal = Number(document.getElementById('modalAmountInput').value) || STANDARD_MONTHLY_FEE;
+                member.payments[currentModalMonthIndex] = { paid: true, date: dateVal, amount: amtVal };
+                saveLocalCache();
+                renderApp(); closeModal('paymentModal'); showToast('Tersimpan');
+                try {
+                    const { error } = await supa.from('payments').upsert({ member_id: member.id, month: currentModalMonthIndex, year: appData.year, amount: amtVal, date_text: dateVal }, { onConflict: 'member_id, month, year' });
+                    if (error) throw error;
+                } catch (e) { console.warn("Payment cloud sync failed, saved locally:", e); }
+            } else {
+                delete member.payments[currentModalMonthIndex];
+                saveLocalCache();
+                renderApp(); closeModal('paymentModal'); showToast('Tersimpan');
+                try {
+                    const { error } = await supa.from('payments').delete().match({ member_id: member.id, month: currentModalMonthIndex, year: appData.year });
+                    if (error) throw error;
+                } catch (e) { console.warn("Payment delete cloud sync failed, saved locally:", e); }
+            }
         }
 
         async function quickMarkAllMonths(memberId) {
             const member = appData.members.find(m => m.id === memberId);
             if (!member) return; const now = new Date(); const dateStr = `${now.getDate()}/${now.getMonth()+1}`;
             if (!member.payments) member.payments = {}; const records = [];
-            for (let m = 1; m <= 11; m++) records.push({ member_id: member.id, month: m, year: appData.year, amount: STANDARD_MONTHLY_FEE, date_text: dateStr });
+            for (let m = 1; m <= 11; m++) {
+                records.push({ member_id: member.id, month: m, year: appData.year, amount: STANDARD_MONTHLY_FEE, date_text: dateStr });
+                member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
+            }
+            saveLocalCache();
+            renderApp(); showToast('11 Bulan dilunasi');
             try {
                 const { error } = await supa.from('payments').upsert(records, { onConflict: 'member_id, month, year' });
                 if (error) throw error;
-                for (let m = 1; m <= 11; m++) member.payments[m] = { paid: true, date: dateStr, amount: STANDARD_MONTHLY_FEE };
-                renderApp(); showToast('11 Bulan dilunasi ✅');
-            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
+            } catch (e) { console.warn("Quick mark cloud sync failed, saved locally:", e); }
         }
 
         function openAddFamilyModal() {
@@ -1675,7 +1866,7 @@
             }
 
             if (unpaidMonths.length === 0) {
-                showToast('Sudah lunas semua! 🎉');
+                showToast('Sudah lunas semua!');
                 return;
             }
 
@@ -1703,24 +1894,32 @@
         async function handleSaveFamily(e) {
             e.preventDefault(); const id = document.getElementById('editFamilyId').value; const name = document.getElementById('inputFamilyName').value.trim(); const phone = document.getElementById('inputFamilyPhone').value.trim();
             if (!name) return;
-            try {
-                if (id) {
+            if (id) {
+                const member = appData.members.find(m => m.id === id); if (member) { member.name = name; member.phone = phone; }
+                saveLocalCache();
+                renderApp(); closeModal('familyModal'); showToast('Tersimpan');
+                try {
                     const { error } = await supa.from('members').update({ name, phone }).eq('id', id); if (error) throw error;
-                    const member = appData.members.find(m => m.id === id); if (member) { member.name = name; member.phone = phone; }
-                } else {
-                    const newId = Date.now().toString(); const { error: err1 } = await supa.from('members').insert([{ id: newId, name, phone }]); if (err1) throw err1;
-                    const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
-                    const now = new Date(); const todayStr = `${now.getDate()}/${now.getMonth()+1}`;
-                    const newMember = { id: newId, name: name, phone: phone, payments: {} };
-                    if (checkedBoxes.length > 0) {
-                        const records = [];
-                        checkedBoxes.forEach(cb => { const m = Number(cb.value); records.push({ member_id: newId, month: m, amount: STANDARD_MONTHLY_FEE, date_text: todayStr }); newMember.payments[m] = { paid: true, date: todayStr, amount: STANDARD_MONTHLY_FEE }; });
-                        const { error: err2 } = await supa.from('payments').insert(records); if(err2) throw err2;
-                    }
-                    appData.members.push(newMember);
+                } catch (err) { console.warn("Family update cloud sync failed, saved locally:", err); }
+            } else {
+                const newId = Date.now().toString();
+                const checkedBoxes = document.querySelectorAll('input[name="quickMonth"]:checked');
+                const now = new Date(); const todayStr = `${now.getDate()}/${now.getMonth()+1}`;
+                const newMember = { id: newId, name: name, phone: phone, payments: {} };
+                const records = [];
+                if (checkedBoxes.length > 0) {
+                    checkedBoxes.forEach(cb => { const m = Number(cb.value); records.push({ member_id: newId, month: m, year: appData.year, amount: STANDARD_MONTHLY_FEE, date_text: todayStr }); newMember.payments[m] = { paid: true, date: todayStr, amount: STANDARD_MONTHLY_FEE }; });
                 }
-                renderApp(); closeModal('familyModal'); showToast('Tersimpan ✅');
-            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast("Gagal"); }
+                appData.members.push(newMember);
+                saveLocalCache();
+                renderApp(); closeModal('familyModal'); showToast('Tersimpan');
+                try {
+                    const { error: err1 } = await supa.from('members').insert([{ id: newId, name, phone }]); if (err1) throw err1;
+                    if (records.length > 0) {
+                        const { error: err2 } = await supa.from('payments').insert(records); if (err2) throw err2;
+                    }
+                } catch (err) { console.warn("Family insert cloud sync failed, saved locally:", err); }
+            }
         }
 
         async function handleDeleteFamily() {
@@ -1731,11 +1930,12 @@
                 "Ya, Hapus",
                 "Batal",
                 async () => {
+                    appData.members = appData.members.filter(m => m.id !== id);
+                    saveLocalCache();
+                    updateAdminUI(); closeModal('familyModal'); showToast('Dihapus');
                     try {
                         const { error } = await supa.from('members').delete().eq('id', id); if (error) throw error;
-                        appData.members = appData.members.filter(m => m.id !== id);
-                        updateAdminUI(); closeModal('familyModal'); showToast('Dihapus 🗑️');
-                    } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
+                    } catch (e) { console.warn("Family delete cloud sync failed, saved locally:", e); }
                 },
                 "danger"
             );
@@ -1750,10 +1950,12 @@
         async function saveSaldoAwal() {
             if (!isAdmin) return;
             const val = Number(document.getElementById('inputSaldoAwal').value) || 0;
+            appData.saldoAwal = val;
+            saveLocalCache();
+            renderApp(); closeModal('saldoModal'); showToast('Tersimpan');
             try {
                 const { error } = await supa.from('settings').upsert({ id: appData.year, saldo_awal: val }); if(error) throw error;
-                appData.saldoAwal = val; renderApp(); closeModal('saldoModal'); showToast('Tersimpan 💾');
-            } catch (e) { console.error("LOAD STORAGE ERROR", e); alert("ERROR: " + e.message); showToast('Gagal'); }
+            } catch (e) { console.warn("Saldo cloud sync failed, saved locally:", e); }
         }
 
         function copyBcaNumber() { 

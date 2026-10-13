@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kas-keluarga-v6';
+const CACHE_NAME = 'kas-keluarga-v7';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -25,12 +25,18 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
   event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
+    fetch(event.request).catch(async () => {
+      const cached = await caches.match(event.request);
+      return cached || caches.match('/index.html');
+    })
   );
 });
